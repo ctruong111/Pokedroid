@@ -1,3 +1,2 @@
 INDEX VERSION 1.126+/Users/cangtruong/Pokedroid/.metadata/.plugins/org.eclipse.jdt.core
-652421776.index
 1702311348.index
