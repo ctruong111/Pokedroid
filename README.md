@@ -1,0 +1,4 @@
+Pokedroid
+=========
+
+Pokedex for Android
