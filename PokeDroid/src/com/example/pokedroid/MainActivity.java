@@ -1,6 +1,7 @@
 package com.example.pokedroid;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,6 +12,7 @@ import android.widget.EditText;
 
 public class MainActivity extends Activity {
 
+	public static String pokemon;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -23,10 +25,11 @@ public class MainActivity extends Activity {
 		search.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0){
-				String pokemon = query.getText().toString();
-				//SQL Query here
+				pokemon = query.getText().toString();
 				
-				
+				//Enter secondary screen
+				Intent myIntent = new Intent(arg0.getContext(), PokemonDisplay.class);
+				startActivityForResult(myIntent,0);
 			}
 		});
 		
