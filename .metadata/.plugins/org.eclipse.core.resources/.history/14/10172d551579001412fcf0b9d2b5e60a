@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <string name="app_name">PokeDroid</string>
-    <string name="hello_world">Hello world!</string>
-    <item android:id="@+id/item1" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-    <item android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/item1"/>
-
-</resources>
