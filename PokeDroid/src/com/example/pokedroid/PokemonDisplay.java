@@ -19,7 +19,6 @@ public class PokemonDisplay extends Activity {
 		backToHome.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0){
-				String lookupVal = MainActivity.pokemon;
 				//SQL Query here
 				
 				//Go back to home screen
@@ -28,6 +27,8 @@ public class PokemonDisplay extends Activity {
 				finish();
 			}
 		});
+		
+		String lookupVal = PokemonLookupActivity.pokemon;		
 	}
 
 	@Override

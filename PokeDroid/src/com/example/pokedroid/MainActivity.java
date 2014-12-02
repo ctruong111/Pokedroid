@@ -12,27 +12,42 @@ import android.widget.EditText;
 
 public class MainActivity extends Activity {
 
-	public static String pokemon;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		final EditText query = (EditText) findViewById(R.id.query);
+		final Button pokemonLookup = (Button)findViewById(R.id.PokemonLookup);
+		final Button typeLookup = (Button)findViewById(R.id.TypeLookup);
+		final Button generationLookup = (Button)findViewById(R.id.GenerationLookup);
 		
-		Button search = (Button)findViewById(R.id.search);
-		
-		search.setOnClickListener(new OnClickListener() {
+		pokemonLookup.setOnClickListener(new OnClickListener() {
 			@Override
-			public void onClick(View arg0){
-				pokemon = query.getText().toString();
-				
-				//Enter secondary screen
-				Intent myIntent = new Intent(arg0.getContext(), PokemonDisplay.class);
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				Intent myIntent = new Intent(arg0.getContext(), PokemonLookupActivity.class);
 				startActivityForResult(myIntent,0);
 			}
 		});
 		
+		typeLookup.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				Intent myIntent = new Intent(arg0.getContext(), TypeLookupActivity.class);
+				startActivityForResult(myIntent,0);
+			}
+		});
+		
+		generationLookup.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				Intent myIntent = new Intent(arg0.getContext(), GenerationLookupActivity.class);
+				startActivityForResult(myIntent,0);
+			}
+		});
+
 	}
 
 	@Override
