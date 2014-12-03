@@ -6,43 +6,42 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.pokedroid.MainActivity" >
-
-    <Button
-        android:id="@+id/PokemonLookup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView1"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:text="Pokemon" />
-
-    <Button
-        android:id="@+id/GenerationLookup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/TypeLookup"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:text="Generation" />
-
-    <Button
-        android:id="@+id/TypeLookup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/PokemonLookup"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:text="Type" />
+    tools:context="com.example.pokedroid.PokemonLookupActivity" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/enterpokemon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:text="Look Up:"
+        android:layout_marginTop="68dp"
+        android:text="Enter Pokemon:"
         android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="40dp"
+        android:text="Back" />
+
+    <EditText
+        android:id="@+id/query"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="153dp"
+        android:ems="10" />
+
+    <Button
+        android:id="@+id/search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/query"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="74dp"
+        android:text="Search" />
 
 </RelativeLayout>
