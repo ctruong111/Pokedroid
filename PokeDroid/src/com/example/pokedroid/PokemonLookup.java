@@ -11,6 +11,8 @@ import android.widget.Button;
 
 public class PokemonLookup extends Activity {
 
+	public static String pokemon;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -35,7 +37,8 @@ public class PokemonLookup extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				
+				Intent myIntent = new Intent(v.getContext(), PokemonDisplay.class);
+				startActivityForResult(myIntent, 0);
 			}
 			
 		});
