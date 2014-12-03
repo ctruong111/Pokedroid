@@ -15,6 +15,7 @@ public class PokemonDisplay extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_pokemon_display);
+		
 		final Button backToHome = (Button)findViewById(R.id.backToHome);
 		backToHome.setOnClickListener(new OnClickListener() {
 			@Override
@@ -28,14 +29,7 @@ public class PokemonDisplay extends Activity {
 			}
 		});
 		
-		String lookupVal = PokemonLookupActivity.pokemon;		
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.pokemon_display, menu);
-		return true;
+		String lookupVal = PokemonLookup.pokemon;		
 	}
 
 	@Override

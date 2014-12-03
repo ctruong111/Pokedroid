@@ -25,7 +25,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				Intent myIntent = new Intent(arg0.getContext(), PokemonLookupActivity.class);
+				Intent myIntent = new Intent(arg0.getContext(), PokemonLookup.class);
 				startActivityForResult(myIntent,0);
 			}
 		});
@@ -34,7 +34,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				Intent myIntent = new Intent(arg0.getContext(), TypeLookupActivity.class);
+				Intent myIntent = new Intent(arg0.getContext(), TypeLookup.class);
 				startActivityForResult(myIntent,0);
 			}
 		});
@@ -43,7 +43,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				Intent myIntent = new Intent(arg0.getContext(), GenerationLookupActivity.class);
+				Intent myIntent = new Intent(arg0.getContext(), GenerationLookup.class);
 				startActivityForResult(myIntent,0);
 			}
 		});
