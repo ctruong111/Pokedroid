@@ -120,7 +120,7 @@ public class imageSnatcher {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			Connection connection = DriverManager.getConnection("jdbc:sqlite:Pokemon");
+			Connection connection = DriverManager.getConnection("jdbc:sqlite:/assets/Pokemon");
 			Statement stat = connection.createStatement();
 			Scanner input = new Scanner(System.in);
 			ResultSet rs = stat.executeQuery("SELECT p_name FROM Pokemon;");
