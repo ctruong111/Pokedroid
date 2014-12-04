@@ -14,22 +14,22 @@ public class PokemonDisplay extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_pokemon_display);
-		
-		final Button backToHome = (Button)findViewById(R.id.backToHome);
-		backToHome.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View arg0){
-				//SQL Query here
-				
-				//Go back to home screen
-				Intent myIntent = new Intent();
-				setResult(RESULT_OK, myIntent);
-				finish();
-			}
-		});
-		
-		String lookupVal = PokemonLookup.pokemon;		
+//		//setContentView(R.layout.activity_pokemon_display);
+//		
+//		final Button backToHome = (Button)findViewById(R.id.backToHome);
+//		backToHome.setOnClickListener(new OnClickListener() {
+//			@Override
+//			public void onClick(View arg0){
+//				//SQL Query here
+//				
+//				//Go back to home screen
+//				Intent myIntent = new Intent();
+//				setResult(RESULT_OK, myIntent);
+//				finish();
+//			}
+//		});
+//		
+		//String lookupVal = PokemonLookup.pokemon;		
 	}
 
 	@Override

@@ -22,22 +22,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".PokemonDisplay"
-            android:label="@string/title_activity_pokemon_display" >
-        </activity>
-        <activity
-            android:name=".PokemonLookupActivity"
-            android:label="@string/title_activity_look_up_by_name" >
-        </activity>
-        <activity
-            android:name=".TypeLookupActivity"
-            android:label="@string/title_activity_type_lookup" >
-        </activity>
-        <activity
-            android:name=".GenerationLookupActivity"
-            android:label="@string/title_activity_generation_lookup" >
-        </activity>
     </application>
 
 </manifest>
