@@ -33,6 +33,9 @@ public class MainActivity extends Activity implements OnItemClickListener {
 		setContentView(R.layout.activity_main);
 		manager = getFragmentManager();
 		transaction = manager.beginTransaction();
+		fragment = new homeFragment();
+		manager.beginTransaction().replace(R.id.mainContent, fragment).commit();
+
 		
 		drawerLayout = (DrawerLayout)findViewById(R.id.drawerLayout);
 		listView = (ListView)findViewById(R.id.drawerList);
@@ -104,8 +107,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
 		selectTitle(position);
 		
 		if (position == 0) {
-			manager = getFragmentManager();
-			manager.beginTransaction().remove(fragment).commit();
+			fragment = new homeFragment();
 		} else if (position == 1) {
 			fragment = new pokemonFragment();
 		} else if (position == 2) {
@@ -116,10 +118,8 @@ public class MainActivity extends Activity implements OnItemClickListener {
 			fragment = new generationFragment();
 		}
 		
-		if (position != 0) {
-			manager = getFragmentManager();
-			manager.beginTransaction().replace(R.id.mainContent, fragment).commit();
-		}
+		manager = getFragmentManager();
+		manager.beginTransaction().replace(R.id.mainContent, fragment).commit();
 		
 		drawerLayout.closeDrawer(listView);
 	}

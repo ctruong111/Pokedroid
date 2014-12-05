@@ -10,6 +10,13 @@
     	<item>Type</item>
     	<item>Generation</item>
 	</string-array>
+	    <string-array name="test">
+    	<item>a</item>
+    	<item>b</item>
+    	<item>c</item>
+    	<item>d</item>
+    	<item>e</item>
+	</string-array>
 	<string name="drawer_open">Drawer is open</string>
     <string name="drawer_close">Drawer is closed</string>
 </resources>
