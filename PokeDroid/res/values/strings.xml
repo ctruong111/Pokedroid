@@ -10,6 +10,7 @@
     	<item>Type</item>
     	<item>Generation</item>
 	</string-array>
+<<<<<<< HEAD
 	    <string-array name="test">
     	<item>a</item>
     	<item>b</item>
@@ -17,6 +18,8 @@
     	<item>d</item>
     	<item>e</item>
 	</string-array>
+=======
+>>>>>>> parent of 67aba85... Fixed list being drawn under subsequent pages
 	<string name="drawer_open">Drawer is open</string>
     <string name="drawer_close">Drawer is closed</string>
 </resources>
