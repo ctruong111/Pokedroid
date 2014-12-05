@@ -2,6 +2,7 @@ package com.example.pokedroid;
 
 import java.util.List;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -62,6 +64,9 @@ public class moveFragment extends Fragment {
 			@Override
 			public void onClick(View view) {
 				move = query.getText().toString();
+				
+				InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+				imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
 				//
 				// IMPLEMENT MOVE DISPLAY PAGE
 				//

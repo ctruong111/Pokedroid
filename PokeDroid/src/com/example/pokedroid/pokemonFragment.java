@@ -2,12 +2,16 @@ package com.example.pokedroid;
 
 import java.util.List;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -54,11 +58,17 @@ public class pokemonFragment extends Fragment {
 			@Override
 			public void onClick(View view) {
 				name = query.getText().toString();
+				
+				InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+				imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+				
 				fragment = new pokemonDisplayFragment(name);
 				manager = getFragmentManager();
 				manager.beginTransaction().replace(R.id.mainContent, fragment).addToBackStack(null).commit();
 			}
+			
 		});
+
 		return view;
 	}
 }

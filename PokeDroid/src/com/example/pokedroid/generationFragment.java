@@ -1,5 +1,6 @@
 package com.example.pokedroid;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 
@@ -32,6 +34,9 @@ public class generationFragment extends Fragment {
 			@Override
 			public void onClick(View view) {
 				generation = query.getText().toString();
+				
+				InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+				imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
 				//
 				// IMPLEMENT GENERATION DISPLAY PAGE
 				//
