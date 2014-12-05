@@ -1,32 +1,26 @@
 package com.example.pokedroid;
 
-import java.util.ArrayList;
-
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.res.Configuration;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle; 
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity implements OnItemClickListener {
 
 	private DrawerLayout drawerLayout;
-	private ListView navListView;
+	private ListView listView;
 	private String[] titles;
 	private ActionBarDrawerToggle drawerListener;
 	private Fragment fragment;
@@ -40,17 +34,13 @@ public class MainActivity extends Activity implements OnItemClickListener {
 		manager = getFragmentManager();
 		transaction = manager.beginTransaction();
 		
-		fragment = new homeFragment();
-		manager.beginTransaction().replace(R.id.mainContent, fragment).commit();
-		
 		drawerLayout = (DrawerLayout)findViewById(R.id.drawerLayout);
-		navListView = (ListView)findViewById(R.id.drawerList);
-		
+		listView = (ListView)findViewById(R.id.drawerList);
 		titles = getResources().getStringArray(R.array.titles);
 		setTitle(titles[0]);
 		
-		navListView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, titles));
-		navListView.setOnItemClickListener(this);
+		listView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, titles));
+		listView.setOnItemClickListener(this);
 		
 		drawerListener = new ActionBarDrawerToggle(this, drawerLayout, R.drawable.ic_drawer, R.string.drawer_open, R.string.drawer_close) {
 			@Override
@@ -73,11 +63,13 @@ public class MainActivity extends Activity implements OnItemClickListener {
 				super.onDrawerStateChanged( newState );
 			}
 			private void bringDrawerToFront() {
-				navListView.bringToFront();
+				listView.bringToFront();
 				drawerLayout.requestLayout();
 			}
 		};
-
+		
+		
+		
 		drawerLayout.setDrawerListener(drawerListener);
 		getActionBar().setHomeButtonEnabled(true);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -112,7 +104,8 @@ public class MainActivity extends Activity implements OnItemClickListener {
 		selectTitle(position);
 		
 		if (position == 0) {
-			fragment = new homeFragment();
+			manager = getFragmentManager();
+			manager.beginTransaction().remove(fragment).commit();
 		} else if (position == 1) {
 			fragment = new pokemonFragment();
 		} else if (position == 2) {
@@ -123,15 +116,17 @@ public class MainActivity extends Activity implements OnItemClickListener {
 			fragment = new generationFragment();
 		}
 		
-		manager = getFragmentManager();
-		manager.beginTransaction().replace(R.id.mainContent, fragment).commit();
+		if (position != 0) {
+			manager = getFragmentManager();
+			manager.beginTransaction().replace(R.id.mainContent, fragment).commit();
+		}
 		
-		drawerLayout.closeDrawer(navListView);
+		drawerLayout.closeDrawer(listView);
 	}
 
 	private void selectTitle(int position) {
 		// TODO Auto-generated method stub
-		navListView.setItemChecked(position, true);
+		listView.setItemChecked(position, true);
 		setTitle(titles[position]);
 	}
 }

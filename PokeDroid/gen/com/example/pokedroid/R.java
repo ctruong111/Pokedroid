@@ -9,7 +9,6 @@ package com.example.pokedroid;
 
 public final class R {
     public static final class array {
-        public static final int test=0x7f060001;
         public static final int titles=0x7f060000;
     }
     public static final class attr {
