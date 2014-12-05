@@ -123,6 +123,35 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	    }
 	}
 	
+	public List<String> getAllTypeNames() {
+		List<String> typeNames = new ArrayList<String>();
+		SQLiteDatabase db = this.getWritableDatabase();
+		Cursor cursor;
+		String name;
+
+		try {
+			cursor = db.rawQuery("SELECT * FROM Type", null);
+			if (cursor == null) {
+				return null;
+			} 
+			
+			cursor.moveToFirst();
+			
+			do {
+	            name = cursor.getString(1);            
+	            typeNames.add(name);
+	        } while (cursor.moveToNext()); 
+			
+	        cursor.close();
+			
+		} catch (Exception e) {
+			Log.e("tle99", e.getMessage());
+		}
+		
+		db.close();
+		return typeNames;
+	}
+	
 	public List<String> getAllPokemonNames() {
 		List<String> pokemonNames = new ArrayList<String>();
 		SQLiteDatabase db = this.getWritableDatabase();
@@ -182,5 +211,53 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		}
 		db.close();
 		return pokemon;
+	}
+	
+	public List<String> getAllMoveNames() {
+		List<String> moveNames = new ArrayList<String>();
+		SQLiteDatabase db = this.getWritableDatabase();
+		Cursor cursor;
+		String name;
+
+		try {
+			cursor = db.rawQuery("SELECT * FROM Moves", null);
+			if (cursor == null) {
+				return null;
+			} 
+			
+			cursor.moveToFirst();
+			
+			do {
+	            name = cursor.getString(1);            
+	            moveNames.add(name);
+	        } while (cursor.moveToNext()); 
+			
+	        cursor.close();
+			
+		} catch (Exception e) {
+			Log.e("tle99", e.getMessage());
+		}
+		
+		db.close();
+		return moveNames;
+	}
+	public Move getMove(String name) {
+		Move move = new Move();
+		SQLiteDatabase db = this.getWritableDatabase();
+		Cursor cursor;
+		
+		try {
+			cursor = db.rawQuery("SELECT * FROM Moves JOIN Typen ON t_id = type WHERE m_name = " + name, null);
+
+			if (cursor == null) {
+				return null;
+			} cursor.moveToFirst();
+			
+		} catch (Exception e) {
+			Log.e("tle99", e.getMessage());
+		}
+		
+		db.close();
+		return move;
 	}
 }
