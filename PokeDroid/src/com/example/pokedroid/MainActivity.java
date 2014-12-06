@@ -128,6 +128,8 @@ public class MainActivity extends Activity implements OnItemClickListener {
 			fragment = new typeFragment();
 		} else if (position == 4) { //If generation is selected
 			fragment = new generationFragment();
+		} else if (position == 5) {	//If imageTest is selected
+			fragment = new imageTestFragment();
 		}
 
 		//Get the fragment manager and change the current fragment
