@@ -5,7 +5,6 @@ import java.util.List;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,9 +59,10 @@ public class typeFragment extends Fragment {
 				//
 				// IMPLEMENT TYPE DISPLAY PAGE
 				//
-				//Change the activity
-				Intent i = new Intent(getActivity().getApplicationContext(), pokemonMainInfo.class);
-				startActivity(i);
+				//Change the fragment
+				fragment = new pokemonDisplayFragment(type);
+				manager = getFragmentManager();
+				manager.beginTransaction().replace(R.id.mainContent, fragment).addToBackStack(null).commit();
 			}
 		});
 		

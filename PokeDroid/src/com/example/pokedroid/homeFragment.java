@@ -9,7 +9,6 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ListFragment;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -60,12 +59,9 @@ public class homeFragment extends ListFragment{
 	
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
-		//Remove the id from string
-		String temp = names[position].substring(5);
-		//Change the activity
-		Intent i = new Intent(getActivity(), pokemonMainInfo.class);
-		i.putExtra("name", temp); //Passing in the pokemon's name
-		startActivity(i);
+		fragment = new pokemonDisplayFragment(names[position]);
+		manager = getFragmentManager();
+		manager.beginTransaction().replace(R.id.mainContent, fragment).addToBackStack(null).commit();
 	}
 	
 }

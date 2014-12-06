@@ -126,7 +126,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
 		} else if (position == 1) { //If pokemon is selected
 			fragment = new pokemonFragment();
 		} else if (position == 2) { //If move is selected
-			fragment = new moveSearchFragment();
+			fragment = new moveFragment();
 		} else if (position == 3) { //If type is selected
 			fragment = new typeFragment();
 		} else if (position == 4) { //If generation is selected

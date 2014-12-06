@@ -5,7 +5,6 @@ import java.text.NumberFormat;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,9 +43,10 @@ public class generationFragment extends Fragment {
 				//
 				// IMPLEMENT GENERATION DISPLAY PAGE
 				//
-				//Change the activity
-				Intent i = new Intent(getActivity().getApplicationContext(), pokemonMainInfo.class);
-				startActivity(i);
+				//Change the fragment
+				fragment = new pokemonDisplayFragment(generation);
+				manager = getFragmentManager();
+				manager.beginTransaction().replace(R.id.mainContent, fragment).addToBackStack(null).commit();
 			}
 		});
 		

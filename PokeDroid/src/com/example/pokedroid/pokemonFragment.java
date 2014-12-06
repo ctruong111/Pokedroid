@@ -6,7 +6,6 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,9 +61,10 @@ public class pokemonFragment extends Fragment {
 				//Hides the keyboard
 				InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
 				imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
-				//Change the activity
-				Intent i = new Intent(getActivity(), pokemonMainInfo.class);
-				startActivity(i);
+				//Change the fragment
+				fragment = new pokemonDisplayFragment(name);
+				manager = getFragmentManager();
+				manager.beginTransaction().replace(R.id.mainContent, fragment).addToBackStack(null).commit();
 			}
 			
 		});
