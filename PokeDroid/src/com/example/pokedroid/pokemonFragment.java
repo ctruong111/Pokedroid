@@ -27,6 +27,7 @@ public class pokemonFragment extends Fragment {
 	private Fragment fragment;
 	private FragmentManager manager;
 	private String name;
+	private static boolean exist;
 	
 	Button search;
 	AutoCompleteTextView query;
@@ -59,12 +60,27 @@ public class pokemonFragment extends Fragment {
 			@Override
 			public void onClick(View view) {
 				name = query.getText().toString();
-				//Hides the keyboard
-				InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
-				imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
-				//Change the activity
-				Intent i = new Intent(getActivity(), pokemonMainInfo.class);
-				startActivity(i);
+				
+				for (int i = 0; i < names.length; i++) {
+					if (name == names[i]) {
+						exist = true;
+						break;
+					}
+					exist = false;
+				}
+
+				if (exist == true) {//Pokemon exists!
+					exist = false;
+					//Hides the keyboard
+					InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+					imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+					//Change the activity
+					Intent i = new Intent(getActivity(), pokemonMainInfo.class);
+					i.putExtra("name", name); //Passing in the pokemon's name
+					startActivity(i);
+				} else if (exist == false){
+					query.setError("Pokemon does not exist!");					
+				}
 			}
 			
 		});
