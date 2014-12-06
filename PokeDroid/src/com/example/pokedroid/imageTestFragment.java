@@ -44,7 +44,6 @@ public class imageTestFragment extends ListFragment {
 			e.printStackTrace();
 		}
 
-		dbHelper.insertImages();
 		List<byte[]> pokemonImages = dbHelper.getImageList();
 		Bitmap[] img = new Bitmap[pokemonImages.size()];
 		for(int i = 0; i < pokemonImages.size(); i++) {
