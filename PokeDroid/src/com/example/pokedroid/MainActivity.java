@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -34,6 +35,8 @@ public class MainActivity extends Activity implements OnItemClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		//Starts the app on the home page
 		manager = getFragmentManager();
 		transaction = manager.beginTransaction();
 		fragment = new homeFragment();
@@ -131,7 +134,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
 		} else if (position == 5) {	//If imageTest is selected
 			fragment = new imageTestFragment();
 		}
-
+		
 		//Get the fragment manager and change the current fragment
 		manager = getFragmentManager();
 		manager.beginTransaction().replace(R.id.mainContent, fragment).addToBackStack(null).commit();

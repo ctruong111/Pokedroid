@@ -58,10 +58,10 @@ public class pokemonFragment extends Fragment {
 			@Override
 			public void onClick(View view) {
 				name = query.getText().toString();
-				
+				//Hides the keyboard
 				InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
 				imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
-				
+				//Change the fragment
 				fragment = new pokemonDisplayFragment(name);
 				manager = getFragmentManager();
 				manager.beginTransaction().replace(R.id.mainContent, fragment).addToBackStack(null).commit();

@@ -37,12 +37,13 @@ public class generationFragment extends Fragment {
 			@Override
 			public void onClick(View view) {
 				generation = query.getText().toString();
-
+				//Hides the keyboard
 				InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
 				imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
 				//
 				// IMPLEMENT GENERATION DISPLAY PAGE
 				//
+				//Change the fragment
 				fragment = new pokemonDisplayFragment(generation);
 				manager = getFragmentManager();
 				manager.beginTransaction().replace(R.id.mainContent, fragment).addToBackStack(null).commit();

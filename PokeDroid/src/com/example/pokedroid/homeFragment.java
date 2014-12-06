@@ -41,14 +41,12 @@ public class homeFragment extends ListFragment{
             e.printStackTrace();
         }
         
-        List<String> pokemonNames = dbHelper.getAllPokemonNames();
+        List<String> pokemonNames = dbHelper.getAllPokemonNamesAndId();
 		names = new String[pokemonNames.size()];
 		
 		for(int i = 0; i < pokemonNames.size(); i++) {
 			names[i] = pokemonNames.get(i);
 			
-			String output = names[i].substring(0, 1).toUpperCase() + names[i].substring(1);
-			names[i] = output;
 		}
         
         if (pokemonNames != null) {

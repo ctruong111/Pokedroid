@@ -12,6 +12,8 @@ public class Pokemon {
 	private int special_attack;
 	private int special_defence;
 	private int speed;
+	private String type1;
+	private String type2;
 	
 	public int getId() {
 		return id;
@@ -101,6 +103,22 @@ public class Pokemon {
 		this.speed = speed;
 	}
 
+	public void setType1(String type) {
+		this.type1 = type;
+	}
+	
+	public String getType1() {
+		return type1;
+	}
+	
+	public void setType2(String type) {
+		this.type2 = type;
+	}
+	
+	public String getType2() {
+		return type2;
+	}
+	
 	public Pokemon(String name) {
 		super();
 		this.name = name;

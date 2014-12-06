@@ -152,11 +152,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		return typeNames;
 	}
 	
-	public List<String> getAllPokemonNames() {
+	public List<String> getAllPokemonNamesAndId() {
 		List<String> pokemonNames = new ArrayList<String>();
 		SQLiteDatabase db = this.getWritableDatabase();
 		Cursor cursor;
+		String temp;
 		String name;
+		int id;
 
 		try {
 			cursor = db.rawQuery("SELECT * FROM Pokemon", null);
@@ -167,7 +169,54 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			cursor.moveToFirst();
 			
 			do {
-	            name = cursor.getString(1);            
+				id = cursor.getInt(0);
+	            name = cursor.getString(1);
+	            
+	            //Capitalizes first letter
+				String output = name.substring(0, 1).toUpperCase() + name.substring(1);
+				name = output;
+	            
+				//Adds in pokemon number with leading zeroes before name
+	            temp = String.format("%03d", id);
+	            temp = temp + "\t\t" + name;
+	            
+	            pokemonNames.add(temp);
+	        } while (cursor.moveToNext()); 
+			
+	        cursor.close();
+			
+		} catch (Exception e) {
+			Log.e("tle99", e.getMessage());
+		}
+		
+		db.close();
+		return pokemonNames;
+	}
+	
+	public List<String> getAllPokemonNames() {
+		List<String> pokemonNames = new ArrayList<String>();
+		SQLiteDatabase db = this.getWritableDatabase();
+		Cursor cursor;
+		String temp;
+		String name;
+		int id;
+
+		try {
+			cursor = db.rawQuery("SELECT * FROM Pokemon", null);
+			if (cursor == null) {
+				return null;
+			} 
+			
+			cursor.moveToFirst();
+			
+			do {
+				id = cursor.getInt(0);
+	            name = cursor.getString(1);
+	            
+	            //Capitalizes first letter
+				String output = name.substring(0, 1).toUpperCase() + name.substring(1);
+				name = output;
+
 	            pokemonNames.add(name);
 	        } while (cursor.moveToNext()); 
 			
@@ -187,7 +236,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		Cursor cursor;
 
 		try {
-			cursor = db.rawQuery("SELECT * FROM Pokemon JOIN Stats ON p_id = s_id JOIN Type ON WHERE p_name = '" + name + "'", null);
+			cursor = db.rawQuery("SELECT * FROM Pokemon "
+					+ "JOIN Stats ON p_id = s_id "
+					+ "JOIN TP ON pokemon = p_id "
+					+ "JOIN Type ON type = t_id "
+					+ "WHERE p_name = '" + name + "'", null);
 			
 			if (cursor == null) {
 				return null;
@@ -203,6 +256,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			pokemon.setSpecial_attack(cursor.getInt(9));
 			pokemon.setSpecial_defence(cursor.getInt(10));
 			pokemon.setSpeed(cursor.getInt(11));
+			pokemon.setType1(cursor.getString(15));
+			
+			if (cursor.getString(16) == null) {
+				pokemon.setType2(cursor.getString(16));
+			} else {
+				pokemon.setType2("-");
+			}
 			
 			cursor.close();
 			

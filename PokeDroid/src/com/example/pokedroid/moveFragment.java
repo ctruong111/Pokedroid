@@ -64,12 +64,13 @@ public class moveFragment extends Fragment {
 			@Override
 			public void onClick(View view) {
 				move = query.getText().toString();
-				
+				//Hides the keyboard
 				InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
 				imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
 				//
 				// IMPLEMENT MOVE DISPLAY PAGE
 				//
+				//Change the fragment
 				fragment = new pokemonDisplayFragment(move);
 				manager = getFragmentManager();
 				manager.beginTransaction().replace(R.id.mainContent, fragment).addToBackStack(null).commit();

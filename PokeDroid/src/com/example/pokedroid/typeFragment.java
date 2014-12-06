@@ -53,12 +53,13 @@ public class typeFragment extends Fragment {
 			@Override
 			public void onClick(View view) {
 				type = query.getText().toString();
-				
+				//Hides the keyboard
 				InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
 				imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
 				//
 				// IMPLEMENT TYPE DISPLAY PAGE
 				//
+				//Change the fragment
 				fragment = new pokemonDisplayFragment(type);
 				manager = getFragmentManager();
 				manager.beginTransaction().replace(R.id.mainContent, fragment).addToBackStack(null).commit();
