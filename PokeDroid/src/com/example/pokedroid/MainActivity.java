@@ -25,6 +25,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
 
 	private DrawerLayout drawerLayout;
 	private ListView listView;
+	private TextView title;
 	public static String[] titles;
 	private ActionBarDrawerToggle drawerListener;
 	private Fragment fragment;
@@ -44,8 +45,10 @@ public class MainActivity extends Activity implements OnItemClickListener {
 
 		drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
 		listView = (ListView) findViewById(R.id.drawerList);
+		title = (TextView) findViewById(R.id.pageTitle);
 		titles = getResources().getStringArray(R.array.titles);
 		setTitle(titles[0]);
+		title.setText(titles[0]);
 
 		//Sets the navigation drawer to display the titles string array
 		listView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, titles));
@@ -56,8 +59,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
 
 		//What happens when the drawer is opened and closed
 		drawerListener = new ActionBarDrawerToggle(this, drawerLayout,
-				R.drawable.ic_drawer, R.string.drawer_open,
-				R.string.drawer_close) {
+				R.drawable.ic_drawer, R.string.drawer_open, R.string.drawer_close) {
 			@Override
 			public void onDrawerOpened(View drawerView) {
 				// TODO Auto-generated method stub
@@ -116,8 +118,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
 	}
 
 	@Override
-	public void onItemClick(AdapterView<?> parent, View view, int position,
-			long id) {
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		// TODO Auto-generated method stub
 		selectTitle(position);
 
@@ -135,6 +136,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
 			fragment = new imageTestFragment();
 		}
 		
+		title.setText(titles[position]);
 		//Get the fragment manager and change the current fragment
 		manager = getFragmentManager();
 		manager.beginTransaction().replace(R.id.mainContent, fragment).addToBackStack(null).commit();

@@ -257,12 +257,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			pokemon.setSpecial_defence(cursor.getInt(10));
 			pokemon.setSpeed(cursor.getInt(11));
 			pokemon.setType1(cursor.getString(15));
-			
-			if (cursor.getString(16) == null) {
-				pokemon.setType2(cursor.getString(16));
-			} else {
-				pokemon.setType2("-");
-			}
+			pokemon.setType2(cursor.getString(16));
 			
 			cursor.close();
 			
@@ -271,6 +266,39 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		}
 		db.close();
 		return pokemon;
+	}
+	
+	public List<String> getPokemonMoves(String name) {
+		List<String> moves = new ArrayList<String>();
+		SQLiteDatabase db = this.getWritableDatabase();
+		String move;
+		Cursor cursor;
+
+		try {
+			cursor = db.rawQuery("SELECT m_name FROM MP "
+					+ "JOIN Pokemon ON MP.p_id = Pokemon.p_id "
+					+ "JOIN Moves ON Moves.m_id = MP.m_id "
+					+ "WHERE p_name = '" + name + "' COLLATE NOCASE "
+					+ "GROUP BY m_name ORDER BY m_name DESC", null);
+			
+			if (cursor == null) {
+				return null;
+			} 
+			
+			cursor.moveToFirst();
+			
+			do {
+				move = cursor.getString(0);
+				moves.add(move);
+			} while (cursor.moveToNext()); 
+			
+	        cursor.close();
+
+		} catch (Exception e) {
+			Log.e("tle99", e.getMessage());
+		} db.close();
+		
+		return moves;
 	}
 	
 	public List<String> getAllMoveNames() {

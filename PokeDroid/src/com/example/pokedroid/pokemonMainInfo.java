@@ -26,6 +26,7 @@ public class pokemonMainInfo extends FragmentActivity implements ActionBar.TabLi
 	private DatabaseHelper dbHelper;
 	private Pokemon pokemon;
 	public static String pokemonName;
+	Bundle bundle;
 	ViewPager viewPager;
 	FragmentPageAdapter adapter;
     ActionBar actionBar;
@@ -37,6 +38,8 @@ public class pokemonMainInfo extends FragmentActivity implements ActionBar.TabLi
 		setContentView(R.layout.pokemon_main_info_layout);
 		
 		Intent i = getIntent();
+		bundle = new Bundle();
+		
 		pokemonName = i.getStringExtra("name");
 		actionBar = getActionBar();
 
@@ -73,16 +76,6 @@ public class pokemonMainInfo extends FragmentActivity implements ActionBar.TabLi
 	    
 		getActionBar().setHomeButtonEnabled(true);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
-		
-	    dbHelper = new DatabaseHelper(this);
-		
-        try {
-            dbHelper.createDataBase();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        
-        pokemon = dbHelper.getPokemon(pokemonName);
 	}
 
 	@Override
