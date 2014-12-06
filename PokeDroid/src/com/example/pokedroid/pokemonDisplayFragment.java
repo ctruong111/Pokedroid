@@ -38,6 +38,7 @@ public class pokemonDisplayFragment extends Fragment {
 	        }
 	        
 	        pokemon = dbHelper.getPokemon(pokemonName);
+	        
 		return view;
 	}
 }

@@ -1,5 +1,7 @@
 package com.example.pokedroid;
 
+import java.text.NumberFormat;
+
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -11,6 +13,7 @@ import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
 
 public class generationFragment extends Fragment {
 	private Fragment fragment;
@@ -18,7 +21,7 @@ public class generationFragment extends Fragment {
 	private String generation;
 
 	Button search;
-	AutoCompleteTextView query;
+	EditText query;
 	
 	public generationFragment() {		
 	}
@@ -28,13 +31,13 @@ public class generationFragment extends Fragment {
 		View view = inflater.inflate(R.layout.generation_fragment_layout, container, false);
 
 		search = (Button)view.findViewById(R.id.search);
-		query = (AutoCompleteTextView)view.findViewById(R.id.query);
+		query = (EditText)view.findViewById(R.id.query);
 		
 		search.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				generation = query.getText().toString();
-				
+
 				InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
 				imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
 				//

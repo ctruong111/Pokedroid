@@ -1,5 +1,6 @@
 package com.example.pokedroid;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -43,9 +44,14 @@ public class MainActivity extends Activity implements OnItemClickListener {
 		titles = getResources().getStringArray(R.array.titles);
 		setTitle(titles[0]);
 
+		//Sets the navigation drawer to display the titles string array
 		listView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, titles));
 		listView.setOnItemClickListener(this);
+		
+		//Hides the app launcher icon from action bar
+		getActionBar().setDisplayShowHomeEnabled(false);
 
+		//What happens when the drawer is opened and closed
 		drawerListener = new ActionBarDrawerToggle(this, drawerLayout,
 				R.drawable.ic_drawer, R.string.drawer_open,
 				R.string.drawer_close) {
@@ -76,7 +82,8 @@ public class MainActivity extends Activity implements OnItemClickListener {
 				drawerLayout.requestLayout();
 			}
 		};
-
+		
+		//Allows for pressing action bar to open navigation drawer
 		drawerLayout.setDrawerListener(drawerListener);
 		getActionBar().setHomeButtonEnabled(true);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -111,26 +118,29 @@ public class MainActivity extends Activity implements OnItemClickListener {
 		// TODO Auto-generated method stub
 		selectTitle(position);
 
-		if (position == 0) {
+		if (position == 0) { //If home is selected
 			fragment = new homeFragment();
-		} else if (position == 1) {
+		} else if (position == 1) { //If pokemon is selected
 			fragment = new pokemonFragment();
-		} else if (position == 2) {
+		} else if (position == 2) { //If move is selected
 			fragment = new moveFragment();
-		} else if (position == 3) {
+		} else if (position == 3) { //If type is selected
 			fragment = new typeFragment();
-		} else if (position == 4) {
+		} else if (position == 4) { //If generation is selected
 			fragment = new generationFragment();
 		}
 
+		//Get the fragment manager and change the current fragment
 		manager = getFragmentManager();
 		manager.beginTransaction().replace(R.id.mainContent, fragment).addToBackStack(null).commit();
 		
+		//Closes the drawer after selection
 		drawerLayout.closeDrawer(listView);
 	}
 
 	private void selectTitle(int position) {
 		// TODO Auto-generated method stub
+		//Changes the action bar title to reflect the page
 		listView.setItemChecked(position, true);
 		setTitle(titles[position]);
 	}

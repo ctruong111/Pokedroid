@@ -187,7 +187,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		Cursor cursor;
 
 		try {
-			cursor = db.rawQuery("SELECT * FROM Pokemon JOIN Stats ON p_id = s_id WHERE p_name = " + name, null);
+			cursor = db.rawQuery("SELECT * FROM Pokemon JOIN Stats ON p_id = s_id JOIN Type ON WHERE p_name = '" + name + "'", null);
 			
 			if (cursor == null) {
 				return null;
@@ -247,7 +247,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		Cursor cursor;
 		
 		try {
-			cursor = db.rawQuery("SELECT * FROM Moves JOIN Typen ON t_id = type WHERE m_name = " + name, null);
+			cursor = db.rawQuery("SELECT * FROM Moves JOIN Typen ON t_id = type WHERE m_name = '" + name + "'", null);
 
 			if (cursor == null) {
 				return null;
