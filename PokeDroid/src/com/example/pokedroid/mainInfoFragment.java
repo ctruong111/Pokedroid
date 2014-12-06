@@ -6,11 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class moveFragment extends Fragment {
+public class mainInfoFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		return inflater.inflate(R.layout.move_fragment_layout, container, false);
+		return inflater.inflate(R.layout.main_info_fragment_layout, container, false);
 	}
 }

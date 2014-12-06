@@ -16,31 +16,42 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 
-public class typeFragment extends Fragment {
+public class moveSearchFragment extends Fragment {
 	public static String[] names;
 	private DatabaseHelper dbHelper;
 	private Fragment fragment;
 	private FragmentManager manager;
-	private String type;
+	private String move;
 
 	Button search;
 	AutoCompleteTextView query;
 	
-	public typeFragment() {		
+	public moveSearchFragment() {		
 	}
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.type_fragment_layout, container, false); 
+		View view = inflater.inflate(R.layout.move_search_fragment_layout, container, false);
 		
-        dbHelper = new DatabaseHelper(this.getActivity());
-		List<String> typeNames = dbHelper.getAllTypeNames();
-		names = new String[typeNames.size()];
+		dbHelper = new DatabaseHelper(this.getActivity());
+		List<String> moveNames = dbHelper.getAllMoveNames();
+		names = new String[moveNames.size()];
 		
-		for(int i = 0; i < typeNames.size(); i++) {
-			names[i] = typeNames.get(i);
+		for(int i = 0; i < moveNames.size(); i++) {
+			names[i] = moveNames.get(i);
 			
 			String output = names[i].substring(0, 1).toUpperCase() + names[i].substring(1);
+			
+			for(int j = 0; j < output.length(); j++) {
+				char[] temp;
+				temp = output.toCharArray();
+				if (temp[j] == '-') {
+					temp[j] = ' ';
+					
+					output = temp.toString();
+				}
+			}
+
 			names[i] = output;
 		}
 
@@ -53,12 +64,12 @@ public class typeFragment extends Fragment {
 		search.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				type = query.getText().toString();
+				move = query.getText().toString();
 				//Hides the keyboard
 				InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
 				imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
 				//
-				// IMPLEMENT TYPE DISPLAY PAGE
+				// IMPLEMENT MOVE DISPLAY PAGE
 				//
 				//Change the activity
 				Intent i = new Intent(getActivity().getApplicationContext(), pokemonMainInfo.class);
