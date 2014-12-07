@@ -310,7 +310,36 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		
 		return moves;
 	}
-	
+	public List<String> getPokemonLocations(String pokemon){
+		List<String> locs = new ArrayList<String>();
+		SQLiteDatabase db = this.getWritableDatabase();
+		String location;
+		Cursor cursor;
+		try {
+			cursor = db.rawQuery("SELECT l_name FROM Locations "
+					+ "JOIN LP ON LP.l_id = Locations.l_locid "
+					+ "JOIN Pokemon ON Pokemon.p_id = LP.p_id "
+					+ "WHERE p_name = '" + pokemon + "' COLLATE NOCASE "
+					+ "GROUP BY l_name ORDER BY l_name DESC", null);
+			
+			if (cursor.getCount() == 0) {
+				return null;
+			}
+			
+			cursor.moveToFirst();
+			
+			do {
+				location = cursor.getString(0);
+				locs.add(location);
+			} while (cursor.moveToNext()); 
+			
+	        cursor.close();
+
+		} catch (Exception e) {
+			Log.e("tle99", e.getMessage());
+		} db.close();
+		return locs;
+	}
 	public List<String> getAllMoveNames() {
 		List<String> moveNames = new ArrayList<String>();
 		SQLiteDatabase db = this.getWritableDatabase();
