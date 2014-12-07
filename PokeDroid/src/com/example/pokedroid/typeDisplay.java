@@ -16,31 +16,30 @@ import android.widget.Adapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class moveDisplay extends FragmentActivity {
+public class typeDisplay extends FragmentActivity {
 	private DatabaseHelper dbHelper;
-	private String moveName;
 	private ActionBar actionBar;
-	public moveDisplay() {}
-	
+	String typeName;
 	Intent i;
+
+	public typeDisplay() {}
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.move_display_layout);
+		setContentView(R.layout.type_display_layout);
 		
 		i = getIntent();
-		
-		moveName = i.getStringExtra("name");
 		actionBar = getActionBar();
-
-		//change the title to the pokemon's name
-		actionBar.setTitle(moveName);
+		typeName = i.getStringExtra("name");
+		
+		actionBar.setTitle(typeName);
 		actionBar.setDisplayShowHomeEnabled(false);
 
 		getActionBar().setHomeButtonEnabled(true);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 	}
+	
 	@Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

@@ -1,6 +1,7 @@
 package com.example.pokedroid;
 
 import java.io.IOException;
+import java.util.Locale;
 
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -10,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class mainInfoFragment extends Fragment {
 	private DatabaseHelper dbHelper;
@@ -21,6 +21,12 @@ public class mainInfoFragment extends Fragment {
 	TextView type2;
 	TextView height;
 	TextView weight;
+	TextView hp;
+	TextView attack;
+	TextView defence;
+	TextView special_attack;
+	TextView special_defence;
+	TextView speed;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -34,6 +40,12 @@ public class mainInfoFragment extends Fragment {
 		type2 = (TextView) view.findViewById(R.id.type2);
 		height = (TextView) view.findViewById(R.id.height);
 		weight = (TextView) view.findViewById(R.id.weight);
+		hp = (TextView) view.findViewById(R.id.hp);
+		attack = (TextView) view.findViewById(R.id.attack);
+		defence = (TextView) view.findViewById(R.id.defence);
+		special_attack = (TextView) view.findViewById(R.id.special_attack);
+		special_defence = (TextView) view.findViewById(R.id.special_defence);
+		speed = (TextView) view.findViewById(R.id.speed);
 		
 	    dbHelper = new DatabaseHelper(getActivity());
 		
@@ -51,20 +63,42 @@ public class mainInfoFragment extends Fragment {
         String temp1 = pokemon.getType1();
 		String temp2 = pokemon.getType2();
 
-        temp1 = temp1.substring(0, 1).toUpperCase() + temp1.substring(1);
-        temp2 = temp2.substring(0, 1).toUpperCase() + temp2.substring(1);
+        temp1 = temp1.substring(0, 1).toUpperCase(Locale.US) + temp1.substring(1);
+        temp2 = temp2.substring(0, 1).toUpperCase(Locale.US) + temp2.substring(1);
 
-		type1.setText(temp1);        
-        if (temp1 != temp2) {
+		type1.setText(temp1);
+		
+        if (temp1.equals(temp2)) {
+        	type2.setText("");
+        } else {
         	type2.setText(temp2);
         }
         
         double num = pokemon.getHeight();
-        height.setText(String.valueOf(num) + " m");
+        height.setText(String.valueOf(num/10) + " m");
         
         num = pokemon.getWeight();
-        weight.setText(String.valueOf(num) + " kg");
+        weight.setText(String.valueOf(num/10) + " kg");
 		
+        int intNum;
+        intNum = pokemon.getHp();
+        hp.setText("HP:               " + Integer.toString(intNum));
+        
+        intNum = pokemon.getAttack();
+        attack.setText("Attack:        " + String.valueOf(intNum));
+        
+        intNum = pokemon.getDefence();
+        defence.setText("Defence:     " + String.valueOf(intNum));
+        
+        intNum = pokemon.getSpecial_attack();
+        special_attack.setText("Sp. Atk:       " + String.valueOf(intNum));
+        
+        intNum = pokemon.getSpecial_defence();
+        special_defence.setText("Sp. Def:       " + String.valueOf(intNum));
+        
+        intNum = pokemon.getSpeed();
+        speed.setText("Speed:         " + String.valueOf(intNum));
+        
 		return view;
 	}
 }

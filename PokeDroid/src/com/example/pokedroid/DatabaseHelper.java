@@ -256,8 +256,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			} cursor.moveToFirst();
 			
 			pokemon.setId(cursor.getInt(0));
-			pokemon.setHeight(cursor.getInt(2)/10);
-			pokemon.setWeight(cursor.getInt(3)/10);
+			pokemon.setHeight(cursor.getInt(2));
+			pokemon.setWeight(cursor.getInt(3));
 			pokemon.setBase_exp(cursor.getInt(4));
 			pokemon.setImage(cursor.getBlob(5));
 			pokemon.setDefence(cursor.getInt(7));
@@ -344,7 +344,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		Cursor cursor;
 		
 		try {
-			cursor = db.rawQuery("SELECT * FROM Moves JOIN Type ON t_id = type WHERE m_name = '" + name + "' COLLATE NOCASE", null);
+			cursor = db.rawQuery("SELECT * FROM Moves "
+					+ "JOIN Type ON t_id = type "
+					+ "WHERE m_name = '" + name + "' COLLATE NOCASE", null);
 
 			if (cursor.getCount() == 0) {
 				return null;

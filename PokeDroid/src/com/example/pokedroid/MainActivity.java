@@ -129,7 +129,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
 		} else if (position == 2) { //If move is selected
 			fragment = new moveSearchFragment();
 		} else if (position == 3) { //If type is selected
-			fragment = new typeFragment();
+			fragment = new typeSearchFragment();
 		} else if (position == 4) { //If generation is selected
 			fragment = new generationFragment();
 		} else if (position == 5) {	//If imageTest is selected

@@ -16,22 +16,23 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 
-public class typeFragment extends Fragment {
+public class typeSearchFragment extends Fragment {
 	public static String[] names;
 	private DatabaseHelper dbHelper;
 	private Fragment fragment;
 	private FragmentManager manager;
 	private String type;
-
+	boolean exists;
+	
 	Button search;
 	AutoCompleteTextView query;
 	
-	public typeFragment() {		
+	public typeSearchFragment() {		
 	}
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.type_fragment_layout, container, false); 
+		View view = inflater.inflate(R.layout.type_search_fragment_layout, container, false); 
 		
         dbHelper = new DatabaseHelper(this.getActivity());
 		List<String> typeNames = dbHelper.getAllTypeNames();
@@ -54,15 +55,26 @@ public class typeFragment extends Fragment {
 			@Override
 			public void onClick(View view) {
 				type = query.getText().toString();
-				//Hides the keyboard
-				InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
-				imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
-				//
-				// IMPLEMENT TYPE DISPLAY PAGE
-				//
-				//Change the activity
-				Intent i = new Intent(getActivity().getApplicationContext(), pokemonMainInfo.class);
-				startActivity(i);
+				
+				for (int i = 0; i < names.length; i++) {
+					if (type.equals(names[i])) {
+						exists = true;
+						break;
+					}
+					exists = false;
+				}
+				if (exists == true) {
+					//Hides the keyboard
+					InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+					imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+	
+					//Change the activity
+					Intent i = new Intent(getActivity().getApplicationContext(), typeDisplay.class);
+					i.putExtra("name", type); //Pass in the name of the move
+					startActivity(i);
+				} else {
+					query.setError("Type does not exist!");
+				}
 			}
 		});
 		

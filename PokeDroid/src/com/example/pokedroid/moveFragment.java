@@ -3,6 +3,7 @@ package com.example.pokedroid;
 import java.util.List;
 
 import android.support.v4.app.ListFragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,23 +35,6 @@ public class moveFragment extends ListFragment {
 			stringMoves[i] = moves.get(i);	
 		}
 		
-		for (int i = 0; i < stringMoves.length; i++){
-			String temp = stringMoves[i];
-			char[] charArray;
-			temp = temp.substring(0, 1).toUpperCase() + temp.substring(1);
-			charArray = temp.toCharArray();
-
-			for(int j = 0; j < temp.length(); j++) {
-				charArray = temp.toCharArray();
-				if (charArray[j] == '-') {
-					temp = temp.substring(0, j) + " " + temp.substring(j+1);
-					break;
-				}
-			}
-			
-			stringMoves[i] = temp;
-		}
-		
         if (moves != null) {
         	ArrayAdapter<String> adapter = new ArrayAdapter<String>(inflater.getContext(), android.R.layout.simple_list_item_1, stringMoves);
 			setListAdapter(adapter);
@@ -61,6 +45,8 @@ public class moveFragment extends ListFragment {
 	
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
-		
+		Intent i = new Intent(getActivity(), moveDisplay.class);
+		i.putExtra("name", stringMoves[position]); //Passing in the move's name
+		startActivity(i);
 	}
 }
