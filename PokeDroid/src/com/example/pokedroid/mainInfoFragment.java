@@ -19,6 +19,8 @@ public class mainInfoFragment extends Fragment {
 	View view;
 	TextView type1;
 	TextView type2;
+	TextView height;
+	TextView weight;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -30,6 +32,8 @@ public class mainInfoFragment extends Fragment {
 		
 		type1 = (TextView) view.findViewById(R.id.type1);
 		type2 = (TextView) view.findViewById(R.id.type2);
+		height = (TextView) view.findViewById(R.id.height);
+		weight = (TextView) view.findViewById(R.id.weight);
 		
 	    dbHelper = new DatabaseHelper(getActivity());
 		
@@ -44,16 +48,22 @@ public class mainInfoFragment extends Fragment {
         byte[] byteImage = dbHelper.getImage(name);
         image.setImageBitmap(BitmapFactory.decodeByteArray(byteImage, 0, byteImage.length));
 
-//        String temp = pokemon.getType1();
-//        String output = temp.substring(0, 1).toUpperCase() + temp.substring(1);
-//        
-//		type1.setText(output);
-//
-//		temp = pokemon.getType2();
-//        output = temp.substring(0, 1).toUpperCase() + temp.substring(1);
-//
-//		type2.setText(output);
-		
+        String temp1 = pokemon.getType1();
+		String temp2 = pokemon.getType2();
+
+        temp1 = temp1.substring(0, 1).toUpperCase() + temp1.substring(1);
+        temp2 = temp2.substring(0, 1).toUpperCase() + temp2.substring(1);
+
+		type1.setText(temp1);        
+        if (temp1 != temp2) {
+        	type2.setText(temp2);
+        }
+        
+        double num = pokemon.getHeight();
+        height.setText(String.valueOf(num) + " m");
+        
+        num = pokemon.getWeight();
+        weight.setText(String.valueOf(num) + " kg");
 		
 		return view;
 	}

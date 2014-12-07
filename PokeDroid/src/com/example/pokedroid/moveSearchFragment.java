@@ -21,8 +21,9 @@ public class moveSearchFragment extends Fragment {
 	private DatabaseHelper dbHelper;
 	private Fragment fragment;
 	private FragmentManager manager;
-	private String move;
-
+	private String moveName;
+	Move move;
+	
 	Button search;
 	AutoCompleteTextView query;
 	
@@ -64,16 +65,22 @@ public class moveSearchFragment extends Fragment {
 		search.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				move = query.getText().toString();
-				//Hides the keyboard
-				InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
-				imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
-				//
-				// IMPLEMENT MOVE DISPLAY PAGE
-				//
-				//Change the activity
-				Intent i = new Intent(getActivity().getApplicationContext(), pokemonMainInfo.class);
-				startActivity(i);
+				moveName = query.getText().toString();
+				
+				move = dbHelper.getMove(moveName);
+				
+				if (move == null) {
+					//Hides the keyboard
+					InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+					imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+
+					//Change the activity
+					Intent i = new Intent(getActivity().getApplicationContext(), moveDisplay.class);
+					i.putExtra("name", moveName); //Pass in the name of the move
+					startActivity(i);
+				} else {
+					query.setError("Move does not exist!");
+				}
 			}
 		});
 		

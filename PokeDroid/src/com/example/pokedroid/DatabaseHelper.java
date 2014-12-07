@@ -29,6 +29,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	
 	private SQLiteDatabase myDB;
 	private Context context;
+	Pokemon pokemon;
 	
 	public DatabaseHelper(Context context) {
 		super(context, DB_NAME, null, DB_VERSION);
@@ -168,6 +169,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 		try {
 			cursor = db.rawQuery("SELECT * FROM Pokemon", null);
+			
 			if (cursor == null) {
 				return null;
 			} 
@@ -237,7 +239,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	}
 	
 	public Pokemon getPokemon(String name) {
-		Pokemon pokemon = new Pokemon(name);
+		pokemon = new Pokemon(name);
 		SQLiteDatabase db = this.getWritableDatabase();
 		Cursor cursor;
 
@@ -344,9 +346,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		try {
 			cursor = db.rawQuery("SELECT * FROM Moves JOIN Type ON t_id = type WHERE m_name = '" + name + "' COLLATE NOCASE", null);
 
-			if (cursor == null) {
+			if (cursor.getCount() == 0) {
 				return null;
-			} cursor.moveToFirst();
+			} 
+			
+			cursor.moveToFirst();
 			
 		} catch (Exception e) {
 			Log.e("tle99", e.getMessage());

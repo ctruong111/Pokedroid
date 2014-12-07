@@ -8,8 +8,8 @@
         android:id="@+id/type1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:paddingRight="20dp"
+        android:paddingTop="20dp"
+        android:paddingRight="30dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -21,8 +21,8 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/type1"
         android:layout_marginTop="5dp"
-        android:paddingRight="20dp"
-        android:paddingTop="300dp"
+        android:paddingRight="30dp"
+        android:paddingTop="10dp"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <ImageView
@@ -31,5 +31,27 @@
             android:layout_height="170dp"
             android:layout_marginLeft="10dp"
            	android:layout_marginTop="20dp">
+           	
 	</ImageView>
+
+    <TextView
+        android:id="@+id/height"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/type2"
+		android:paddingRight="30dp"
+        android:layout_marginTop="20dp"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/weight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/height"
+		android:paddingRight="30dp"
+        android:layout_marginTop="20dp"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
 </RelativeLayout>
