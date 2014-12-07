@@ -34,6 +34,23 @@ public class moveFragment extends ListFragment {
 			stringMoves[i] = moves.get(i);	
 		}
 		
+		for (int i = 0; i < stringMoves.length; i++){
+			String temp = stringMoves[i];
+			char[] charArray;
+			temp = temp.substring(0, 1).toUpperCase() + temp.substring(1);
+			charArray = temp.toCharArray();
+
+			for(int j = 0; j < temp.length(); j++) {
+				charArray = temp.toCharArray();
+				if (charArray[j] == '-') {
+					temp = temp.substring(0, j) + " " + temp.substring(j+1);
+					break;
+				}
+			}
+			
+			stringMoves[i] = temp;
+		}
+		
         if (moves != null) {
         	ArrayAdapter<String> adapter = new ArrayAdapter<String>(inflater.getContext(), android.R.layout.simple_list_item_1, stringMoves);
 			setListAdapter(adapter);

@@ -18,11 +18,18 @@
         android:id="@+id/type2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="300dp"
-        android:paddingRight="20dp"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/type1"
         android:layout_marginTop="5dp"
+        android:paddingRight="20dp"
+        android:paddingTop="300dp"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
+    <ImageView
+            android:id="@+id/image"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:layout_marginLeft="10dp"
+           	android:layout_marginTop="20dp">
+	</ImageView>
 </RelativeLayout>

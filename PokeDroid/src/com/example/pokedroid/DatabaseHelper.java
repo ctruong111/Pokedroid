@@ -244,26 +244,28 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		try {
 			cursor = db.rawQuery("SELECT * FROM Pokemon "
 					+ "JOIN Stats ON p_id = s_id "
-					+ "JOIN TP ON pokemon = p_id "
-					+ "JOIN Type ON type = t_id "
+					+ "JOIN TP ON p_id = tp_id "
+					+ "JOIN Type t1 ON t1.t_id = type1 "
+					+ "JOIN Type t2 ON t2.t_id = type2 "
 					+ "WHERE p_name = '" + name + "' COLLATE NOCASE", null);
 			
-			if (cursor == null) {
+			if (cursor.getCount() == 0) {
 				return null;
 			} cursor.moveToFirst();
 			
 			pokemon.setId(cursor.getInt(0));
-			pokemon.setHeight(cursor.getDouble(2)/10);
-			pokemon.setWeight(cursor.getDouble(3)/10);
+			pokemon.setHeight(cursor.getInt(2)/10);
+			pokemon.setWeight(cursor.getInt(3)/10);
 			pokemon.setBase_exp(cursor.getInt(4));
-			pokemon.setDefence(cursor.getInt(6));
-			pokemon.setAttack(cursor.getInt(7));
-			pokemon.setHp(cursor.getInt(8));
-			pokemon.setSpecial_attack(cursor.getInt(9));
-			pokemon.setSpecial_defence(cursor.getInt(10));
-			pokemon.setSpeed(cursor.getInt(11));
-			pokemon.setType1(cursor.getString(15));
-			pokemon.setType2(cursor.getString(16));
+			pokemon.setImage(cursor.getBlob(5));
+			pokemon.setDefence(cursor.getInt(7));
+			pokemon.setAttack(cursor.getInt(8));
+			pokemon.setHp(cursor.getInt(9));
+			pokemon.setSpecial_attack(cursor.getInt(10));
+			pokemon.setSpecial_defence(cursor.getInt(11));
+			pokemon.setSpeed(cursor.getInt(12));
+			pokemon.setType1(cursor.getString(17));
+			pokemon.setType2(cursor.getString(19));
 			
 			cursor.close();
 			
@@ -287,9 +289,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 					+ "WHERE p_name = '" + name + "' COLLATE NOCASE "
 					+ "GROUP BY m_name ORDER BY m_name DESC", null);
 			
-			if (cursor == null) {
+			if (cursor.getCount() == 0) {
 				return null;
-			} 
+			}
 			
 			cursor.moveToFirst();
 			
@@ -315,11 +317,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 		try {
 			cursor = db.rawQuery("SELECT * FROM Moves", null);
-			if (cursor == null) {
-				return null;
-			} 
 			
-			cursor.moveToFirst();
+			if (cursor.getCount() == 0) {
+				return null;
+			} cursor.moveToFirst();
 			
 			do {
 	            name = cursor.getString(1);            
@@ -341,7 +342,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		Cursor cursor;
 		
 		try {
-			cursor = db.rawQuery("SELECT * FROM Moves JOIN Typen ON t_id = type WHERE m_name = '" + name + "' COLLATE NOCASE", null);
+			cursor = db.rawQuery("SELECT * FROM Moves JOIN Type ON t_id = type WHERE m_name = '" + name + "' COLLATE NOCASE", null);
 
 			if (cursor == null) {
 				return null;
@@ -355,7 +356,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		return move;
 	}
 	
-	private byte[] getImage(String url){
+	public byte[] getImage(String name) {
+		byte[] pokemonImage = null;
+		Cursor cursor;		
+		SQLiteDatabase db = this.getWritableDatabase();
+
+		try {
+			cursor = db.rawQuery("SELECT image FROM Pokemon WHERE p_name = '" + name + "' COLLATE NOCASE;", null);
+			
+			if (cursor.getCount() == 0) {
+				return null;
+			} cursor.moveToFirst();
+			
+			pokemonImage = cursor.getBlob(0);
+		} catch (Exception e) {
+			Log.e("tle99", e.getMessage());
+		}
+		
+		return pokemonImage;
+	}
+	
+	private byte[] getImageOnline(String url){
 	     try {
 	             URL imageUrl = new URL(url);
 	             URLConnection ucon = imageUrl.openConnection();
@@ -391,7 +412,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		byte[] image;
 	    
 	    try {
-			cursor = db.rawQuery("SELECT image FROM Pokemon", null);
+			cursor = db.rawQuery("SELECT 'image' FROM Pokemon", null);
 			if (cursor == null) {
 				return null;
 			} 
@@ -408,6 +429,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		} catch (Exception e) {
 			Log.e("tle99", e.getMessage());
 		}
+	    db.close();
 	    
 	    return imageList;
 	}
@@ -416,7 +438,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		List<String> names = this.getAllPokemonNames();
 		try {
 			for(int i = 0; i < names.size(); i++){
-				byte[] blob = this.getImage("http://img.pokemondb.net/artwork/"+names.get(i)+".jpg");
+				byte[] blob = this.getImageOnline("http://img.pokemondb.net/artwork/"+names.get(i)+".jpg");
 				this.insertImage(blob, names.get(i));
 			}
 		} catch (Exception e) {

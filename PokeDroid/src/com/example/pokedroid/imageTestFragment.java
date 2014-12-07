@@ -39,7 +39,7 @@ public class imageTestFragment extends ListFragment {
 			dbHelper = new DatabaseHelper(this.getActivity());
 		}
 		try {
-			dbHelper.createDataBase();
+			dbHelper.createDataBase();    
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

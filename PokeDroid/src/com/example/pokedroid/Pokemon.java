@@ -14,7 +14,16 @@ public class Pokemon {
 	private int speed;
 	private String type1;
 	private String type2;
+	private byte[] image;
 	
+	public byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
+
 	public int getId() {
 		return id;
 	}
