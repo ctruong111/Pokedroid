@@ -132,8 +132,6 @@ public class MainActivity extends Activity implements OnItemClickListener {
 			fragment = new typeSearchFragment();
 		} else if (position == 4) { //If generation is selected
 			fragment = new generationFragment();
-		} else if (position == 5) {	//If imageTest is selected
-			fragment = new imageTestFragment();
 		}
 		
 		title.setText(titles[position]);

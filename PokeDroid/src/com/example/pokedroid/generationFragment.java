@@ -31,24 +31,7 @@ public class generationFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.generation_fragment_layout, container, false);
 
-		search = (Button)view.findViewById(R.id.search);
-		query = (EditText)view.findViewById(R.id.query);
 		
-		search.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				generation = query.getText().toString();
-				//Hides the keyboard
-				InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
-				imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
-				//
-				// IMPLEMENT GENERATION DISPLAY PAGE
-				//
-				//Change the activity
-				Intent i = new Intent(getActivity().getApplicationContext(), pokemonMainInfo.class);
-				startActivity(i);
-			}
-		});
 		
 		return view;
 	}

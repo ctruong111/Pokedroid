@@ -21,6 +21,7 @@ import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.Toast;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 	public static String DB_PATH = "/data/data/com.example.pokedroid/databases/";
@@ -525,7 +526,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	}
 	
 	public List<Abilities> getAbilities(String name) {
-		List<Abilities> abilities = null;
+		List<Abilities> abilities = new ArrayList<Abilities>();
 		Abilities ability = null;
 		SQLiteDatabase db = this.getWritableDatabase();
 		Cursor cursor;
@@ -551,6 +552,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		} catch (Exception e) {
 			Log.e("tle99", e.getMessage());
 		}
+
 		return abilities;
 	}
 }

@@ -1,17 +1,20 @@
 package com.example.pokedroid;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class pokemonMainInfoFragment extends Fragment {
 	private DatabaseHelper dbHelper;
@@ -26,6 +29,7 @@ public class pokemonMainInfoFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
+		ABILITY = new ArrayList<Abilities>();
 		view = inflater.inflate(R.layout.pokemon_main_info_fragment_layout, container, false);
 		name = getActivity().getActionBar().getTitle().toString();
 		
@@ -54,12 +58,14 @@ public class pokemonMainInfoFragment extends Fragment {
         ABILITY = dbHelper.getAbilities(name);
         byte[] byteImage = dbHelper.getImage(name);
         image.setImageBitmap(BitmapFactory.decodeByteArray(byteImage, 0, byteImage.length));
-
-        for(int i = 0; 0 < ABILITY.size(); i++){
-        	Abilities temp = ABILITY.get(i);
-        	ability.setText(Abilities.getName() + "\n");
-        	ability.setText(Abilities.getDescription() + "\n");
-
+        if (ABILITY != null) {
+	        for(int i = 0; i < ABILITY.size(); i++){
+	        	Abilities temp = ABILITY.get(i);
+	        	ability.setText(temp.getName() + "\n");
+	        	ability.setText(temp.getDescription() + "\n");
+	        }
+        } else {
+        	Toast.makeText(getActivity(), "SHIT DON'T WORK", Toast.LENGTH_LONG).show();
         }
         String temp1 = pokemon.getType1();
 		String temp2 = pokemon.getType2();

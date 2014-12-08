@@ -8,7 +8,7 @@ public class Move {
 	private int power;
 	private int pp;
 	private int accuracy;
-	private String attack_type;
+	private int attack_type;
 	private int effect_id;
 	private int effect_chance;
 	
@@ -54,11 +54,11 @@ public class Move {
 	public void setAccuracy(int accuracy) {
 		this.accuracy = accuracy;
 	}
-	public String getAttack_type() {
+	public int getAttack_type() {
 		return attack_type;
 	}
-	public void setAttack_type(String attack_type) {
-		this.attack_type = attack_type;
+	public void setAttack_type(int i) {
+		this.attack_type = i;
 	}
 	public int getEffect_id() {
 		return effect_id;

@@ -44,9 +44,6 @@ public class moveMainInfoFragment extends Fragment {
         
         move = dbHelper.getMove(name);
         
-        byte[] byteImage = dbHelper.getImage(name);
-        image.setImageBitmap(BitmapFactory.decodeByteArray(byteImage, 0, byteImage.length));
-
         String TYPEdisplay = move.getType();
 		int ACCURACYdisplay = move.getAccuracy();
 		int POWERdisplay = move.getPower();

@@ -36,7 +36,7 @@ public class moveMainInfo extends FragmentActivity implements ActionBar.TabListe
 		actionBar.addTab(actionBar.newTab().setText("Main Info").setTabListener(this));
 		actionBar.addTab(actionBar.newTab().setText("Pokemon").setTabListener(this));
 		
-		viewPager = (ViewPager) findViewById(R.id.moveDisplay);
+		viewPager = (ViewPager) findViewById(R.id.moveMainInfo);
 		adapter = new MoveDisplayAdapter(getSupportFragmentManager());
 		viewPager.setAdapter(adapter);
 		
@@ -60,6 +60,9 @@ public class moveMainInfo extends FragmentActivity implements ActionBar.TabListe
 				
 			}
 		});
+
+		getActionBar().setHomeButtonEnabled(true);
+		getActionBar().setDisplayHomeAsUpEnabled(true);
 	}
 	
 	@Override
@@ -76,7 +79,7 @@ public class moveMainInfo extends FragmentActivity implements ActionBar.TabListe
 	@Override
 	public void onTabSelected(Tab tab, FragmentTransaction ft) {
 		// TODO Auto-generated method stub
-		viewPager.setCurrentItem(tab.getPosition());
+		//viewPager.setCurrentItem(tab.getPosition());
 	}
 	@Override
 	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
