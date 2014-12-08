@@ -48,11 +48,7 @@ public class typeMainInfoFragment extends ListFragment{
         
         if (pokemonNames != null) {
         	ArrayAdapter<String> adapter = new ArrayAdapter<String>(inflater.getContext(), android.R.layout.simple_list_item_1, names);
-    		Log.e("tle99", "!!!!!!!!!!!!!! got in !!!!!!!!!!!!");
-
 			setListAdapter(adapter);
-			Log.e("tle99", "!!!!!!!!!!!!!! got in !!!!!!!!!!!!");
-
         }
 
 		return super.onCreateView(inflater, container, savedInstanceState);

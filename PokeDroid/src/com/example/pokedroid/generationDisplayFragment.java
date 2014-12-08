@@ -31,7 +31,7 @@ public class generationDisplayFragment extends Fragment {
 	        } catch (IOException e) {
 	            e.printStackTrace();
 	        }
-	        	        
+	        
 		return view;
 	}
 }
