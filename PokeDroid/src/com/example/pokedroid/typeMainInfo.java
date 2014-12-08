@@ -51,8 +51,7 @@ public class typeMainInfo extends FragmentActivity {
 		actionBar.setDisplayShowHomeEnabled(false);
 		
 		ListFragment l = new typeMainInfoFragment();
-		transaction.add(R.id.typeMainInfo, l);
-		transaction.commit();
+		transaction.replace(R.id.typeMainInfo,l).addToBackStack(null).commit();
 		
 		getActionBar().setHomeButtonEnabled(true);
 		getActionBar().setDisplayHomeAsUpEnabled(true);

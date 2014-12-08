@@ -380,8 +380,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		Cursor cursor;
 		try{
 			cursor = db.rawQuery("SELECT p_name FROM Pokemon "
-					+ "JOIN TP ON TP.tp_id = Pokemon.p_id"
-					+ "JOIN JOIN Type ON Type.t_id = TP.type1 OR Type.t_id = TP.type2"
+					+ "JOIN TP ON TP.tp_id = Pokemon.p_id "
+					+ "JOIN JOIN Type ON Type.t_id = TP.type1 OR Type.t_id = TP.type2 "
 					+ "JOIN LP ON Pokemon.p_id = LP.p_id "
 					+ "JOIN Location ON LP.l_id = l_locId "
 					+ "JOIN MP Pokemon.p_id = MP.p_id "
