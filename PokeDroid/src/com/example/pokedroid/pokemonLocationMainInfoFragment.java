@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-public class locationFragment extends ListFragment {
+public class pokemonLocationMainInfoFragment extends ListFragment {
 	private View view;
 	public static String name;
 	private DatabaseHelper dbHelper;
@@ -24,7 +24,7 @@ public class locationFragment extends ListFragment {
 			Bundle savedInstanceState) {
 		name = getActivity().getActionBar().getTitle().toString();
 
-		view = inflater.inflate(R.layout.location_fragment_layout, container, false);
+		view = inflater.inflate(R.layout.pokemon_location_main_info_fragment, container, false);
 		
         dbHelper = new DatabaseHelper(this.getActivity());
         
@@ -51,7 +51,7 @@ public class locationFragment extends ListFragment {
 	
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
-		Intent i = new Intent(getActivity(), moveDisplay.class);
+		Intent i = new Intent(getActivity(), moveMainInfo.class);
 		i.putExtra("name", stringLocations[position]); //Passing in the move's name
 		startActivity(i);
 	}

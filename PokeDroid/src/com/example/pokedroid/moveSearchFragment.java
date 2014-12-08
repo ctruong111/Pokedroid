@@ -66,7 +66,7 @@ public class moveSearchFragment extends Fragment {
 					imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
 
 					//Change the activity
-					Intent i = new Intent(getActivity().getApplicationContext(), moveDisplay.class);
+					Intent i = new Intent(getActivity().getApplicationContext(), moveMainInfo.class);
 					i.putExtra("name", moveName); //Pass in the name of the move
 					startActivity(i);
 				} else {

@@ -69,7 +69,7 @@ public class typeSearchFragment extends Fragment {
 					imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
 	
 					//Change the activity
-					Intent i = new Intent(getActivity().getApplicationContext(), typeDisplay.class);
+					Intent i = new Intent(getActivity().getApplicationContext(), typeMainInfo.class);
 					i.putExtra("name", type); //Pass in the name of the move
 					startActivity(i);
 				} else {

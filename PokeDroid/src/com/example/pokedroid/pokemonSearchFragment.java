@@ -21,7 +21,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class pokemonFragment extends Fragment {
+public class pokemonSearchFragment extends Fragment {
 	public static String[] names;
 	private DatabaseHelper dbHelper;
 	private Fragment fragment;
@@ -33,12 +33,12 @@ public class pokemonFragment extends Fragment {
 	Button search;
 	AutoCompleteTextView query;
 	
-	public pokemonFragment() {
+	public pokemonSearchFragment() {
 	}
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.pokemon_fragment_layout, container, false); 
+		View view = inflater.inflate(R.layout.pokemon_search_fragment_layout, container, false); 
 		
         dbHelper = new DatabaseHelper(this.getActivity());
 		List<String> pokemonNames = dbHelper.getAllPokemonNames();

@@ -4,9 +4,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-public class FragmentPageAdapter extends FragmentPagerAdapter {
+public class MoveDisplayAdapter extends FragmentPagerAdapter {
 
-	public FragmentPageAdapter(FragmentManager fragmentManager) {
+	public MoveDisplayAdapter(FragmentManager fragmentManager) {
 		super(fragmentManager);
 		// TODO Auto-generated constructor stub
 	}
@@ -16,11 +16,9 @@ public class FragmentPageAdapter extends FragmentPagerAdapter {
 		// TODO Auto-generated method stub
 		switch (position) {
 			case 0:
-				return new pokemonMainInfoFragment();
+				return new moveMainInfoFragment();
 			case 1:
-				return new pokemonLocationMainInfoFragment();
-			case 2:
-				return new movePokemonMainInfoFragment();
+				return new pokemonMoveFragment();
 			default:
 				break;
 		}
