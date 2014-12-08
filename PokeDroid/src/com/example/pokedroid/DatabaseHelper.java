@@ -541,6 +541,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			}
 
 			do {
+				ability = new Abilities();
 				ability.setName(cursor.getString(1));
 				ability.setDescription(cursor.getString(2));
 				
