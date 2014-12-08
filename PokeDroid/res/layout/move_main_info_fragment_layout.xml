@@ -4,7 +4,7 @@
     android:layout_height="match_parent" >
 
     <TextView
-        android:id="@+id/TYPE"
+        android:id="@+id/type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -17,12 +17,12 @@
         android:id="@+id/PP"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/TYPE"
-        android:layout_below="@+id/TYPE"
+        android:layout_alignLeft="@+id/type"
+        android:layout_below="@+id/type"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
-        android:id="@+id/POWER"
+        android:id="@+id/power"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/PP"
@@ -30,11 +30,11 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
-        android:id="@+id/ACCURACY"
+        android:id="@+id/accuracy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/POWER"
-        android:layout_below="@+id/POWER"
+        android:layout_alignRight="@+id/power"
+        android:layout_below="@+id/power"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>

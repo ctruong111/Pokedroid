@@ -23,13 +23,17 @@ public class moveMainInfo extends FragmentActivity implements ActionBar.TabListe
 	ActionBar actionBar;
 	ViewPager viewPager;
 	MoveDisplayAdapter adapter;
+	String name;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.move_main_info_layout);
+		Intent i = getIntent();
+		name = i.getStringExtra("name");
 		
 		actionBar = getActionBar();
+		actionBar.setTitle(name);
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		actionBar.setDisplayShowHomeEnabled(false);
 		

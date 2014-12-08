@@ -6,6 +6,7 @@ import java.util.Locale;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,22 +18,20 @@ public class moveMainInfoFragment extends Fragment {
 	String name;
 	Move move;
 	View view;
-	TextView PP;
-	TextView TYPE;
-	TextView POWER;
-	TextView ACCURACY;
+	public static TextView PP;
+	public static TextView TYPE;
+	public static TextView POWER;
+	public static TextView ACCURACY;
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		view = inflater.inflate(R.layout.pokemon_main_info_fragment_layout, container, false);
+		view = inflater.inflate(R.layout.move_main_info_fragment_layout, container, false);
 		name = getActivity().getActionBar().getTitle().toString();
-		
-		ImageView image = (ImageView) view.findViewById(R.id.image);
-		
+				
 		PP = (TextView) view.findViewById(R.id.PP);
-		TYPE = (TextView) view.findViewById(R.id.TYPE);
-		POWER = (TextView) view.findViewById(R.id.POWER);
-		ACCURACY = (TextView) view.findViewById(R.id.ACCURACY);
+		TYPE = (TextView) view.findViewById(R.id.type);
+		POWER = (TextView) view.findViewById(R.id.power);
+		ACCURACY = (TextView) view.findViewById(R.id.accuracy);
 		
 	    dbHelper = new DatabaseHelper(getActivity());
 		
@@ -49,11 +48,16 @@ public class moveMainInfoFragment extends Fragment {
 		int POWERdisplay = move.getPower();
 		int PPdisplay = move.getPp();
         TYPEdisplay = TYPEdisplay.substring(0, 1).toUpperCase(Locale.US) + TYPEdisplay.substring(1);
+        
+		Log.e("tle99", "!!!!!!!!!!!!!!!"+TYPEdisplay+"!!!!!!!!!!!!!");
+		Log.e("tle99", "!!!!!!!!!!!!!!!"+PPdisplay+"!!!!!!!!!!!!!");
+		Log.e("tle99", "!!!!!!!!!!!!!!!"+ACCURACYdisplay+"!!!!!!!!!!!!!");
+		Log.e("tle99", "!!!!!!!!!!!!!!!"+POWERdisplay+"!!!!!!!!!!!!!");
 
-		TYPE.setText(		"Attack Type: "+ TYPE);
-        PP.setText(  		"PP:          "+ PPdisplay);
-        ACCURACY.setText(	"ACCURACY:    " + ACCURACYdisplay);
-        POWER.setText(		"POWER:       " + POWERdisplay);
+		TYPE.setText("Attack Type: "+ TYPEdisplay);
+        PP.setText("PP:          "+ String.valueOf(PPdisplay));
+        ACCURACY.setText("ACCURACY:    " + String.valueOf(ACCURACYdisplay));
+        POWER.setText("POWER:       " + String.valueOf(POWERdisplay));
 		
         
 		return view;

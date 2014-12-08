@@ -30,7 +30,7 @@
 	            android:value="com.example.pokedroid.MainActivity" />
         </activity>
         
-        <activity android:name="moveDisplay">
+        <activity android:name="moveMainInfo">
 			<meta-data
 	            android:name="android.support.PARENT_ACTIVITY"
 	            android:value="com.example.pokedroid.MainActivity" />
@@ -41,6 +41,7 @@
 	            android:name="android.support.PARENT_ACTIVITY"
 	            android:value="com.example.pokedroid.MainActivity" />
         </activity>
+        
     </application>
 
 </manifest>

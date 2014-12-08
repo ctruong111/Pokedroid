@@ -58,15 +58,17 @@ public class pokemonMainInfoFragment extends Fragment {
         ABILITY = dbHelper.getAbilities(name);
         byte[] byteImage = dbHelper.getImage(name);
         image.setImageBitmap(BitmapFactory.decodeByteArray(byteImage, 0, byteImage.length));
+        
+        String toEnter = "";
         if (ABILITY != null) {
 	        for(int i = 0; i < ABILITY.size(); i++){
 	        	Abilities temp = ABILITY.get(i);
-	        	ability.setText(temp.getName() + "\n");
-	        	ability.setText(temp.getDescription() + "\n");
+	        	toEnter += temp.getName() + " \n";
+	        	toEnter += temp.getDescription() + " \n";
 	        }
-        } else {
-        	Toast.makeText(getActivity(), "SHIT DON'T WORK", Toast.LENGTH_LONG).show();
         }
+        ability.setText(toEnter);
+        
         String temp1 = pokemon.getType1();
 		String temp2 = pokemon.getType2();
 

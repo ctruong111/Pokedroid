@@ -81,7 +81,7 @@
 	    <TextView
 	        android:id="@+id/hp"
 	        android:minLines="1"
-	        android:layout_width="match_parent"
+	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_below="@+id/image"
 	        android:layout_marginTop="40dp"
@@ -100,7 +100,7 @@
 	    <TextView
 	        android:id="@+id/defence"
 	        android:minLines="1"
-	        android:layout_width="match_parent"
+	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_below="@+id/attack"
 			android:layout_marginLeft="10dp"
@@ -109,7 +109,7 @@
 	    <TextView
 	        android:id="@+id/special_attack"
 	        android:minLines="1"
-	        android:layout_width="match_parent"
+	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_below="@+id/defence"
 			android:layout_marginLeft="10dp"
@@ -118,7 +118,7 @@
 	    <TextView
 	        android:id="@+id/special_defence"
 	        android:minLines="1"
-	        android:layout_width="match_parent"
+	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_below="@+id/special_attack"
 			android:layout_marginLeft="10dp"
@@ -127,7 +127,7 @@
 	    <TextView
 	        android:id="@+id/speed"
 	        android:minLines="1"
-	        android:layout_width="match_parent"
+	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_below="@+id/special_defence"
 			android:layout_marginLeft="10dp"
@@ -135,11 +135,12 @@
 
 	    <TextView
 	        android:id="@+id/Abilities"
-	        android:layout_width="wrap_content"
+	        android:layout_width="150dp"
 	        android:layout_height="wrap_content"
 	        android:layout_alignBottom="@+id/hp"
 	        android:layout_alignParentRight="true"
-	        android:text="Large Text"
+			android:layout_below="@+id/weightDesc"
+			android:layout_marginTop="20dp"
 	        android:textAppearance="?android:attr/textAppearanceLarge" />
 	</RelativeLayout>
 </ScrollView>

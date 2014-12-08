@@ -26,8 +26,7 @@ public class moveSearchFragment extends Fragment {
 	Button search;
 	AutoCompleteTextView query;
 	
-	public moveSearchFragment() {		
-	}
+	public moveSearchFragment() {}
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -59,7 +58,7 @@ public class moveSearchFragment extends Fragment {
 					}
 					exists = false;
 				}
-				
+
 				if (exists == true) {
 					//Hides the keyboard
 					InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);

@@ -31,6 +31,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	private SQLiteDatabase myDB;
 	private Context context;
 	Pokemon pokemon;
+	Move move;
 	
 	public DatabaseHelper(Context context) {
 		super(context, DB_NAME, null, DB_VERSION);
@@ -405,20 +406,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	}
 	
 	public Move getMove(String name) {
-		Move move = new Move();
+		move = new Move();
 		SQLiteDatabase db = this.getWritableDatabase();
 		Cursor cursor;
-		
+		Log.e("tle99", "!!!!!!!!!!!!!!" + name + "!!!!!!!!!!!!");
+
 		try {
 			cursor = db.rawQuery("SELECT * FROM Moves "
 					+ "JOIN Type ON t_id = type "
 					+ "WHERE m_name = '" + name + "' COLLATE NOCASE", null);
 
 			if (cursor.getCount() == 0) {
+				Log.e("tle99", "!!!!!!!!!!!!!!!NULL IS RETURNED!!!!!!!!!!!!!");
 				return null;
 			} 
 			
 			cursor.moveToFirst();
+			
 			move.setName(cursor.getString(1));
 			move.setPower(cursor.getInt(3));
 			move.setPp(cursor.getInt(4));
@@ -527,7 +531,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	
 	public List<Abilities> getAbilities(String name) {
 		List<Abilities> abilities = new ArrayList<Abilities>();
-		Abilities ability = null;
+		Abilities ability = new Abilities();
 		SQLiteDatabase db = this.getWritableDatabase();
 		Cursor cursor;
 		
@@ -535,17 +539,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			cursor = db.rawQuery("SELECT * FROM Abilities "
 				+ "JOIN AP ON Abilities.a_id = AP.a_id "
 				+ "JOIN Pokemon ON AP.p_id = Pokemon.p_id "
-				+ "WHERE p_name = '" + name + "';", null);
+				+ "WHERE p_name = '" + name + "' COLLATE NOCASE;", null);
 		
 			if (cursor.getCount() == 0) {
 				return null;
-			}
+			} cursor.moveToFirst();
 
 			do {
-				ability = new Abilities();
 				ability.setName(cursor.getString(1));
 				ability.setDescription(cursor.getString(2));
-				
+				Log.e("tle99", "ADDED INTO ABILITIES");
 				abilities.add(ability);
 	        } while (cursor.moveToNext()); 
 			
@@ -554,5 +557,66 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		}
 
 		return abilities;
+	}
+	
+	public List<String> getLocationNames() {
+		List<String> locationNames = new ArrayList<String>();
+		SQLiteDatabase db = this.getWritableDatabase();
+		Cursor cursor;
+		String name;
+		try {
+			cursor = db.rawQuery("SELECT l_name, r_name FROM Locations JOIN Region ON l_regId = r_id", null);
+			if (cursor.getCount() == 0) {
+				return null;
+			} 
+			
+			cursor.moveToFirst();
+			
+			do {
+	            name = cursor.getString(0);
+	            name = name + " - " + cursor.getString(1);
+	            locationNames.add(name);
+	        } while (cursor.moveToNext()); 
+			
+	        cursor.close();
+			
+		} catch (Exception e) {
+			Log.e("tle99", e.getMessage());
+		}
+		
+		db.close();
+		return locationNames;
+	}
+
+	public List<String> getEvolutionChain(String name) {
+		List<String> evolutionChain = new ArrayList<String>();
+		SQLiteDatabase db = this.getWritableDatabase();
+		Cursor cursor;
+		String temp;
+		
+		try {
+			cursor = db.rawQuery("SELECT p_name FROM pokemon "
+					+ "	JOIN evolution ON e_id = p_id "
+					+ "	WHERE evolution_chain_id = "
+					+ "		(SELECT evolution_chain_id FROM pokemon "
+					+ "			JOIN evolution ON e_id = p_id "
+					+ "			WHERE p_name = '" + name + "' COLLATE NOCASE)", null);
+			
+			if (cursor.getCount() == 0) {
+				return null;
+			} cursor.moveToFirst();
+			
+			do {
+	            temp = cursor.getString(0);            
+	            evolutionChain.add(temp);
+	        } while (cursor.moveToNext()); 
+			
+	        cursor.close();
+			
+		} catch (Exception e) {
+			Log.e("tle99", e.getMessage());
+		}
+		db.close();
+		return evolutionChain;
 	}
 }

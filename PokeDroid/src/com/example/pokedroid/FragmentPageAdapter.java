@@ -21,6 +21,8 @@ public class FragmentPageAdapter extends FragmentPagerAdapter {
 				return new pokemonLocationMainInfoFragment();
 			case 2:
 				return new movePokemonMainInfoFragment();
+			case 3:
+				return new pokemonEvolutionFragment();
 			default:
 				break;
 		}
@@ -30,7 +32,7 @@ public class FragmentPageAdapter extends FragmentPagerAdapter {
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return 3;
+		return 4;
 	}
 
 }

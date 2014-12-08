@@ -55,6 +55,7 @@ public class pokemonMainInfo extends FragmentActivity implements ActionBar.TabLi
 	    actionBar.addTab(actionBar.newTab().setText("Main Info").setTabListener(this));
 	    actionBar.addTab(actionBar.newTab().setText("Location").setTabListener(this));
 	    actionBar.addTab(actionBar.newTab().setText("Moves").setTabListener(this));
+	    actionBar.addTab(actionBar.newTab().setText("Evolutions").setTabListener(this));
 	    
 	    viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 			@Override
