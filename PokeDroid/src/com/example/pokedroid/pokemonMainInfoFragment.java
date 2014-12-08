@@ -1,6 +1,7 @@
 package com.example.pokedroid;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Locale;
 
 import android.graphics.BitmapFactory;
@@ -16,17 +17,11 @@ public class pokemonMainInfoFragment extends Fragment {
 	private DatabaseHelper dbHelper;
 	String name;
 	Pokemon pokemon;
+	List<Abilities> ABILITY;
 	View view;
-	TextView type1;
-	TextView type2;
-	TextView height;
-	TextView weight;
-	TextView hp;
-	TextView attack;
-	TextView defence;
-	TextView special_attack;
-	TextView special_defence;
-	TextView speed;
+	TextView type1, type2, height, weight, hp, attack, defence, special_attack, special_defence, 
+				speed, ability;
+
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -46,7 +41,7 @@ public class pokemonMainInfoFragment extends Fragment {
 		special_attack = (TextView) view.findViewById(R.id.special_attack);
 		special_defence = (TextView) view.findViewById(R.id.special_defence);
 		speed = (TextView) view.findViewById(R.id.speed);
-		
+		ability = (TextView) view.findViewById(R.id.Abilities);
 	    dbHelper = new DatabaseHelper(getActivity());
 		
         try {
@@ -56,10 +51,16 @@ public class pokemonMainInfoFragment extends Fragment {
         }
         
         pokemon = dbHelper.getPokemon(name);
-        
+        ABILITY = dbHelper.getAbilities(name);
         byte[] byteImage = dbHelper.getImage(name);
         image.setImageBitmap(BitmapFactory.decodeByteArray(byteImage, 0, byteImage.length));
 
+        for(int i = 0; 0 < ABILITY.size(); i++){
+        	Abilities temp = ABILITY.get(i);
+        	ability.setText(Abilities.getName() + "\n");
+        	ability.setText(Abilities.getDescription() + "\n");
+
+        }
         String temp1 = pokemon.getType1();
 		String temp2 = pokemon.getType2();
 
@@ -98,6 +99,7 @@ public class pokemonMainInfoFragment extends Fragment {
         
         intNum = pokemon.getSpeed();
         speed.setText("Speed:         " + String.valueOf(intNum));
+        
         
 		return view;
 	}
