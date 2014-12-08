@@ -317,7 +317,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		Cursor cursor;
 		try {
 			cursor = db.rawQuery("SELECT l_name FROM Locations "
-					+ "JOIN LP ON LP.l_id = Locations.l_locid "
+					+ "JOIN LP ON LP.l_id = Locations.l_locId "
 					+ "JOIN Pokemon ON Pokemon.p_id = LP.p_id "
 					+ "WHERE p_name = '" + pokemon + "' COLLATE NOCASE "
 					+ "GROUP BY l_name ORDER BY l_name DESC", null);
@@ -367,6 +367,39 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		db.close();
 		return moveNames;
 	}
+	
+	public List<String> crap(String move, String location){
+		List<String> pokemon= new ArrayList<String>();
+		SQLiteDatabase db = this.getWritableDatabase();
+		Cursor cursor;
+		try{
+			cursor = db.rawQuery("SELECT p_name FROM Pokemon JOIN " +
+					"LP JOIN Location JOIN MP JOIN Moves " +
+					"ON Pokemon.p_id = LP.p_id AND LP.l_id = l_locId AND " +
+					"Pokemon.p_id = MP.p_id AND MP.m_id = Moves.m_id " +
+					"WHERE m_name = '" + move + "' AND l_name = '" + location + "' COLLATE NOCASE " +
+					"GROUP BY p_name ORDER BY p_name DESC", null);
+			
+			if (cursor.getCount() == 0) {
+				return null;
+			}
+			
+			cursor.moveToFirst();
+			
+			do {
+				pokemon.add(cursor.getString(0));
+			} while (cursor.moveToNext()); 
+			
+	        cursor.close();
+		}catch (Exception e) {
+			Log.e("tle99", e.getMessage());
+		}
+		
+		db.close();
+		
+		return pokemon;
+	}
+	
 	public Move getMove(String name) {
 		Move move = new Move();
 		SQLiteDatabase db = this.getWritableDatabase();
