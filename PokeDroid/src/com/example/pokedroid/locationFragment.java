@@ -24,17 +24,23 @@ public class locationFragment extends ListFragment {
 			Bundle savedInstanceState) {
 		name = getActivity().getActionBar().getTitle().toString();
 
-		view = inflater.inflate(R.layout.move_fragment_layout, container, false);
+		view = inflater.inflate(R.layout.location_fragment_layout, container, false);
 		
         dbHelper = new DatabaseHelper(this.getActivity());
         
         locations = dbHelper.getPokemonLocations(name);
-		stringLocations = new String[locations.size()];
         
-		for(int i = 0; i < locations.size(); i++) {
-			stringLocations[i] = locations.get(i);	
-		}
-		
+        if (locations == null) {
+        	stringLocations = new String[1];
+        	stringLocations[0] = "Cannot be found in the wild!";
+        } else {
+			stringLocations = new String[locations.size()];
+	        
+			for(int i = 0; i < locations.size(); i++) {
+				stringLocations[i] = locations.get(i);	
+			}
+        }
+        
         if (locations != null) {
         	ArrayAdapter<String> adapter = new ArrayAdapter<String>(inflater.getContext(), android.R.layout.simple_list_item_1, stringLocations);
 			setListAdapter(adapter);

@@ -61,7 +61,7 @@ public class homeFragment extends ListFragment{
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		//Remove the id from string
-		String temp = names[position].substring(5);
+		String temp = names[position].substring(5).trim();
 		//Change the activity
 		Intent i = new Intent(getActivity(), pokemonMainInfo.class);
 		i.putExtra("name", temp); //Passing in the pokemon's name
