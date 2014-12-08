@@ -659,4 +659,33 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		db.close();
 		return evolutionChain;
 	}
+	public List<String> getPokemonFromType(String type){
+		List<String> pokemon = new ArrayList<String>();
+		SQLiteDatabase db = this.getWritableDatabase();
+		Cursor cursor;
+		String temp;
+		try {
+			cursor = db.rawQuery("SELECT p_name FROM pokemon "
+					+ "	JOIN TP ON TP.tp_id = pokemon.p_id" +
+					"JOIN Type ON Type.t_id = TP.type1 OR Type.t_id = TP.type2 "
+					+ "	WHERE t_name  = '" + type + "' COLLATE NOCASE)", null);
+			
+			if (cursor.getCount() == 0) {
+				return null;
+			} cursor.moveToFirst();
+			
+			do {
+	            temp = cursor.getString(0);            
+	            pokemon.add(temp);
+	        } while (cursor.moveToNext()); 
+			
+	        cursor.close();
+			
+		} catch (Exception e) {
+			Log.e("tle99", e.getMessage());
+		}
+		db.close();
+		
+		return pokemon;
+	}
 }
