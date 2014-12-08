@@ -666,9 +666,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		String temp;
 		try {
 			cursor = db.rawQuery("SELECT p_name FROM pokemon "
-					+ "	JOIN TP ON TP.tp_id = pokemon.p_id" +
+					+ "	JOIN TP ON TP.tp_id = pokemon.p_id " +
 					"JOIN Type ON Type.t_id = TP.type1 OR Type.t_id = TP.type2 "
-					+ "	WHERE t_name  = '" + type + "' COLLATE NOCASE)", null);
+					+ "	WHERE t_name  = '" + type + "' COLLATE NOCASE", null);
 			
 			if (cursor.getCount() == 0) {
 				return null;
