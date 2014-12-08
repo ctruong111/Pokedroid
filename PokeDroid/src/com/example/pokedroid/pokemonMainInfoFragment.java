@@ -60,12 +60,11 @@ public class pokemonMainInfoFragment extends Fragment {
         image.setImageBitmap(BitmapFactory.decodeByteArray(byteImage, 0, byteImage.length));
         
         String toEnter = "";
-        if (ABILITY != null) {
-	        for(int i = 0; i < ABILITY.size(); i++){
-	        	Abilities temp = ABILITY.get(i);
-	        	toEnter += temp.getName() + " \n";
-	        	toEnter += temp.getDescription() + " \n";
-	        }
+        Abilities temp;
+        for(int i = 0; i < ABILITY.size(); i++){
+        	temp = ABILITY.get(i);
+        	toEnter += temp.getName() + " \n";
+        	toEnter += temp.getDescription() + " \n";
         }
         ability.setText(toEnter);
         

@@ -127,11 +127,11 @@ public class generationFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent i = new Intent();
+				Intent i = new Intent(getActivity().getApplicationContext(), generationDisplayFragment.class);
 				i.putExtra("move", selectedMove);
 				i.putExtra("loc", selectedLoc);
 				i.putExtra("type", selectedType);
-				
+				startActivity(i);
 			}
 		});
 		

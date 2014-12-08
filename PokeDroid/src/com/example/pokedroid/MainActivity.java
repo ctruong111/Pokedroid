@@ -47,7 +47,6 @@ public class MainActivity extends Activity implements OnItemClickListener {
 		listView = (ListView) findViewById(R.id.drawerList);
 		title = (TextView) findViewById(R.id.pageTitle);
 		titles = getResources().getStringArray(R.array.titles);
-		setTitle(titles[0]);
 		title.setText(titles[0]);
 
 		//Sets the navigation drawer to display the titles string array
@@ -147,6 +146,5 @@ public class MainActivity extends Activity implements OnItemClickListener {
 		// TODO Auto-generated method stub
 		//Changes the action bar title to reflect the page
 		listView.setItemChecked(position, true);
-		setTitle(titles[position]);
 	}
 }

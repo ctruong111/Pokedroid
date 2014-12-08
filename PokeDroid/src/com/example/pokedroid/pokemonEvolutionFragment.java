@@ -32,7 +32,9 @@ public class pokemonEvolutionFragment extends ListFragment {
 		stringNames = new String[evolutionChain.size()];
         
 		for(int i = 0; i < evolutionChain.size(); i++) {
-			stringNames[i] = evolutionChain.get(i);	
+			String temp = evolutionChain.get(i);
+			temp = temp.substring(0, 1).toUpperCase() + temp.substring(1);
+			stringNames[i] = temp; 		
 		}
 		
         if (evolutionChain != null) {

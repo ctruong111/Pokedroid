@@ -23,14 +23,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class pokemonMainInfo extends FragmentActivity implements ActionBar.TabListener {
-	private DatabaseHelper dbHelper;
-	private Pokemon pokemon;
-	public static String pokemonName;
-	Bundle bundle;
 	ViewPager viewPager;
 	FragmentPageAdapter adapter;
     ActionBar actionBar;
-
+    String pokemonName;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -38,12 +34,9 @@ public class pokemonMainInfo extends FragmentActivity implements ActionBar.TabLi
 		setContentView(R.layout.pokemon_main_info_layout);
 		
 		Intent i = getIntent();
-		bundle = new Bundle();
-		
 		pokemonName = i.getStringExtra("name");
+		
 		actionBar = getActionBar();
-
-		//change the title to the pokemon's name
 		actionBar.setTitle(pokemonName);
 		actionBar.setDisplayShowHomeEnabled(false);
 		
@@ -58,6 +51,7 @@ public class pokemonMainInfo extends FragmentActivity implements ActionBar.TabLi
 	    actionBar.addTab(actionBar.newTab().setText("Evolutions").setTabListener(this));
 	    
 	    viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+	    	
 			@Override
 			public void onPageSelected(int position) {
 				// TODO Auto-generated method stub

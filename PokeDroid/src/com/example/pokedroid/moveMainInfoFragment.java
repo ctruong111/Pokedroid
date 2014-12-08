@@ -48,11 +48,6 @@ public class moveMainInfoFragment extends Fragment {
 		int POWERdisplay = move.getPower();
 		int PPdisplay = move.getPp();
         TYPEdisplay = TYPEdisplay.substring(0, 1).toUpperCase(Locale.US) + TYPEdisplay.substring(1);
-        
-		Log.e("tle99", "!!!!!!!!!!!!!!!"+TYPEdisplay+"!!!!!!!!!!!!!");
-		Log.e("tle99", "!!!!!!!!!!!!!!!"+PPdisplay+"!!!!!!!!!!!!!");
-		Log.e("tle99", "!!!!!!!!!!!!!!!"+ACCURACYdisplay+"!!!!!!!!!!!!!");
-		Log.e("tle99", "!!!!!!!!!!!!!!!"+POWERdisplay+"!!!!!!!!!!!!!");
 
 		TYPE.setText("Attack Type: "+ TYPEdisplay);
         PP.setText("PP:          "+ String.valueOf(PPdisplay));

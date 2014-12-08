@@ -28,11 +28,13 @@ public class movePokemonMainInfoFragment extends ListFragment {
 		
         dbHelper = new DatabaseHelper(this.getActivity());
         
-        moves = dbHelper.getPokemonMoves(name);
+        moves = dbHelper.getMovePokemon(name);
 		stringMoves = new String[moves.size()];
         
 		for(int i = 0; i < moves.size(); i++) {
-			stringMoves[i] = moves.get(i);	
+			String temp = moves.get(i);;
+			temp = temp.substring(0, 1).toUpperCase() + temp.substring(1);
+			stringMoves[i] = temp; 	
 		}
 		
         if (moves != null) {

@@ -30,24 +30,15 @@ public class homeFragment extends ListFragment{
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		getActivity().setTitle(MainActivity.titles[0]);
-
 		if (this.getActivity() != null) {
         dbHelper = new DatabaseHelper(this.getActivity());
 		}
-		
-        try {
-            dbHelper.createDataBase();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         
         List<String> pokemonNames = dbHelper.getAllPokemonNamesAndId();
 		names = new String[pokemonNames.size()];
 		
 		for(int i = 0; i < pokemonNames.size(); i++) {
 			names[i] = pokemonNames.get(i);
-			
 		}
         
         if (pokemonNames != null) {

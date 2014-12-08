@@ -20,29 +20,30 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class moveMainInfo extends FragmentActivity implements ActionBar.TabListener {
-	ActionBar actionBar;
-	ViewPager viewPager;
-	MoveDisplayAdapter adapter;
+	private static ActionBar actionBar;
+	private static ViewPager viewPager;
+	private static MoveDisplayAdapter adapter;
 	String name;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.move_main_info_layout);
+		
 		Intent i = getIntent();
 		name = i.getStringExtra("name");
 		
 		actionBar = getActionBar();
 		actionBar.setTitle(name);
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		actionBar.setDisplayShowHomeEnabled(false);
-		
-		actionBar.addTab(actionBar.newTab().setText("Main Info").setTabListener(this));
-		actionBar.addTab(actionBar.newTab().setText("Pokemon").setTabListener(this));
-		
+
 		viewPager = (ViewPager) findViewById(R.id.moveMainInfo);
 		adapter = new MoveDisplayAdapter(getSupportFragmentManager());
 		viewPager.setAdapter(adapter);
+		
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+		actionBar.addTab(actionBar.newTab().setText("Main Info").setTabListener(this));
+		actionBar.addTab(actionBar.newTab().setText("Pokemon").setTabListener(this));
 		
 		viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 			
@@ -70,20 +71,9 @@ public class moveMainInfo extends FragmentActivity implements ActionBar.TabListe
 	}
 	
 	@Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-        case android.R.id.home:
-            NavUtils.navigateUpFromSameTask(this);
-            return true;
-        default:
-            return super.onOptionsItemSelected(item);
-        }
-    }
-	
-	@Override
 	public void onTabSelected(Tab tab, FragmentTransaction ft) {
 		// TODO Auto-generated method stub
-		//viewPager.setCurrentItem(tab.getPosition());
+		viewPager.setCurrentItem(tab.getPosition());
 	}
 	@Override
 	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
@@ -95,4 +85,15 @@ public class moveMainInfo extends FragmentActivity implements ActionBar.TabListe
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+        case android.R.id.home:
+            NavUtils.navigateUpFromSameTask(this);
+            return true;
+        default:
+            return super.onOptionsItemSelected(item);
+        }
+    }
 }

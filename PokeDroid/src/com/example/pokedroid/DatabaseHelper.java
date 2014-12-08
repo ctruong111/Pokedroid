@@ -280,7 +280,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		return pokemon;
 	}
 	
-	public List<String> getPokemonMoves(String name) {
+	public List<String> getMovePokemon(String name) {
 		List<String> moves = new ArrayList<String>();
 		SQLiteDatabase db = this.getWritableDatabase();
 		String move;
@@ -312,6 +312,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		
 		return moves;
 	}
+	
 	public List<String> getPokemonLocations(String pokemon){
 		List<String> locs = new ArrayList<String>();
 		SQLiteDatabase db = this.getWritableDatabase();
@@ -373,17 +374,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		return moveNames;
 	}
 	
-	public List<String> crap(String move, String location){
+	public List<String> crap(String move, String location, String type){
 		List<String> pokemon= new ArrayList<String>();
 		SQLiteDatabase db = this.getWritableDatabase();
 		Cursor cursor;
 		try{
-			cursor = db.rawQuery("SELECT p_name FROM Pokemon JOIN " +
-					"LP JOIN Location JOIN MP JOIN Moves " +
-					"ON Pokemon.p_id = LP.p_id AND LP.l_id = l_locId AND " +
-					"Pokemon.p_id = MP.p_id AND MP.m_id = Moves.m_id " +
-					"WHERE m_name = '" + move + "' AND l_name = '" + location + "' COLLATE NOCASE " +
-					"GROUP BY p_name ORDER BY p_name DESC", null);
+			cursor = db.rawQuery("SELECT p_name FROM Pokemon "
+					+ "JOIN Type t1 ON t1.t_id = type1"
+					+ "JOIN Type t2 ON t2.t_id = type2"
+					+ "JOIN LP ON Pokemon.p_id = LP.p_id "
+					+ "JOIN Location ON LP.l_id = l_locId "
+					+ "JOIN MP Pokemon.p_id = MP.p_id "
+					+ "JOIN Moves MP.m_id = Moves.m_id "
+					+ " WHERE m_name = '" + move + "' "
+					+ "AND l_name = '" + location + "' "
+					+ "AND (t1.t_name = '" + type + "' "
+					+ "OR t2.t_name = '" + type + "') COLLATE NOCASE "
+					+ "GROUP BY p_name ORDER BY p_name DESC", null);
 			
 			if (cursor.getCount() == 0) {
 				return null;
@@ -436,6 +443,39 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		}
 		db.close();
 		return move;
+	}
+	
+	public List<String> getPokemonMove(String name) {
+		List<String> pokemonNames = new ArrayList<String>();
+		SQLiteDatabase db = this.getWritableDatabase();
+		String temp;
+		Cursor cursor;		
+
+		try {
+			cursor = db.rawQuery("SELECT p_name FROM Pokemon "
+					+ "JOIN MP ON Pokemon.p_id = MP.p_id "
+					+ "JOIN Moves ON MP.m_id = Moves.m_id "
+					+ "WHERE m_name = '" + name + "' COLLATE NOCASE "
+					+ "GROUP BY p_name;", null);
+			
+			if (cursor.getCount() == 0) {
+				Log.e("tle99", "!!!!!!!!!!!!NULL RETURNED!!!!!!!!!!!");
+				return null;
+			}
+			
+			cursor.moveToFirst();
+			
+			do {
+				temp = cursor.getString(0);
+				pokemonNames.add(temp);
+			} while (cursor.moveToNext());
+			
+			cursor.close();
+		} catch (Exception e) {
+			Log.e("tle99", e.getMessage());
+		}
+		db.close();
+		return pokemonNames;
 	}
 	
 	public byte[] getImage(String name) {
