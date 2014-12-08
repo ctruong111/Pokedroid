@@ -418,11 +418,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			} 
 			
 			cursor.moveToFirst();
+			move.setName(cursor.getString(1));
+			move.setPower(cursor.getInt(3));
+			move.setPp(cursor.getInt(4));
+			move.setAccuracy(cursor.getInt(5));
+			move.setAttack_type(cursor.getInt(6));
+			move.setType(cursor.getString(10));
 			
+			cursor.close();
 		} catch (Exception e) {
 			Log.e("tle99", e.getMessage());
 		}
-		
 		db.close();
 		return move;
 	}
@@ -516,5 +522,34 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			// TODO Auto-generated catch block
 			Log.e("tle99", e.getMessage());
 		}
+	}
+	
+	public List<Abilities> getAbilities(String name) {
+		List<Abilities> abilities = null;
+		Abilities ability = null;
+		SQLiteDatabase db = this.getWritableDatabase();
+		Cursor cursor;
+		
+		try {
+			cursor = db.rawQuery("SELECT * FROM Abilities "
+				+ "JOIN AP ON Abilities.a_id = AP.a_id "
+				+ "JOIN Pokemon ON AP.p_id = Pokemon.p_id "
+				+ "WHERE p_name = '" + name + "';", null);
+		
+			if (cursor.getCount() == 0) {
+				return null;
+			}
+
+			do {
+				ability.setName(cursor.getString(1));
+				ability.setDescription(cursor.getString(2));
+				
+				abilities.add(ability);
+	        } while (cursor.moveToNext()); 
+			
+		} catch (Exception e) {
+			Log.e("tle99", e.getMessage());
+		}
+		return abilities;
 	}
 }
