@@ -316,9 +316,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		String location;
 		Cursor cursor;
 		try {
-			cursor = db.rawQuery("SELECT l_name FROM Locations "
+			cursor = db.rawQuery("SELECT l_name, r_name FROM Locations "
 					+ "JOIN LP ON LP.l_id = Locations.l_locId "
-					+ "JOIN Pokemon ON Pokemon.p_id = LP.p_id "
+					+ "JOIN Pokemon ON Pokemon.p_id = LP.p_id " 
+					+ "JOIN Region ON Location.regId = Region.r_id"
 					+ "WHERE p_name = '" + pokemon + "' COLLATE NOCASE "
 					+ "GROUP BY l_name ORDER BY l_name DESC", null);
 			
@@ -330,6 +331,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			
 			do {
 				location = cursor.getString(0);
+				String temp = cursor.getString(1);
+				location.concat(" - " + temp);
 				locs.add(location);
 			} while (cursor.moveToNext()); 
 			
