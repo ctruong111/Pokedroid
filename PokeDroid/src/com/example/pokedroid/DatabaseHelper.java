@@ -658,33 +658,41 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		db.close();
 		return evolutionChain;
 	}
-	public List<String> getPokemonFromType(String type){
-		List<String> pokemon = new ArrayList<String>();
+
+	public List<String> getPokemonType(String type) {
+		List<String> pokemonNames = new ArrayList<String>();
 		SQLiteDatabase db = this.getWritableDatabase();
 		Cursor cursor;
-		String temp;
+		Log.e("tle99", "FUNCTION STARTED");
+
 		try {
-			cursor = db.rawQuery("SELECT p_name FROM pokemon "
-					+ "	JOIN TP ON TP.tp_id = pokemon.p_id " +
-					"JOIN Type ON Type.t_id = TP.type1 OR Type.t_id = TP.type2 "
-					+ "	WHERE t_name  = '" + type + "' COLLATE NOCASE", null);
-			
+			cursor = db.rawQuery("SELECT p_name FROM Pokemon "
+					+ "JOIN TP ON tp_id = p_id "
+					+ "JOIN Type t1 ON t1.t_id = type1 "
+					+ "JOIN Type t2 ON t2.t_id = type2 "
+					+ "WHERE t1.t_name = '" + type + "' OR t2.t_name = '" + type +"' COLLATE NOCASE", null);
+			Log.e("tle99","QUERY FINISHED");
 			if (cursor.getCount() == 0) {
 				return null;
-			} cursor.moveToFirst();
-			
+			} 
+			Log.e("tle99", "NOT NULL");
+
+			cursor.moveToFirst();
+			Log.e("tle99", "MOVED TO FIRST");
+
 			do {
-	            temp = cursor.getString(0);            
-	            pokemon.add(temp);
+	            String temp = cursor.getString(0);    
+				temp = temp.substring(0, 1).toUpperCase() + temp.substring(1);
+	            pokemonNames.add(temp);
 	        } while (cursor.moveToNext()); 
 			
-	        cursor.close();
-			
+			Log.e("tle99", "MOVED INTO STRING LIST");
+
 		} catch (Exception e) {
 			Log.e("tle99", e.getMessage());
 		}
-		db.close();
-		
-		return pokemon;
+		Log.e("tle99", "RETURNING NOW");
+
+		return pokemonNames;
 	}
 }
