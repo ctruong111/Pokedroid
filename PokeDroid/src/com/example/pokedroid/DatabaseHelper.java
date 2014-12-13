@@ -686,13 +686,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	            pokemonNames.add(temp);
 	        } while (cursor.moveToNext()); 
 			
+			cursor.close();
 			Log.e("tle99", "MOVED INTO STRING LIST");
 
 		} catch (Exception e) {
 			Log.e("tle99", e.getMessage());
 		}
 		Log.e("tle99", "RETURNING NOW");
-
+		
+		db.close();
 		return pokemonNames;
 	}
 }

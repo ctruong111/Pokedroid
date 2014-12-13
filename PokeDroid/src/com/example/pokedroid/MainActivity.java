@@ -1,5 +1,7 @@
 package com.example.pokedroid;
 
+import java.io.IOException;
+
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
@@ -22,7 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity implements OnItemClickListener {
-
+	private DatabaseHelper dbHelper;
 	private DrawerLayout drawerLayout;
 	private ListView listView;
 	private TextView title;
@@ -36,6 +38,14 @@ public class MainActivity extends Activity implements OnItemClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		dbHelper = new DatabaseHelper(getApplicationContext());
+		
+		try {
+			dbHelper.createDataBase();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 		//Starts the app on the home page
 		manager = getFragmentManager();
