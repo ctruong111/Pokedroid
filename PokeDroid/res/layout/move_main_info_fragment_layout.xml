@@ -12,13 +12,19 @@
         android:layout_marginLeft="44dp"
         android:layout_marginTop="36dp"
         android:textAppearance="?android:attr/textAppearanceLarge" />
-
+    <TextView
+        android:id="@+id/attackType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/type"
+        android:layout_below="@+id/type"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
     <TextView
         android:id="@+id/PP"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/type"
-        android:layout_below="@+id/type"
+        android:layout_below="@+id/attackType"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
@@ -33,7 +39,7 @@
         android:id="@+id/accuracy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/power"
+        android:layout_alignLeft="@+id/power"
         android:layout_below="@+id/power"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 

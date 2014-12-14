@@ -33,12 +33,14 @@ public class pokemonMoveFragment extends ListFragment {
 		pokemonNames = new String[names.size()];
 		if (names != null) {
 			for (int i = 0; i < names.size(); i++) {
-				pokemonNames[i] = names.get(i);
+                String temp = names.get(i);;
+                temp = temp.substring(0, 1).toUpperCase() + temp.substring(1);
+                pokemonNames[i] = temp;
 			}
 		} else {
 			Log.e("tle99", "------------------NAMES IS NULL------------------");
 		}
-		
+
 		if (names != null) {
 			ArrayAdapter<String> adapter = new ArrayAdapter<String>(inflater.getContext(), android.R.layout.simple_list_item_1, pokemonNames);
 			setListAdapter(adapter);
