@@ -42,12 +42,6 @@
 	            android:value="com.example.pokedroid.MainActivity" />
         </activity>
         
-		<activity android:name="generationDisplayFragment">
-			<meta-data
-	            android:name="android.support.PARENT_ACTIVITY"
-	            android:value="com.example.pokedroid.MainActivity" />
-        </activity>
-        
     </application>
 
 </manifest>
