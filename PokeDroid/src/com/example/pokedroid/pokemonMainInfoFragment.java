@@ -23,7 +23,7 @@ public class pokemonMainInfoFragment extends Fragment {
 	List<Abilities> ABILITY;
 	View view;
 	TextView type1, type2, height, weight, hp, attack, defence, special_attack, special_defence, 
-				speed, ability;
+				speed, abilityT1, abilityT2, abilityT3, abilityD1, abilityD2, abilityD3;
 
 	
 	@Override
@@ -45,15 +45,14 @@ public class pokemonMainInfoFragment extends Fragment {
 		special_attack = (TextView) view.findViewById(R.id.special_attack);
 		special_defence = (TextView) view.findViewById(R.id.special_defence);
 		speed = (TextView) view.findViewById(R.id.speed);
-		ability = (TextView) view.findViewById(R.id.Abilities);
-	    dbHelper = new DatabaseHelper(getActivity());
-		
-        try {
-            dbHelper.createDataBase();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        
+		abilityT1 = (TextView) view.findViewById(R.id.AbilityTitle1);
+        abilityT2 = (TextView) view.findViewById(R.id.AbilityTitle2);
+        abilityT3 = (TextView) view.findViewById(R.id.AbilityTitle3);
+        abilityD1 = (TextView) view.findViewById(R.id.AbilityDesc1);
+        abilityD2 = (TextView) view.findViewById(R.id.AbilityDesc2);
+        abilityD3 = (TextView) view.findViewById(R.id.AbilityDesc3);
+        dbHelper = new DatabaseHelper(getActivity());
+
         pokemon = dbHelper.getPokemon(name);
         ABILITY = dbHelper.getAbilities(name);
         byte[] byteImage = dbHelper.getImage(name);
@@ -61,13 +60,29 @@ public class pokemonMainInfoFragment extends Fragment {
         
         String toEnter = "";
         Abilities temp;
-        for(int i = 0; i < ABILITY.size(); i++){
-        	temp = ABILITY.get(i);
-        	toEnter += temp.getName() + " \n";
-        	toEnter += temp.getDescription() + " \n";
+
+        temp = ABILITY.get(0);
+        abilityT1.setText(temp.getName());
+        abilityD1.setText(temp.getDescription());
+        temp = new Abilities();
+        if (ABILITY.size() == 2) {
+            temp = ABILITY.get(1);
+            abilityT2.setText(temp.getName());
+            abilityD2.setText(temp.getDescription());
+        } else {
+            abilityT2.setText("");
+            abilityD2.setText("");
         }
-        ability.setText(toEnter);
-        
+        temp = new Abilities();
+        if (ABILITY.size() == 3) {
+            temp = ABILITY.get(2);
+            abilityT3.setText(temp.getName());
+            abilityD3.setText(temp.getDescription());
+        } else {
+            abilityT3.setText("");
+            abilityD3.setText("");
+        }
+
         String temp1 = pokemon.getType1();
 		String temp2 = pokemon.getType2();
 

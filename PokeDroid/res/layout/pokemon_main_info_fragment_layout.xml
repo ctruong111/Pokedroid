@@ -133,12 +133,47 @@
 	        android:textAppearance="?android:attr/textAppearanceLarge" />
 
 	    <TextView
-	        android:id="@+id/Abilities"
+	        android:id="@+id/AbilityTitle1"
 	        android:layout_width="150dp"
 	        android:layout_height="match_parent"
 	        android:layout_alignParentRight="true"
 			android:layout_below="@+id/weightDesc"
 			android:layout_marginTop="30dp"
 	        android:textAppearance="?android:attr/textAppearanceLarge" />
+        <TextView
+            android:id="@+id/AbilityDesc1"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/AbilityTitle1"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+        <TextView
+            android:id="@+id/AbilityTitle2"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/AbilityDesc1"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+        <TextView
+            android:id="@+id/AbilityDesc2"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/AbilityTitle2"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+        <TextView
+            android:id="@+id/AbilityTitle3"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/AbilityDesc2"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+        <TextView
+            android:id="@+id/AbilityDesc3"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/AbilityTitle3"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
 	</RelativeLayout>
 </ScrollView>

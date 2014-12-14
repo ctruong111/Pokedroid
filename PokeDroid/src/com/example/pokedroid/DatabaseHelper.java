@@ -586,8 +586,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 			do {
 				ability.setName(cursor.getString(1));
-				ability.setDescription(cursor.getString(2));
-				Log.e("tle99", "ADDED INTO ABILITIES");
+                Log.e("tle99", cursor.getString(1));
+                ability.setDescription(cursor.getString(2));
+                Log.e("tle99", cursor.getString(2));
+                Log.e("tle99", "ADDED INTO ABILITIES");
 				abilities.add(ability);
 	        } while (cursor.moveToNext()); 
 			

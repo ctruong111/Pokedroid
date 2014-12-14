@@ -48,11 +48,4 @@ public class pokemonLocationMainInfoFragment extends ListFragment {
         
 		return super.onCreateView(inflater, container, savedInstanceState);
 	}
-	
-	@Override
-	public void onListItemClick(ListView l, View v, int position, long id) {
-		Intent i = new Intent(getActivity(), moveMainInfo.class);
-		i.putExtra("name", stringLocations[position]); //Passing in the move's name
-		startActivity(i);
-	}
 }
