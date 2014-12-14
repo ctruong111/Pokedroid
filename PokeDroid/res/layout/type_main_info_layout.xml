@@ -4,7 +4,6 @@
     android:layout_height="match_parent">
 	<ListView android:name="com.example.pokedroid.type_main_info_fragment"
 		android:id="@+id/typeMainInfo"
-		android:paddingTop="55dp"
 	    android:layout_width="match_parent"
 	    android:layout_height="match_parent"/>
 </RelativeLayout>
