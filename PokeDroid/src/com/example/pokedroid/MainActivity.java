@@ -1,6 +1,7 @@
 package com.example.pokedroid;
 
 import java.io.IOException;
+import java.util.List;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -24,15 +25,25 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity implements OnItemClickListener {
+	public static String[] titles;
+	private List<String> pokemonNamesList;
+	private List<String> moveNamesList;
+	private List<String> typeNamesList;
+	private List<String> pokemonNamesAndIdList;
+	public static String[] pokemonNames;
+	public static String[] moveNames;
+	public static String[] typeNames;
+	public static String[] pokemonNamesAndId;
+	
 	private DatabaseHelper dbHelper;
 	private DrawerLayout drawerLayout;
 	private ListView listView;
 	private TextView title;
-	public static String[] titles;
 	private ActionBarDrawerToggle drawerListener;
 	private Fragment fragment;
 	private FragmentManager manager;
 	private FragmentTransaction transaction;
+	Bundle bundle = new Bundle();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -47,10 +58,39 @@ public class MainActivity extends Activity implements OnItemClickListener {
 			e.printStackTrace();
 		}
 		
+		
+		moveNamesList = dbHelper.getAllMoveNames();
+		pokemonNamesList = dbHelper.getAllPokemonNames();
+		typeNamesList = dbHelper.getAllTypeNames();
+		pokemonNamesAndIdList = dbHelper.getAllPokemonNamesAndId();
+
+		moveNames = new String[moveNamesList.size()];
+		typeNames = new String[typeNamesList.size()];
+		pokemonNames = new String[pokemonNamesList.size()];
+		pokemonNamesAndId = new String[pokemonNamesAndIdList.size()];
+		
+		for (int i = 0; i < moveNamesList.size(); i++) {
+			moveNames[i] = moveNamesList.get(i);
+		}
+		
+		for (int i = 0; i < typeNamesList.size(); i++) {
+			typeNames[i] = typeNamesList.get(i);
+		}
+		
+		for (int i = 0; i < pokemonNamesList.size(); i++) {
+			pokemonNames[i] = pokemonNamesList.get(i);
+		}
+		
+		for (int i = 0; i < pokemonNamesAndIdList.size(); i++) {
+			pokemonNamesAndId[i] = pokemonNamesAndIdList.get(i);
+		}
+
 		//Starts the app on the home page
 		manager = getFragmentManager();
 		transaction = manager.beginTransaction();
+		bundle.putStringArray("names", pokemonNamesAndId);
 		fragment = new homeFragment();
+		fragment.setArguments(bundle);
 		manager.beginTransaction().replace(R.id.mainContent, fragment).commit();
 
 		drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
@@ -132,17 +172,23 @@ public class MainActivity extends Activity implements OnItemClickListener {
 		selectTitle(position);
 
 		if (position == 0) { //If home is selected
+			bundle.putStringArray("names", pokemonNamesAndId);
 			fragment = new homeFragment();
+			fragment.setArguments(bundle);
 		} else if (position == 1) { //If pokemon is selected
+			bundle.putStringArray("names", pokemonNames);
 			fragment = new pokemonSearchFragment();
+			fragment.setArguments(bundle);
 		} else if (position == 2) { //If move is selected
+			bundle.putStringArray("names", moveNames);
 			fragment = new moveSearchFragment();
+			fragment.setArguments(bundle);
 		} else if (position == 3) { //If type is selected
+			bundle.putStringArray("names", typeNames);
 			fragment = new typeSearchFragment();
-		} else if (position == 4) { //If generation is selected
-			fragment = new generationFragment();
+			fragment.setArguments(bundle);
 		}
-		
+
 		title.setText(titles[position]);
 		//Get the fragment manager and change the current fragment
 		manager = getFragmentManager();

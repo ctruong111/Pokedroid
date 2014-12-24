@@ -39,18 +39,9 @@ public class pokemonSearchFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.pokemon_search_fragment_layout, container, false); 
-		
-        dbHelper = new DatabaseHelper(this.getActivity());
-		List<String> pokemonNames = dbHelper.getAllPokemonNames();
-		names = new String[pokemonNames.size()];
-		
-		for(int i = 0; i < pokemonNames.size(); i++) {
-			names[i] = pokemonNames.get(i);
-			
-			String output = names[i].substring(0, 1).toUpperCase() + names[i].substring(1);
-			names[i] = output;
-		}
 
+		names = getArguments().getStringArray("names");
+		
 		search = (Button)view.findViewById(R.id.search);
 		query = (AutoCompleteTextView)view.findViewById(R.id.query);
 		

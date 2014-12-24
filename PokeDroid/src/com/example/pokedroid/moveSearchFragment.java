@@ -31,15 +31,9 @@ public class moveSearchFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.move_search_fragment_layout, container, false);
-		
-		dbHelper = new DatabaseHelper(this.getActivity());
-		List<String> moveNames = dbHelper.getAllMoveNames();
-		names = new String[moveNames.size()];
-		
-		for(int i = 0; i < moveNames.size(); i++) {
-			names[i] = moveNames.get(i);
-		}
 
+		names = getArguments().getStringArray("names");
+		
 		search = (Button)view.findViewById(R.id.search);
 		query = (AutoCompleteTextView)view.findViewById(R.id.query);
 		

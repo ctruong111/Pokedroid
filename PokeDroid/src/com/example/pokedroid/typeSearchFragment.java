@@ -34,17 +34,8 @@ public class typeSearchFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.type_search_fragment_layout, container, false); 
 		
-        dbHelper = new DatabaseHelper(this.getActivity());
-		List<String> typeNames = dbHelper.getAllTypeNames();
-		names = new String[typeNames.size()];
+		names = getArguments().getStringArray("names");
 		
-		for(int i = 0; i < typeNames.size(); i++) {
-			names[i] = typeNames.get(i);
-			
-			String output = names[i].substring(0, 1).toUpperCase() + names[i].substring(1);
-			names[i] = output;
-		}
-
 		search = (Button)view.findViewById(R.id.search);
 		query = (AutoCompleteTextView)view.findViewById(R.id.query);
 		
