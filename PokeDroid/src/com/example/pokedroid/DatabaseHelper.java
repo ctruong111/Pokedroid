@@ -170,7 +170,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		int id;
 
 		try {
-			cursor = db.rawQuery("SELECT * FROM Pokemon", null);
+			cursor = db.rawQuery("SELECT p_id, p_name FROM Pokemon", null);
 			
 			if (cursor == null) {
 				return null;
