@@ -41,11 +41,9 @@ public class pokemonLocationMainInfoFragment extends ListFragment {
 			}
         }
         
-        if (locations != null) {
-        	ArrayAdapter<String> adapter = new ArrayAdapter<String>(inflater.getContext(), android.R.layout.simple_list_item_1, stringLocations);
-			setListAdapter(adapter);
-        }
-        
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(inflater.getContext(), android.R.layout.simple_list_item_1, stringLocations);
+		setListAdapter(adapter);
+
 		return super.onCreateView(inflater, container, savedInstanceState);
 	}
 }
