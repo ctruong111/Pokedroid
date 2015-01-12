@@ -15,42 +15,20 @@ import android.widget.ListView;
 
 public class pokemonMoveFragment extends ListFragment {
 	private View view;
-	private DatabaseHelper dbHelper;
-	private List<String> names;
-	private String[] pokemonNames;
-	private String name;
-	
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, 
 			Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.pokemon_move_fragment_layout, container, false);
-		name = getActivity().getActionBar().getTitle().toString();
-		
-		dbHelper = new DatabaseHelper(this.getActivity());
-		
-		names = dbHelper.getPokemonMove(name);
-		
-		pokemonNames = new String[names.size()];
-		if (names != null) {
-			for (int i = 0; i < names.size(); i++) {
-                String temp = names.get(i);;
-                temp = temp.substring(0, 1).toUpperCase() + temp.substring(1);
-                pokemonNames[i] = temp;
-			}
-		} else {
-			Log.e("tle99", "------------------NAMES IS NULL------------------");
-		}
 
-		if (names != null) {
-			ArrayAdapter<String> adapter = new ArrayAdapter<String>(inflater.getContext(), android.R.layout.simple_list_item_1, pokemonNames);
+			ArrayAdapter<String> adapter = new ArrayAdapter<String>(inflater.getContext(), android.R.layout.simple_list_item_1, pokemonMainInfo.pokemonMoves);
 			setListAdapter(adapter);
-		}
 		
 		return super.onCreateView(inflater, container, savedInstanceState);
 	}
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		Intent i = new Intent(getActivity(), pokemonMainInfo.class);
-		i.putExtra("name", pokemonNames[position]); //Passing in the pokemon's name
+		i.putExtra("name", pokemonMainInfo.pokemonMoves[position]); //Passing in the pokemon's name
 		startActivity(i);
 	}
 }

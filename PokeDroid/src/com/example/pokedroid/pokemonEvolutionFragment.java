@@ -14,33 +14,16 @@ import android.widget.Toast;
 
 public class pokemonEvolutionFragment extends ListFragment {
 	private View view;
-	public static String name;
-	private DatabaseHelper dbHelper;
-	private List<String> evolutionChain;
-	private String[] stringNames;
+
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		name = getActivity().getActionBar().getTitle().toString();
 
 		view = inflater.inflate(R.layout.pokemon_evolution_fragment, container, false);
 		
-        dbHelper = new DatabaseHelper(this.getActivity());
-        
-        evolutionChain = dbHelper.getEvolutionChain(name);
-		stringNames = new String[evolutionChain.size()];
-        
-		for(int i = 0; i < evolutionChain.size(); i++) {
-			String temp = evolutionChain.get(i);
-			temp = temp.substring(0, 1).toUpperCase() + temp.substring(1);
-			stringNames[i] = temp; 		
-		}
-		
-        if (evolutionChain != null) {
-        	ArrayAdapter<String> adapter = new ArrayAdapter<String>(inflater.getContext(), android.R.layout.simple_list_item_1, stringNames);
-			setListAdapter(adapter);
-        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(inflater.getContext(), android.R.layout.simple_list_item_1, pokemonMainInfo.pokemonEvolutions);
+		setListAdapter(adapter);
 
 		return super.onCreateView(inflater, container, savedInstanceState);
 	}
@@ -48,7 +31,7 @@ public class pokemonEvolutionFragment extends ListFragment {
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		Intent i = new Intent(getActivity(), pokemonMainInfo.class);
-		i.putExtra("name", stringNames[position]); //Passing in the pokemon's name
+		i.putExtra("name", pokemonMainInfo.pokemonEvolutions[position]); //Passing in the pokemon's name
 		startActivity(i);
 	}
 }

@@ -1,6 +1,7 @@
 package com.example.pokedroid;
 
 import java.io.IOException;
+import java.util.List;
 
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
@@ -13,6 +14,7 @@ import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,7 +25,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class pokemonMainInfo extends FragmentActivity implements ActionBar.TabListener {
-	ViewPager viewPager;
+    private DatabaseHelper dbHelper;
+
+    private List<String> evolutionChain;
+    public static String[] pokemonEvolutions;
+    private List<String> locations;
+    public static String[] pokemonLocations;
+    private List<String> movesList;
+    public static String[] pokemonMoves;
+
+    ViewPager viewPager;
 	FragmentPageAdapter adapter;
     ActionBar actionBar;
     String pokemonName;
@@ -35,11 +46,22 @@ public class pokemonMainInfo extends FragmentActivity implements ActionBar.TabLi
 		
 		Intent i = getIntent();
 		pokemonName = i.getStringExtra("name");
-		
-		actionBar = getActionBar();
+
+        Log.e("tle99", pokemonName);
+        dbHelper = new DatabaseHelper(getApplicationContext());
+
+        actionBar = getActionBar();
 		actionBar.setTitle(pokemonName);
 		actionBar.setDisplayShowHomeEnabled(false);
-		
+
+        Thread thread1 = new Thread(new movesThread());
+        Thread thread2 = new Thread(new evolutionsThread());
+        Thread thread3 = new Thread(new locationsThread());
+
+        thread1.run();
+        thread2.run();
+        thread3.run();
+
 		viewPager = (ViewPager) findViewById(R.id.mainInfo);
 		adapter = new FragmentPageAdapter(getSupportFragmentManager());
 		viewPager.setAdapter(adapter);
@@ -99,6 +121,64 @@ public class pokemonMainInfo extends FragmentActivity implements ActionBar.TabLi
             return true;
         default:
             return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private class mainInfoThread implements Runnable {
+        @Override
+        public void run() {
+
+        }
+    }
+
+    private class locationsThread implements Runnable {
+        @Override
+        public void run() {
+            locations = dbHelper.getPokemonLocations(pokemonName);
+
+            if (locations == null) {
+                pokemonLocations = new String[1];
+                pokemonLocations[0] = "Cannot be found in the wild!";
+            } else {
+                pokemonLocations = new String[locations.size()];
+
+                for(int i = 0; i < locations.size(); i++) {
+                    pokemonLocations[i] = locations.get(i);
+                }
+            }
+        }
+    }
+
+    private class movesThread implements Runnable {
+        @Override
+        public void run() {
+            movesList = dbHelper.getPokemonMove(pokemonName);
+
+            pokemonMoves = new String[movesList.size()];
+            for (int i = 0; i < movesList.size(); i++) {
+                String temp = movesList.get(i);
+                temp = temp.substring(0, 1).toUpperCase() + temp.substring(1);
+                pokemonMoves[i] = temp;
+            }
+        }
+    }
+
+    private class evolutionsThread implements Runnable {
+        @Override
+        public void run() {
+            evolutionChain = dbHelper.getEvolutionChain(pokemonName);
+
+            if (evolutionChain != null) {
+                pokemonEvolutions = new String[evolutionChain.size()];
+                for (int i = 0; i < evolutionChain.size(); i++) {
+                    String temp = evolutionChain.get(i);
+                    temp = temp.substring(0, 1).toUpperCase() + temp.substring(1);
+                    pokemonEvolutions[i] = temp;
+                }
+            } else {
+                pokemonEvolutions = new String[1];
+                pokemonEvolutions[0] = "No Evolutions!";
+            }
         }
     }
 }

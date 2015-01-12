@@ -58,8 +58,7 @@ public class pokemonMainInfoFragment extends Fragment {
         byte[] byteImage = dbHelper.getImage(name);
         image.setImageBitmap(BitmapFactory.decodeByteArray(byteImage, 0, byteImage.length));
         
-        String toEnter = "";
-        Abilities temp;
+        Abilities temp = new Abilities();
 
         temp = ABILITY.get(0);
         abilityT1.setText(temp.getName());
