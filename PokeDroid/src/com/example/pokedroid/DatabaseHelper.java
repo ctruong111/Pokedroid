@@ -533,7 +533,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	
 	public List<Abilities> getAbilities(String name) {
 		List<Abilities> abilities = new ArrayList<Abilities>();
-		Abilities ability = new Abilities();
 		SQLiteDatabase db = this.getWritableDatabase();
 		Cursor cursor;
 		
@@ -548,7 +547,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			} cursor.moveToFirst();
 
 			do {
-				ability.setName(cursor.getString(1));
+                Abilities ability = new Abilities();
+                ability.setName(cursor.getString(1));
                 Log.e("tle99", cursor.getString(1));
                 ability.setDescription(cursor.getString(2));
                 Log.e("tle99", cursor.getString(2));
