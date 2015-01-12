@@ -373,44 +373,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		db.close();
 		return moveNames;
 	}
-	
-	public List<String> crap(String move, String location, String type){
-		List<String> pokemon= new ArrayList<String>();
-		SQLiteDatabase db = this.getWritableDatabase();
-		Cursor cursor;
-		try{
-			cursor = db.rawQuery("SELECT p_name FROM Pokemon "
-					+ "JOIN TP ON TP.tp_id = Pokemon.p_id "
-					+ "JOIN JOIN Type ON Type.t_id = TP.type1 OR Type.t_id = TP.type2 "
-					+ "JOIN LP ON Pokemon.p_id = LP.p_id "
-					+ "JOIN Location ON LP.l_id = l_locId "
-					+ "JOIN MP Pokemon.p_id = MP.p_id "
-					+ "JOIN Moves MP.m_id = Moves.m_id "
-					+ " WHERE m_name = '" + move + "' "
-					+ "AND l_name = '" + location + "' "
-					+ "AND Type.t_name = '"+type+"' COLLATE NOCASE "
-					+ "GROUP BY p_name ORDER BY p_name DESC", null);
-			
-			if (cursor.getCount() == 0) {
-				return null;
-			}
-			
-			cursor.moveToFirst();
-			
-			do {
-				pokemon.add(cursor.getString(0));
-			} while (cursor.moveToNext()); 
-			
-	        cursor.close();
-		}catch (Exception e) {
-			Log.e("tle99", e.getMessage());
-		}
-		
-		db.close();
-		
-		return pokemon;
-	}
-	
+
 	public Move getMove(String name) {
 		move = new Move();
 		SQLiteDatabase db = this.getWritableDatabase();
@@ -451,11 +414,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		Cursor cursor;		
 
 		try {
-			cursor = db.rawQuery("SELECT p_name FROM Pokemon "
+			cursor = db.rawQuery("SELECT m_name FROM Pokemon "
 					+ "JOIN MP ON Pokemon.p_id = MP.p_id "
 					+ "JOIN Moves ON MP.m_id = Moves.m_id "
-					+ "WHERE m_name = '" + name + "' COLLATE NOCASE "
-					+ "GROUP BY p_name;", null);
+					+ "WHERE p_name = '" + name + "' COLLATE NOCASE "
+					+ "GROUP BY m_name;", null);
 			
 			if (cursor.getCount() == 0) {
 				Log.e("tle99", "!!!!!!!!!!!!NULL RETURNED!!!!!!!!!!!");
