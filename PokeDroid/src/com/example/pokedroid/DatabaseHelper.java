@@ -418,7 +418,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 					+ "JOIN MP ON Pokemon.p_id = MP.p_id "
 					+ "JOIN Moves ON MP.m_id = Moves.m_id "
 					+ "WHERE p_name = '" + name + "' COLLATE NOCASE "
-					+ "GROUP BY m_name;", null);
+					+ "GROUP BY m_name ORDER BY m_name ASC;", null);
 			
 			if (cursor.getCount() == 0) {
 				Log.e("tle99", "!!!!!!!!!!!!NULL RETURNED!!!!!!!!!!!");
