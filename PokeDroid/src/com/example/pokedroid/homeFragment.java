@@ -30,9 +30,9 @@ public class homeFragment extends ListFragment{
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        
+
 		names = getArguments().getStringArray("names");
-        
+
         if (names != null) {
         	ArrayAdapter<String> adapter = new ArrayAdapter<String>(inflater.getContext(), android.R.layout.simple_list_item_1, names);
 			setListAdapter(adapter);
@@ -50,5 +50,5 @@ public class homeFragment extends ListFragment{
 		i.putExtra("name", temp); //Passing in the pokemon's name
 		startActivity(i);
 	}
-	
+
 }
