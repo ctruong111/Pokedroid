@@ -141,6 +141,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		try {
 			cursor = db.rawQuery("SELECT * FROM Type", null);
 			if (cursor == null) {
+                cursor.close();
+                db.close();
 				return null;
 			} 
 			
@@ -174,6 +176,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			cursor = db.rawQuery("SELECT p_id, p_name FROM Pokemon", null);
 			
 			if (cursor == null) {
+                cursor.close();
+                db.close();
 				return null;
 			} 
 			
@@ -215,6 +219,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		try {
 			cursor = db.rawQuery("SELECT * FROM Pokemon", null);
 			if (cursor == null) {
+                cursor.close();
+                db.close();
 				return null;
 			} 
 			
@@ -255,6 +261,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 					+ "WHERE p_name = '" + name + "' COLLATE NOCASE", null);
 			
 			if (cursor.getCount() == 0) {
+                cursor.close();
+                db.close();
 				return null;
 			} cursor.moveToFirst();
 			
@@ -295,6 +303,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 					+ "GROUP BY p_name ORDER BY p_name ASC", null);
 			
 			if (cursor.getCount() == 0) {
+                cursor.close();
+                db.close();
 				return null;
 			}
 			
@@ -329,6 +339,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 					+ "GROUP BY l_name ORDER BY l_name DESC", null);
 			
 			if (cursor.getCount() == 0) {
+                cursor.close();
+                db.close();
 				return null;
 			}
 			
@@ -358,6 +370,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			cursor = db.rawQuery("SELECT * FROM Moves", null);
 			
 			if (cursor.getCount() == 0) {
+                cursor.close();
+                db.close();
 				return null;
 			} cursor.moveToFirst();
 			
@@ -388,7 +402,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 					+ "WHERE m_name = '" + name + "' COLLATE NOCASE", null);
 
 			if (cursor.getCount() == 0) {
-				Log.e("tle99", "!!!!!!!!!!!!!!!NULL IS RETURNED!!!!!!!!!!!!!");
+                cursor.close();
+                db.close();
 				return null;
 			} 
 			
@@ -423,7 +438,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 					+ "GROUP BY m_name ORDER BY m_name ASC;", null);
 			
 			if (cursor.getCount() == 0) {
-				Log.e("tle99", "!!!!!!!!!!!!NULL RETURNED!!!!!!!!!!!");
+                cursor.close();
+                db.close();
 				return null;
 			}
 			
@@ -451,14 +467,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			cursor = db.rawQuery("SELECT image FROM Pokemon WHERE p_name = '" + name + "' COLLATE NOCASE;", null);
 			
 			if (cursor.getCount() == 0) {
+                cursor.close();
+                db.close();
 				return null;
 			} cursor.moveToFirst();
 			
 			pokemonImage = cursor.getBlob(0);
+            cursor.close();
+
 		} catch (Exception e) {
 			Log.e("tle99", e.getMessage());
 		}
-		
+
+		db.close();
 		return pokemonImage;
 	}
 	
@@ -500,6 +521,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	    try {
 			cursor = db.rawQuery("SELECT 'image' FROM Pokemon", null);
 			if (cursor == null) {
+                cursor.close();
+                db.close();
 				return null;
 			} 
 			
@@ -545,6 +568,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 				+ "WHERE p_name = '" + name + "' COLLATE NOCASE;", null);
 		
 			if (cursor.getCount() == 0) {
+                cursor.close();
+                db.close();
 				return null;
 			} cursor.moveToFirst();
 
@@ -557,11 +582,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 Log.e("tle99", "ADDED INTO ABILITIES");
 				abilities.add(ability);
 	        } while (cursor.moveToNext()); 
-			
+			cursor.close();
 		} catch (Exception e) {
 			Log.e("tle99", e.getMessage());
 		}
-
+        db.close();
 		return abilities;
 	}
 	
@@ -573,7 +598,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		try {
 			cursor = db.rawQuery("SELECT l_name, r_name FROM Locations JOIN Region ON l_regId = r_id", null);
 			if (cursor.getCount() == 0) {
-				return null;
+                cursor.close();
+                db.close();
+                return null;
 			} 
 			
 			cursor.moveToFirst();
@@ -609,6 +636,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 					+ "			WHERE p_name = '" + name + "' COLLATE NOCASE)", null);
 			
 			if (cursor.getCount() == 0) {
+                cursor.close();
+                db.close();
 				return null;
 			} cursor.moveToFirst();
 			
@@ -640,6 +669,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 					+ "WHERE t1.t_name = '" + type + "' OR t2.t_name = '" + type +"' COLLATE NOCASE", null);
 			Log.e("tle99","QUERY FINISHED");
 			if (cursor.getCount() == 0) {
+                cursor.close();
+                db.close();
 				return null;
 			} 
 			Log.e("tle99", "NOT NULL");
