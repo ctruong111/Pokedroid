@@ -1,6 +1,7 @@
 package com.example.pokedroid;
 
 import java.io.IOException;
+import java.util.List;
 
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
@@ -10,20 +11,17 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.webkit.WebView.FindListener;
-import android.widget.Adapter;
-import android.widget.TextView;
-import android.widget.Toast;
 
 public class moveMainInfo extends FragmentActivity implements ActionBar.TabListener {
 	private static ActionBar actionBar;
 	private static ViewPager viewPager;
 	private static MoveDisplayAdapter adapter;
-	String name;
+    private DatabaseHelper dbHelper;
+    public static Move move;
+    private List<String> pokemon;
+    public static String pokemonNames[];
+    private String name;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -32,12 +30,20 @@ public class moveMainInfo extends FragmentActivity implements ActionBar.TabListe
 		
 		Intent i = getIntent();
 		name = i.getStringExtra("name");
-		
-		actionBar = getActionBar();
+
+        dbHelper = new DatabaseHelper(getApplicationContext());
+
+        actionBar = getActionBar();
 		actionBar.setTitle(name);
 		actionBar.setDisplayShowHomeEnabled(false);
 
-		viewPager = (ViewPager) findViewById(R.id.moveMainInfo);
+        Thread thread1 = new Thread(new mainInfoThread());
+        Thread thread2 = new Thread(new pokemonThread());
+
+        thread1.run();
+        thread2.run();
+
+        viewPager = (ViewPager) findViewById(R.id.moveMainInfo);
 		adapter = new MoveDisplayAdapter(getSupportFragmentManager());
 		viewPager.setAdapter(adapter);
 		
@@ -94,6 +100,25 @@ public class moveMainInfo extends FragmentActivity implements ActionBar.TabListe
             return true;
         default:
             return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private class mainInfoThread implements Runnable {
+        @Override
+        public void run() {
+            move = dbHelper.getMove(name);
+        }
+    }
+
+    private class pokemonThread implements Runnable {
+        @Override
+        public void run() {
+            pokemon = dbHelper.getMovePokemon(name);
+            pokemonNames = new String[pokemon.size()];
+
+            for (int i = 0; i < pokemon.size(); i++) {
+                pokemonNames[i] = pokemon.get(i);
+            }
         }
     }
 }

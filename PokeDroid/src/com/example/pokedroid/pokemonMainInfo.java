@@ -33,6 +33,8 @@ public class pokemonMainInfo extends FragmentActivity implements ActionBar.TabLi
     public static String[] pokemonLocations;
     private List<String> movesList;
     public static String[] pokemonMoves;
+    public static Pokemon pokemon;
+    public static List<Abilities> ABILITY;
 
     ViewPager viewPager;
 	FragmentPageAdapter adapter;
@@ -57,10 +59,14 @@ public class pokemonMainInfo extends FragmentActivity implements ActionBar.TabLi
         Thread thread1 = new Thread(new movesThread());
         Thread thread2 = new Thread(new evolutionsThread());
         Thread thread3 = new Thread(new locationsThread());
+        Thread thread4 = new Thread(new pokemonThread());
+        Thread thread5 = new Thread(new abilityThread());
 
         thread1.run();
         thread2.run();
         thread3.run();
+        thread4.run();
+        thread5.run();
 
 		viewPager = (ViewPager) findViewById(R.id.mainInfo);
 		adapter = new FragmentPageAdapter(getSupportFragmentManager());
@@ -181,4 +187,19 @@ public class pokemonMainInfo extends FragmentActivity implements ActionBar.TabLi
             }
         }
     }
+
+    private class pokemonThread implements Runnable {
+        @Override
+        public void run() {
+            pokemon = dbHelper.getPokemon(pokemonName);
+        }
+    }
+
+    private class abilityThread implements Runnable {
+        @Override
+        public void run() {
+            ABILITY = dbHelper.getAbilities(pokemonName);
+        }
+    }
+
 }

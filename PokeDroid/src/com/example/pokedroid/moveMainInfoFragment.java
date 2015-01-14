@@ -16,7 +16,6 @@ import android.widget.TextView;
 import org.w3c.dom.Text;
 
 public class moveMainInfoFragment extends Fragment {
-	private DatabaseHelper dbHelper;
 	String name;
 	Move move;
 	View view;
@@ -29,29 +28,21 @@ public class moveMainInfoFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		view = inflater.inflate(R.layout.move_main_info_fragment_layout, container, false);
-		name = getActivity().getActionBar().getTitle().toString();
-				
+
 		PP = (TextView) view.findViewById(R.id.PP);
 		TYPE = (TextView) view.findViewById(R.id.type);
         ATTACKTYPE = (TextView) view.findViewById(R.id.attackType);
 		POWER = (TextView) view.findViewById(R.id.power);
 		ACCURACY = (TextView) view.findViewById(R.id.accuracy);
-		
-	    dbHelper = new DatabaseHelper(getActivity());
-		
-        try {
-            dbHelper.createDataBase();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        
-        move = dbHelper.getMove(name);
-        
+
+        move = moveMainInfo.move;
+
         String TYPEdisplay = move.getType();
         int ATTACKTYPEdisplay = move.getAttack_type();
 		int ACCURACYdisplay = move.getAccuracy();
 		int POWERdisplay = move.getPower();
 		int PPdisplay = move.getPp();
+
         TYPEdisplay = TYPEdisplay.substring(0, 1).toUpperCase(Locale.US) + TYPEdisplay.substring(1);
 
         String temp = null;
@@ -62,6 +53,7 @@ public class moveMainInfoFragment extends Fragment {
         } else if (ATTACKTYPEdisplay == 3) {
            temp = "Special Attack";
         }
+
 		TYPE.setText("Type:                "+ TYPEdisplay);
         ATTACKTYPE.setText("Attack Type:  " + temp);
         PP.setText("PP:                   "+ String.valueOf(PPdisplay));

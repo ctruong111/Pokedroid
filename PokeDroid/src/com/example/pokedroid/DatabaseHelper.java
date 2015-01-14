@@ -147,8 +147,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			cursor.moveToFirst();
 			
 			do {
-	            name = cursor.getString(1);            
-	            typeNames.add(name);
+                String temp = cursor.getString(1);
+                temp = temp.substring(0, 1).toUpperCase() + temp.substring(1);
+                typeNames.add(temp);
 	        } while (cursor.moveToNext()); 
 			
 	        cursor.close();
@@ -287,11 +288,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		Cursor cursor;
 
 		try {
-			cursor = db.rawQuery("SELECT m_name FROM MP "
+			cursor = db.rawQuery("SELECT p_name FROM MP "
 					+ "JOIN Pokemon ON MP.p_id = Pokemon.p_id "
 					+ "JOIN Moves ON Moves.m_id = MP.m_id "
-					+ "WHERE p_name = '" + name + "' COLLATE NOCASE "
-					+ "GROUP BY m_name ORDER BY m_name DESC", null);
+					+ "WHERE m_name = '" + name + "' COLLATE NOCASE "
+					+ "GROUP BY p_name ORDER BY p_name ASC", null);
 			
 			if (cursor.getCount() == 0) {
 				return null;
@@ -301,7 +302,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			
 			do {
 				move = cursor.getString(0);
-				moves.add(move);
+                String output = move.substring(0, 1).toUpperCase() + move.substring(1);
+                moves.add(output);
 			} while (cursor.moveToNext()); 
 			
 	        cursor.close();

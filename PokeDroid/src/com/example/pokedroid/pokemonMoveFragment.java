@@ -17,18 +17,18 @@ public class pokemonMoveFragment extends ListFragment {
 	private View view;
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, 
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.pokemon_move_fragment_layout, container, false);
 
-			ArrayAdapter<String> adapter = new ArrayAdapter<String>(inflater.getContext(), android.R.layout.simple_list_item_1, pokemonMainInfo.pokemonMoves);
-			setListAdapter(adapter);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(inflater.getContext(), android.R.layout.simple_list_item_1, moveMainInfo.pokemonNames);
+        setListAdapter(adapter);
 		
 		return super.onCreateView(inflater, container, savedInstanceState);
 	}
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		Intent i = new Intent(getActivity(), pokemonMainInfo.class);
-		i.putExtra("name", pokemonMainInfo.pokemonMoves[position]); //Passing in the pokemon's name
+		i.putExtra("name", moveMainInfo.pokemonNames[position]); //Passing in the pokemon's name
 		startActivity(i);
 	}
 }

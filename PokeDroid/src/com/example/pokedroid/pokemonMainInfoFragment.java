@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Locale;
 
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -24,17 +25,15 @@ public class pokemonMainInfoFragment extends Fragment {
 	View view;
 	TextView type1, type2, height, weight, hp, attack, defence, special_attack, special_defence, 
 				speed, abilityT1, abilityT2, abilityT3, abilityD1, abilityD2, abilityD3;
+    ImageView image;
 
-	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		ABILITY = new ArrayList<Abilities>();
 		view = inflater.inflate(R.layout.pokemon_main_info_fragment_layout, container, false);
 		name = getActivity().getActionBar().getTitle().toString();
-		
-		ImageView image = (ImageView) view.findViewById(R.id.image);
-		
+
 		type1 = (TextView) view.findViewById(R.id.type1);
 		type2 = (TextView) view.findViewById(R.id.type2);
 		height = (TextView) view.findViewById(R.id.height);
@@ -53,17 +52,17 @@ public class pokemonMainInfoFragment extends Fragment {
         abilityD3 = (TextView) view.findViewById(R.id.AbilityDesc3);
         dbHelper = new DatabaseHelper(getActivity());
 
-        pokemon = dbHelper.getPokemon(name);
-        ABILITY = dbHelper.getAbilities(name);
-        byte[] byteImage = dbHelper.getImage(name);
-        image.setImageBitmap(BitmapFactory.decodeByteArray(byteImage, 0, byteImage.length));
-        
-        Abilities temp = new Abilities();
+        pokemon = pokemonMainInfo.pokemon;
+        ABILITY = pokemonMainInfo.ABILITY;
 
+        ImageTask imageTask = new ImageTask();
+        imageTask.execute();
+
+        Abilities temp = new Abilities();
         temp = ABILITY.get(0);
         abilityT1.setText(temp.getName());
         abilityD1.setText(temp.getDescription());
-        temp = new Abilities();
+
         if (ABILITY.size() == 2) {
             temp = ABILITY.get(1);
             abilityT2.setText(temp.getName());
@@ -72,7 +71,7 @@ public class pokemonMainInfoFragment extends Fragment {
             abilityT2.setText("");
             abilityD2.setText("");
         }
-        temp = new Abilities();
+
         if (ABILITY.size() == 3) {
             temp = ABILITY.get(2);
             abilityT3.setText(temp.getName());
@@ -124,4 +123,22 @@ public class pokemonMainInfoFragment extends Fragment {
         
 		return view;
 	}
+
+    private class ImageTask extends AsyncTask<byte[], Void, byte[]> {
+        @Override
+        protected byte[] doInBackground(byte[]... params) {
+
+            byte[] byteImage = dbHelper.getImage(name);
+            return byteImage;
+        }
+
+        @Override
+        protected void onPostExecute(byte[] bytes) {
+            super.onPostExecute(bytes);
+
+            image = (ImageView) view.findViewById(R.id.image);
+            image.setImageBitmap(BitmapFactory.decodeByteArray(bytes, 0, bytes.length));
+
+        }
+    }
 }

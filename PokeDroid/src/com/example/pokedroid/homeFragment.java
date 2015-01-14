@@ -47,7 +47,7 @@ public class homeFragment extends ListFragment{
 		String temp = names[position].substring(5).trim();
 		//Change the activity
 		Intent i = new Intent(getActivity(), pokemonMainInfo.class);
-		i.putExtra("name", temp); //Passing in the pokemon's name
+        i.putExtra("name", temp); //Passing in the pokemon's name
 		startActivity(i);
 	}
 

@@ -14,41 +14,22 @@ import android.widget.Toast;
 
 public class movePokemonMainInfoFragment extends ListFragment {
 	private View view;
-	public static String name;
-	private DatabaseHelper dbHelper;
-	private List<String> moves;
-	private String[] stringMoves;
-	
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		name = getActivity().getActionBar().getTitle().toString();
+        view = inflater.inflate(R.layout.pokemon_move_fragment_layout, container, false);
 
-		view = inflater.inflate(R.layout.move_pokemon_main_info_fragment, container, false);
-		
-        dbHelper = new DatabaseHelper(this.getActivity());
-        
-        moves = dbHelper.getMovePokemon(name);
-		stringMoves = new String[moves.size()];
-        
-		for(int i = 0; i < moves.size(); i++) {
-			String temp = moves.get(i);;
-			temp = temp.substring(0, 1).toUpperCase() + temp.substring(1);
-			stringMoves[i] = temp; 	
-		}
-		
-        if (moves != null) {
-        	ArrayAdapter<String> adapter = new ArrayAdapter<String>(inflater.getContext(), android.R.layout.simple_list_item_1, stringMoves);
-			setListAdapter(adapter);
-        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(inflater.getContext(), android.R.layout.simple_list_item_1, pokemonMainInfo.pokemonMoves);
+        setListAdapter(adapter);
 
-		return super.onCreateView(inflater, container, savedInstanceState);
+        return super.onCreateView(inflater, container, savedInstanceState);
 	}
 	
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		Intent i = new Intent(getActivity(), moveMainInfo.class);
-		i.putExtra("name", stringMoves[position]); //Passing in the move's name
+		i.putExtra("name", pokemonMainInfo.pokemonMoves[position]); //Passing in the move's name
 		startActivity(i);
 	}
 }

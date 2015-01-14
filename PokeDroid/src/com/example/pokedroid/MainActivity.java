@@ -186,6 +186,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
 	}
 
     private class pokemonNamesAndIdsTask extends AsyncTask<String[], Void, String[]> {
+        @Override
         protected String[] doInBackground(String[]... strings) {
             pokemonNamesAndIdList = dbHelper.getAllPokemonNamesAndId();
             pokemonNamesAndId = new String[pokemonNamesAndIdList.size()];
@@ -195,7 +196,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
             }
             return pokemonNamesAndId;
         }
-
+        @Override
         protected void onPostExecute(String[] pokemonNamesAndIdsArray) {
             //Starts the app on the home page
             manager = getFragmentManager();
@@ -205,7 +206,6 @@ public class MainActivity extends Activity implements OnItemClickListener {
             fragment.setArguments(bundle);
             manager.beginTransaction().replace(R.id.mainContent, fragment).commit();
         }
-
     }
 
     private class moveNamesThread implements Runnable {
