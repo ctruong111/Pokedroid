@@ -23,7 +23,6 @@ import android.widget.Toast;
 
 public class pokemonSearchFragment extends Fragment {
 	public static String[] names;
-	private DatabaseHelper dbHelper;
 	private Fragment fragment;
 	private FragmentManager manager;
 	private String name;
@@ -52,10 +51,16 @@ public class pokemonSearchFragment extends Fragment {
 			@Override
 			public void onClick(View view) {
 				name = query.getText().toString();
-				
-				pokemon = dbHelper.getPokemon(name);
 
-				if (pokemon != null) {//Pokemon exists!
+                for (int i = 0; i < names.length; i++) {
+                    if (name.equals(names[i])) {
+                        exist = true;
+                        break;
+                    }
+                    exist = false;
+                }
+
+				if (exist == true) {//Pokemon exists!
 					pokemon = null;
 					//Hides the keyboard
 					InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
@@ -64,7 +69,7 @@ public class pokemonSearchFragment extends Fragment {
 					Intent i = new Intent(getActivity(), pokemonMainInfo.class);
 					i.putExtra("name", name); //Passing in the pokemon's name
 					startActivity(i);
-				} else if (pokemon == null){
+				} else if (exist == false){
 					query.setError("Pokemon does not exist!");					
 				}
 			}
