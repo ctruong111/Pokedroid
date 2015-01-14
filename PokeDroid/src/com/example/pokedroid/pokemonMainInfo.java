@@ -130,13 +130,6 @@ public class pokemonMainInfo extends FragmentActivity implements ActionBar.TabLi
         }
     }
 
-    private class mainInfoThread implements Runnable {
-        @Override
-        public void run() {
-
-        }
-    }
-
     private class locationsThread implements Runnable {
         @Override
         public void run() {

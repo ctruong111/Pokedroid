@@ -60,25 +60,33 @@ public class pokemonMainInfoFragment extends Fragment {
 
         Abilities temp = new Abilities();
         temp = ABILITY.get(0);
-        abilityT1.setText(temp.getName());
-        abilityD1.setText(temp.getDescription());
 
-        if (ABILITY.size() == 2) {
+        if (ABILITY.size() == 1) {
+            abilityT1.setText(temp.getName());
+            abilityD1.setText(temp.getDescription());
+            abilityT2.setText("");
+            abilityD2.setText("");
+            abilityT3.setText("");
+            abilityD3.setText("");
+        }
+        else if (ABILITY.size() == 2) {
+            abilityT1.setText(temp.getName());
+            abilityD1.setText(temp.getDescription());
             temp = ABILITY.get(1);
             abilityT2.setText(temp.getName());
             abilityD2.setText(temp.getDescription());
-        } else {
-            abilityT2.setText("");
-            abilityD2.setText("");
+            abilityT3.setText("");
+            abilityD3.setText("");
         }
-
-        if (ABILITY.size() == 3) {
+        else if (ABILITY.size() == 3) {
+            abilityT1.setText(temp.getName());
+            abilityD1.setText(temp.getDescription());
+            temp = ABILITY.get(1);
+            abilityT2.setText(temp.getName());
+            abilityD2.setText(temp.getDescription());
             temp = ABILITY.get(2);
             abilityT3.setText(temp.getName());
             abilityD3.setText(temp.getDescription());
-        } else {
-            abilityT3.setText("");
-            abilityD3.setText("");
         }
 
         String temp1 = pokemon.getType1();
@@ -119,15 +127,13 @@ public class pokemonMainInfoFragment extends Fragment {
         
         intNum = pokemon.getSpeed();
         speed.setText("Speed:         " + String.valueOf(intNum));
-        
-        
+
 		return view;
 	}
 
     private class ImageTask extends AsyncTask<byte[], Void, byte[]> {
         @Override
         protected byte[] doInBackground(byte[]... params) {
-
             byte[] byteImage = dbHelper.getImage(name);
             return byteImage;
         }
@@ -135,10 +141,8 @@ public class pokemonMainInfoFragment extends Fragment {
         @Override
         protected void onPostExecute(byte[] bytes) {
             super.onPostExecute(bytes);
-
             image = (ImageView) view.findViewById(R.id.image);
             image.setImageBitmap(BitmapFactory.decodeByteArray(bytes, 0, bytes.length));
-
         }
     }
 }
