@@ -55,15 +55,6 @@ public class pokemonMainInfoFragment extends Fragment {
         pokemon = pokemonMainInfo.pokemon;
         ABILITY = pokemonMainInfo.ABILITY;
 
-        image = (ImageView) view.findViewById(R.id.image);
-
-        while(true) {
-            if (pokemonMainInfo.imageProcessed == true) {
-                image.setImageBitmap(pokemonMainInfo.bitmap);
-                break;
-            }
-        }
-
         Abilities temp = ABILITY.get(0);
 
         if (ABILITY.size() == 1) {
@@ -133,6 +124,14 @@ public class pokemonMainInfoFragment extends Fragment {
         intNum = pokemon.getSpeed();
         speed.setText("Speed:         " + String.valueOf(intNum));
 
+        image = (ImageView) view.findViewById(R.id.image);
+
+        while(true) {
+            if (pokemonMainInfo.imageProcessed == true) {
+                image.setImageBitmap(pokemonMainInfo.bitmap);
+                break;
+            }
+        }
 		return view;
 	}
 }
