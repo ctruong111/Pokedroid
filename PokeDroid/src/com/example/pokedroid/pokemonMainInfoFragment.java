@@ -126,12 +126,8 @@ public class pokemonMainInfoFragment extends Fragment {
 
         image = (ImageView) view.findViewById(R.id.image);
 
-        while(true) {
-            if (pokemonMainInfo.imageProcessed == true) {
-                image.setImageBitmap(pokemonMainInfo.bitmap);
-                break;
-            }
-        }
+        image.setImageBitmap(pokemonMainInfo.bitmap);
+
 		return view;
 	}
 }

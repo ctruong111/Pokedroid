@@ -42,7 +42,6 @@ public class pokemonMainInfo extends FragmentActivity implements ActionBar.TabLi
     public static Bitmap bitmap;
     private byte[] byteImage;
     private int byteLength;
-    public static boolean imageProcessed;
 
     ViewPager viewPager;
 	FragmentPageAdapter adapter;
@@ -208,7 +207,7 @@ public class pokemonMainInfo extends FragmentActivity implements ActionBar.TabLi
     private class ImageTask extends AsyncTask<byte[], Void, byte[]> {
         @Override
         protected byte[] doInBackground(byte[]... params) {
-            imageProcessed = false;
+            bitmap = null;
             byteImage = dbHelper.getImage(pokemonName);
             byteLength = byteImage.length;
             return byteImage;
@@ -218,7 +217,6 @@ public class pokemonMainInfo extends FragmentActivity implements ActionBar.TabLi
         protected void onPostExecute(byte[] bytes) {
             super.onPostExecute(bytes);
             bitmap = BitmapFactory.decodeByteArray(byteImage, 0, byteLength);
-            imageProcessed = true;
         }
     }
 
