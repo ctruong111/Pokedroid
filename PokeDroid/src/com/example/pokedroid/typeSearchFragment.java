@@ -18,6 +18,8 @@ import android.widget.Button;
 
 public class typeSearchFragment extends Fragment {
 	public static String[] names;
+    public static List<String> pokemonList;
+    public static boolean done;
 	private DatabaseHelper dbHelper;
 	private Fragment fragment;
 	private FragmentManager manager;
@@ -32,9 +34,10 @@ public class typeSearchFragment extends Fragment {
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.type_search_fragment_layout, container, false); 
-		
-		names = getArguments().getStringArray("names");
+		View view = inflater.inflate(R.layout.type_search_fragment_layout, container, false);
+        dbHelper = new DatabaseHelper(getActivity());
+
+        names = getArguments().getStringArray("names");
 		
 		search = (Button)view.findViewById(R.id.search);
 		query = (AutoCompleteTextView)view.findViewById(R.id.query);
@@ -62,7 +65,12 @@ public class typeSearchFragment extends Fragment {
 					//Change the activity
 					Intent i = new Intent(getActivity().getApplicationContext(), typeMainInfo.class);
 					i.putExtra("name", type); //Pass in the name of the move
-					startActivity(i);
+
+                    Thread thread = new Thread(new pokemonThread());
+                    done = false;
+                    thread.run();
+
+                    startActivity(i);
 				} else {
 					query.setError("Type does not exist!");
 				}
@@ -71,4 +79,12 @@ public class typeSearchFragment extends Fragment {
 		
 		return view;
 	}
+
+    private class pokemonThread implements Runnable {
+        @Override
+        public void run() {
+            pokemonList = dbHelper.getPokemonType(type);
+            done = true;
+        }
+    }
 }

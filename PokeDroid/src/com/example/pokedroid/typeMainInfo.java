@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.app.ActionBar;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
@@ -37,7 +38,6 @@ public class typeMainInfo extends FragmentActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.type_main_info_layout);
-		dbHelper = new DatabaseHelper(this);
 
 		i = getIntent();
 		actionBar = getActionBar();
@@ -50,26 +50,28 @@ public class typeMainInfo extends FragmentActivity {
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		
 		view = (ListView)findViewById(R.id.typeMainInfo);
-		
-		pokemonNames = dbHelper.getPokemonType(typeName);
-		if (pokemonNames == null) {
-		Log.e("tle99", "!!!!!!!!!!!!POKEMON NAMES IS NULL!!!!!!!!!!!!!");
-		}
-		
-		if (pokemonNames != null) {
-			ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, pokemonNames);
-			view.setAdapter(adapter);
-			view.setOnItemClickListener(new OnItemClickListener() {
-				@Override
-				public void onItemClick(AdapterView<?> parent, View view,
-						int position, long id) {
-					// TODO Auto-generated method stub
-					Intent i = new Intent(view.getContext(), pokemonMainInfo.class);
-					i.putExtra("name", pokemonNames.get(position)); //Passing in the pokemon's name
-					startActivity(i);
-				}
-			});
-		}
+
+        while(true) {
+            if (typeSearchFragment.done == true) {
+                pokemonNames = typeSearchFragment.pokemonList;
+                break;
+            }
+        }
+
+        if (pokemonNames != null) {
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getBaseContext(), android.R.layout.simple_list_item_1, pokemonNames);
+            view.setAdapter(adapter);
+            view.setOnItemClickListener(new OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view,
+                                        int position, long id) {
+                    // TODO Auto-generated method stub
+                    Intent i = new Intent(view.getContext(), pokemonMainInfo.class);
+                    i.putExtra("name", pokemonNames.get(position)); //Passing in the pokemon's name
+                    startActivity(i);
+                }
+            });
+        }
 	}
 	
 	@Override
