@@ -44,8 +44,10 @@ public class moveSearchFragment extends Fragment {
 			@Override
 			public void onClick(View view) {
 				moveName = query.getText().toString();
-				
-				for (int i = 0; i < names.length; i++) {
+                moveName = moveName.toLowerCase();
+                moveName = moveName.substring(0, 1).toUpperCase() + moveName.substring(1);
+
+                for (int i = 0; i < names.length; i++) {
 					if (moveName.equals(names[i])) {
 						exists = true;
 						break;

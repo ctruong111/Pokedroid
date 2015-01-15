@@ -27,8 +27,7 @@ public class pokemonSearchFragment extends Fragment {
 	private FragmentManager manager;
 	private String name;
 	private static boolean exist;
-	Pokemon pokemon;
-	
+
 	Button search;
 	AutoCompleteTextView query;
 	
@@ -51,6 +50,8 @@ public class pokemonSearchFragment extends Fragment {
 			@Override
 			public void onClick(View view) {
 				name = query.getText().toString();
+                name = name.toLowerCase();
+                name = name.substring(0, 1).toUpperCase() + name.substring(1);
 
                 for (int i = 0; i < names.length; i++) {
                     if (name.equals(names[i])) {
@@ -61,7 +62,6 @@ public class pokemonSearchFragment extends Fragment {
                 }
 
 				if (exist == true) {//Pokemon exists!
-					pokemon = null;
 					//Hides the keyboard
 					InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
 					imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
@@ -79,3 +79,4 @@ public class pokemonSearchFragment extends Fragment {
 		return view;
 	}
 }
+

@@ -9,6 +9,9 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentActivity;
@@ -21,6 +24,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView.FindListener;
 import android.widget.Adapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +39,10 @@ public class pokemonMainInfo extends FragmentActivity implements ActionBar.TabLi
     public static String[] pokemonMoves;
     public static Pokemon pokemon;
     public static List<Abilities> ABILITY;
+    public static Bitmap bitmap;
+    private byte[] byteImage;
+    private int byteLength;
+    public static boolean imageProcessed;
 
     ViewPager viewPager;
 	FragmentPageAdapter adapter;
@@ -56,12 +64,14 @@ public class pokemonMainInfo extends FragmentActivity implements ActionBar.TabLi
 		actionBar.setTitle(pokemonName);
 		actionBar.setDisplayShowHomeEnabled(false);
 
+        ImageTask task = new ImageTask();
         Thread thread1 = new Thread(new movesThread());
         Thread thread2 = new Thread(new evolutionsThread());
         Thread thread3 = new Thread(new locationsThread());
         Thread thread4 = new Thread(new pokemonThread());
         Thread thread5 = new Thread(new abilityThread());
 
+        task.execute();
         thread1.run();
         thread2.run();
         thread3.run();
@@ -192,6 +202,23 @@ public class pokemonMainInfo extends FragmentActivity implements ActionBar.TabLi
         @Override
         public void run() {
             ABILITY = dbHelper.getAbilities(pokemonName);
+        }
+    }
+
+    private class ImageTask extends AsyncTask<byte[], Void, byte[]> {
+        @Override
+        protected byte[] doInBackground(byte[]... params) {
+            imageProcessed = false;
+            byteImage = dbHelper.getImage(pokemonName);
+            byteLength = byteImage.length;
+            return byteImage;
+        }
+
+        @Override
+        protected void onPostExecute(byte[] bytes) {
+            super.onPostExecute(bytes);
+            bitmap = BitmapFactory.decodeByteArray(byteImage, 0, byteLength);
+            imageProcessed = true;
         }
     }
 

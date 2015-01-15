@@ -49,8 +49,10 @@ public class typeSearchFragment extends Fragment {
 			@Override
 			public void onClick(View view) {
 				type = query.getText().toString();
-				
-				for (int i = 0; i < names.length; i++) {
+                type = type.toLowerCase();
+                type = type.substring(0, 1).toUpperCase() + type.substring(1);
+
+                for (int i = 0; i < names.length; i++) {
 					if (type.equals(names[i])) {
 						exists = true;
 						break;

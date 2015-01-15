@@ -55,11 +55,16 @@ public class pokemonMainInfoFragment extends Fragment {
         pokemon = pokemonMainInfo.pokemon;
         ABILITY = pokemonMainInfo.ABILITY;
 
-        ImageTask imageTask = new ImageTask();
-        imageTask.execute();
+        image = (ImageView) view.findViewById(R.id.image);
 
-        Abilities temp = new Abilities();
-        temp = ABILITY.get(0);
+        while(true) {
+            if (pokemonMainInfo.imageProcessed == true) {
+                image.setImageBitmap(pokemonMainInfo.bitmap);
+                break;
+            }
+        }
+
+        Abilities temp = ABILITY.get(0);
 
         if (ABILITY.size() == 1) {
             abilityT1.setText(temp.getName());
@@ -130,19 +135,4 @@ public class pokemonMainInfoFragment extends Fragment {
 
 		return view;
 	}
-
-    private class ImageTask extends AsyncTask<byte[], Void, byte[]> {
-        @Override
-        protected byte[] doInBackground(byte[]... params) {
-            byte[] byteImage = dbHelper.getImage(name);
-            return byteImage;
-        }
-
-        @Override
-        protected void onPostExecute(byte[] bytes) {
-            super.onPostExecute(bytes);
-            image = (ImageView) view.findViewById(R.id.image);
-            image.setImageBitmap(BitmapFactory.decodeByteArray(bytes, 0, bytes.length));
-        }
-    }
 }
