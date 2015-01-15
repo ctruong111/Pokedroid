@@ -666,7 +666,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 					+ "JOIN TP ON tp_id = p_id "
 					+ "JOIN Type t1 ON t1.t_id = type1 "
 					+ "JOIN Type t2 ON t2.t_id = type2 "
-					+ "WHERE t1.t_name = '" + type + "' OR t2.t_name = '" + type +"' COLLATE NOCASE", null);
+					+ "WHERE t1.t_name = '" + type + "' COLLATE NOCASE "
+                    + "OR t2.t_name = '" + type +"' COLLATE NOCASE ORDER BY p_name ASC", null);
 			Log.e("tle99","QUERY FINISHED");
 			if (cursor.getCount() == 0) {
                 cursor.close();
