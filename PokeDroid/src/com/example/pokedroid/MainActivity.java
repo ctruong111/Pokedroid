@@ -42,7 +42,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
 	private DrawerLayout drawerLayout;
 	private ListView drawerList;
     private ListView pokemonNamesListView;
-	private TextView title;
+	public static TextView title;
 	private ActionBarDrawerToggle drawerListener;
 	private Fragment fragment;
 	private FragmentManager manager;
@@ -169,8 +169,6 @@ public class MainActivity extends Activity implements OnItemClickListener {
 			fragment = new typeSearchFragment();
 			fragment.setArguments(bundle);
 		}
-
-		title.setText(titles[position]);
 		//Get the fragment manager and change the current fragment
 		manager = getFragmentManager();
 		manager.beginTransaction().replace(R.id.mainContent, fragment).addToBackStack(null).commit();

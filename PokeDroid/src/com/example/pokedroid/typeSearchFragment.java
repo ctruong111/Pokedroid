@@ -15,14 +15,14 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class typeSearchFragment extends Fragment {
 	public static String[] names;
     public static List<String> pokemonList;
     public static boolean done;
 	private DatabaseHelper dbHelper;
-	private Fragment fragment;
-	private FragmentManager manager;
+    private TextView title;
 	private String type;
 	boolean exists;
 	
@@ -36,6 +36,9 @@ public class typeSearchFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.type_search_fragment_layout, container, false);
         dbHelper = new DatabaseHelper(getActivity());
+
+        title = MainActivity.title;
+        title.setText("Type");
 
         names = getArguments().getStringArray("names");
 		

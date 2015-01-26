@@ -19,25 +19,27 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class homeFragment extends ListFragment{
 	public static String[] names;
 	private DatabaseHelper dbHelper;
 	private Fragment fragment;
 	private FragmentManager manager;
+    private TextView title;
 
 	public homeFragment() {}
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+        title = MainActivity.title;
 		names = MainActivity.pokemonNamesAndId;
 
         if (names != null) {
         	ArrayAdapter<String> adapter = new ArrayAdapter<String>(inflater.getContext(), android.R.layout.simple_list_item_1, names);
 			setListAdapter(adapter);
         }
-
+        title.setText("Home");
 		return super.onCreateView(inflater, container, savedInstanceState);
 	}
 	

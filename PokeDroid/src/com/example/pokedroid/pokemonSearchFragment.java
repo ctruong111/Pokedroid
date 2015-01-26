@@ -19,14 +19,14 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class pokemonSearchFragment extends Fragment {
 	public static String[] names;
-	private Fragment fragment;
-	private FragmentManager manager;
 	private String name;
 	private static boolean exist;
+    private TextView title;
 
 	Button search;
 	AutoCompleteTextView query;
@@ -36,7 +36,10 @@ public class pokemonSearchFragment extends Fragment {
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.pokemon_search_fragment_layout, container, false); 
+		View view = inflater.inflate(R.layout.pokemon_search_fragment_layout, container, false);
+
+        title = MainActivity.title;
+        title.setText("Pokemon");
 
 		names = getArguments().getStringArray("names");
 		

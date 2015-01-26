@@ -15,13 +15,13 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class moveSearchFragment extends Fragment {
 	public static String[] names;
-	private DatabaseHelper dbHelper;
 	private String moveName;
-	Move move;
-	boolean exists;
+    private TextView title;
+    boolean exists;
 	
 	Button search;
 	AutoCompleteTextView query;
@@ -32,7 +32,10 @@ public class moveSearchFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.move_search_fragment_layout, container, false);
 
-		names = getArguments().getStringArray("names");
+        title = MainActivity.title;
+        title.setText("Moves");
+
+        names = getArguments().getStringArray("names");
 		
 		search = (Button)view.findViewById(R.id.search);
 		query = (AutoCompleteTextView)view.findViewById(R.id.query);
