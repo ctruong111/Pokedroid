@@ -1,179 +1,322 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="fill_parent"
-	android:layout_height="fill_parent">
-<RelativeLayout
-	    android:layout_width="match_parent"
-	    android:layout_height="match_parent"
-	    android:orientation="vertical" >
-	
-	    <TextView
-	        android:id="@+id/type1"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:paddingTop="20dp"
-	        android:paddingRight="30dp"
-	        android:layout_alignParentRight="true"
-	        android:layout_alignParentTop="true"
-	        android:textAppearance="?android:attr/textAppearanceLarge" />
-	
-	    <TextView
-	        android:id="@+id/type2"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_alignParentRight="true"
-	        android:layout_below="@+id/type1"
-	        android:paddingRight="30dp"
-	        android:paddingTop="5dp"
-	        android:textAppearance="?android:attr/textAppearanceLarge" />
-	
-	    <ImageView
-	        android:id="@+id/image"
-	        android:layout_width="170dp"
-	        android:layout_height="170dp"
-	        android:layout_marginLeft="10dp"
-			android:layout_marginTop="20dp">
-		</ImageView>
-	
-	    <TextView
-	        android:id="@+id/height"
-	        android:minLines="1"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_alignParentRight="true"
-	        android:layout_below="@+id/type2"
-			android:paddingRight="30dp"
-	        android:layout_marginTop="15dp"
-	        android:textAppearance="?android:attr/textAppearanceLarge" />
-	    
-		<TextView
-	        android:id="@+id/heightDesc"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:paddingRight="30dp"
-			android:layout_alignParentRight="true"
-	        android:layout_below="@+id/height"
-			android:text="Height"
-	        android:textAppearance="?android:attr/textAppearanceSmall" />
-	
-	    <TextView
-	        android:id="@+id/weight"
-			android:minLines="1"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_alignParentRight="true"
-	        android:layout_below="@+id/height"
-			android:paddingRight="30dp"
-	        android:layout_marginTop="20dp"
-	        android:textAppearance="?android:attr/textAppearanceLarge" />
-	    
-		<TextView
-	        android:id="@+id/weightDesc"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:paddingRight="30dp"
-			android:layout_below="@+id/weight"
-			android:layout_alignParentRight="true"
-			android:text="Weight"
-	        android:textAppearance="?android:attr/textAppearanceSmall" />
-	
-	    <TextView
-	        android:id="@+id/hp"
-	        android:minLines="1"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_below="@+id/image"
-	        android:layout_marginTop="40dp"
-			android:layout_marginLeft="10dp"
-	        android:textAppearance="?android:attr/textAppearanceLarge" />
-	
-	    <TextView
-	        android:id="@+id/attack"
-	        android:minLines="1"
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:layout_below="@+id/hp"
-			android:layout_marginLeft="10dp"
-	        android:textAppearance="?android:attr/textAppearanceLarge" />
-	
-	    <TextView
-	        android:id="@+id/defence"
-	        android:minLines="1"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_below="@+id/attack"
-			android:layout_marginLeft="10dp"
-	        android:textAppearance="?android:attr/textAppearanceLarge" />
-	
-	    <TextView
-	        android:id="@+id/special_attack"
-	        android:minLines="1"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_below="@+id/defence"
-			android:layout_marginLeft="10dp"
-	        android:textAppearance="?android:attr/textAppearanceLarge" />
-	
-	    <TextView
-	        android:id="@+id/special_defence"
-	        android:minLines="1"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_below="@+id/special_attack"
-			android:layout_marginLeft="10dp"
-	        android:textAppearance="?android:attr/textAppearanceLarge" />
-	
-	    <TextView
-	        android:id="@+id/speed"
-	        android:minLines="1"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_below="@+id/special_defence"
-			android:layout_marginLeft="10dp"
-	        android:textAppearance="?android:attr/textAppearanceLarge" />
+	android:layout_height="fill_parent"
+	android:background="@android:color/darker_gray">
 
-	    <TextView
-	        android:id="@+id/AbilityTitle1"
-	        android:layout_width="150dp"
-	        android:layout_height="match_parent"
-	        android:layout_alignParentRight="true"
-			android:layout_below="@+id/weightDesc"
-			android:layout_marginTop="30dp"
-	        android:textAppearance="?android:attr/textAppearanceLarge" />
-        <TextView
-            android:id="@+id/AbilityDesc1"
-            android:layout_width="150dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/AbilityTitle1"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-        <TextView
-            android:id="@+id/AbilityTitle2"
-            android:layout_width="150dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/AbilityDesc1"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-        <TextView
-            android:id="@+id/AbilityDesc2"
-            android:layout_width="150dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/AbilityTitle2"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-        <TextView
-            android:id="@+id/AbilityTitle3"
-            android:layout_width="150dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/AbilityDesc2"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-        <TextView
-            android:id="@+id/AbilityDesc3"
-            android:layout_width="150dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/AbilityTitle3"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+	<RelativeLayout
+		android:id="@+id/pokemon"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical">
+
+		<ImageView
+			android:id="@+id/image"
+			android:contentDescription="Picture of Pokemon"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:adjustViewBounds="true"
+			android:scaleType="fitXY" />
+
+		<RelativeLayout
+			android:id="@+id/mainInfo"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_below="@+id/image">
+
+			<TextView
+				android:id="@+id/name"
+				android:textColor="#000000"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="20dp"
+				android:textSize="40sp" />
+
+			<RelativeLayout
+				android:id="@+id/types"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_below="@+id/name"
+				android:layout_marginEnd="20dp"
+				android:layout_marginStart="20dp"
+				android:layout_marginTop="5dp">
+
+				<RelativeLayout
+					android:id="@+id/type1"
+					android:layout_width="175dp"
+					android:layout_height="wrap_content"
+					android:background="@drawable/rounded_corner">
+
+					<TextView
+						android:id="@+id/type1Text"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:gravity="center"
+						android:text=""
+						android:textAppearance="?android:attr/textAppearanceSmall" />
+				</RelativeLayout>
+
+				<RelativeLayout
+					android:id="@+id/type2"
+					android:layout_width="175dp"
+					android:layout_height="wrap_content"
+					android:layout_alignParentEnd="true"
+					android:background="@drawable/rounded_corner">
+
+					<TextView
+						android:id="@+id/type2Text"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:gravity="center"
+						android:text=""
+						android:textAppearance="?android:attr/textAppearanceSmall" />
+				</RelativeLayout>
+
+			</RelativeLayout>
+
+			<View
+				android:id="@+id/statsDivider"
+				android:layout_width="match_parent"
+				android:layout_height="2dp"
+				android:layout_below="@id/types"
+				android:layout_marginEnd="20dp"
+				android:layout_marginStart="20dp"
+				android:layout_marginTop="20dp"
+				android:background="@android:color/holo_red_dark" />
+
+			<RelativeLayout
+				android:id="@+id/stats"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_alignParentStart="true"
+				android:layout_below="@id/statsDivider"
+				android:layout_marginEnd="20dp"
+				android:layout_marginStart="20dp"
+				android:layout_marginTop="15dp">
+
+				<TextView
+					android:id="@+id/statsHeader"
+					android:textColor="#000000"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:text="@string/stats_header"
+					android:textSize="30sp" />
+
+				<TextView
+					android:id="@+id/hp"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textColor="#000000"
+					android:layout_below="@+id/statsHeader"
+					android:minLines="1"
+					android:text="@string/HP"
+					android:textSize="18sp" />
+
+				<TextView
+					android:id="@+id/attack"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textColor="#000000"
+					android:layout_below="@+id/hp"
+					android:minLines="1"
+					android:text="@string/Attack"
+					android:textSize="18sp" />
+
+				<TextView
+					android:id="@+id/defence"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textColor="#000000"
+					android:layout_below="@+id/attack"
+					android:minLines="1"
+					android:text="@string/Defence"
+					android:textSize="18sp" />
+
+				<TextView
+					android:id="@+id/special_attack"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textColor="#000000"
+					android:layout_below="@+id/defence"
+					android:minLines="1"
+					android:text="@string/Special_Attack"
+					android:textSize="18sp" />
+
+				<TextView
+					android:id="@+id/special_defence"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textColor="#000000"
+					android:layout_below="@+id/special_attack"
+					android:minLines="1"
+					android:text="@string/Special_Defence"
+					android:textSize="18sp" />
+
+				<TextView
+					android:id="@+id/speed"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textColor="#000000"
+					android:layout_below="@+id/special_defence"
+					android:minLines="1"
+					android:text="@string/Speed"
+					android:textSize="18sp" />
+
+				<RelativeLayout
+					android:id="@+id/hpBar"
+					android:layout_alignBottom="@id/hp"
+					android:layout_alignParentEnd="true"
+					android:gravity="end"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content">
+					<TextView
+						android:id="@+id/hpVal"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginEnd="10dp"
+						android:gravity="end"
+						android:minLines="1"
+						android:shadowColor="#000000"
+						android:shadowRadius="3"
+						android:textColor="#ffffff"
+						android:textSize="16sp" />
+				</RelativeLayout>
+
+				<RelativeLayout
+					android:id="@+id/attackBar"
+					android:layout_alignBottom="@id/attack"
+					android:layout_alignParentEnd="true"
+					android:gravity="end"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content">
+					<TextView
+						android:id="@+id/attackVal"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginEnd="10dp"
+						android:gravity="end"
+						android:minLines="1"
+						android:shadowColor="#000000"
+						android:shadowRadius="3"
+						android:textColor="#ffffff"
+						android:textSize="16sp" />
+				</RelativeLayout>
+
+				<RelativeLayout
+					android:id="@+id/defenceBar"
+					android:layout_alignBottom="@id/defence"
+					android:layout_alignParentEnd="true"
+					android:gravity="end"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content">
+					<TextView
+						android:id="@+id/defenceVal"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginEnd="10dp"
+						android:gravity="end"
+						android:minLines="1"
+						android:shadowColor="#000000"
+						android:shadowRadius="3"
+						android:textColor="#ffffff"
+						android:textSize="16sp" />
+				</RelativeLayout>
+
+
+				<RelativeLayout
+					android:id="@+id/special_attackBar"
+					android:layout_alignBottom="@id/special_attack"
+					android:layout_alignParentEnd="true"
+					android:gravity="end"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content">
+					<TextView
+						android:id="@+id/special_attackVal"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginEnd="10dp"
+						android:gravity="end"
+						android:minLines="1"
+						android:shadowColor="#000000"
+						android:shadowRadius="3"
+						android:textColor="#ffffff"
+						android:textSize="16sp" />
+				</RelativeLayout>
+
+
+				<RelativeLayout
+					android:id="@+id/special_defenceBar"
+					android:layout_alignBottom="@id/special_defence"
+					android:layout_alignParentEnd="true"
+					android:gravity="end"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content">
+					<TextView
+						android:id="@+id/special_defenceVal"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginEnd="10dp"
+						android:gravity="end"
+						android:minLines="1"
+						android:shadowColor="#000000"
+						android:shadowRadius="3"
+						android:textColor="#ffffff"
+						android:textSize="16sp" />
+				</RelativeLayout>
+
+
+				<RelativeLayout
+					android:id="@+id/speedBar"
+					android:layout_alignBottom="@id/speed"
+					android:layout_alignParentEnd="true"
+					android:gravity="end"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content">
+					<TextView
+						android:id="@+id/speedVal"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginEnd="10dp"
+						android:gravity="end"
+						android:minLines="1"
+						android:shadowColor="#000000"
+						android:shadowRadius="3"
+						android:textColor="#ffffff"
+						android:textSize="16sp" />
+				</RelativeLayout>
+
+			</RelativeLayout>
+
+			<View
+				android:id="@+id/abilitiesDivider"
+				android:layout_width="match_parent"
+				android:layout_height="2dp"
+				android:layout_below="@id/stats"
+				android:layout_marginEnd="20dp"
+				android:layout_marginStart="20dp"
+				android:layout_marginTop="20dp"
+				android:background="@android:color/holo_red_dark" />
+
+			<RelativeLayout
+				android:id="@+id/abilities"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_alignStart="@+id/stats"
+				android:layout_below="@+id/abilitiesDivider"
+				android:layout_marginTop="10dp">
+
+				<TextView
+					android:id="@+id/abilitiesHeader"
+					android:textColor="#000000"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:text="@string/Abilities"
+					android:textSize="30sp" />
+			</RelativeLayout>
+
+		</RelativeLayout>
+
 	</RelativeLayout>
+
 </ScrollView>

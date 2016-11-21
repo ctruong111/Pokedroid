@@ -1,133 +1,147 @@
 package com.example.pokedroid;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
+import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class pokemonMainInfoFragment extends Fragment {
-	private DatabaseHelper dbHelper;
-	String name;
-	Pokemon pokemon;
-	List<Abilities> ABILITY;
-	View view;
-	TextView type1, type2, height, weight, hp, attack, defence, special_attack, special_defence, 
-				speed, abilityT1, abilityT2, abilityT3, abilityD1, abilityD2, abilityD3;
-    ImageView image;
+	TextView type1TextView, type2TextView, name;
+    RelativeLayout pokemonRL, mainInfo, hp, attack, defence, special_attack, special_defence, speed;
+
+    Pokemon pokemon = pokemonMainInfo.pokemon;
+    List<Abilities> abilities = pokemonMainInfo.ABILITY;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
-		ABILITY = new ArrayList<Abilities>();
-		view = inflater.inflate(R.layout.pokemon_main_info_fragment_layout, container, false);
-		name = getActivity().getActionBar().getTitle().toString();
+        ScrollView mainView = (ScrollView) inflater.inflate(R.layout.pokemon_main_info_fragment_layout, container, false);
+        pokemonRL = (RelativeLayout) mainView.findViewById(R.id.pokemon);
+        mainInfo = (RelativeLayout)pokemonRL.findViewById(R.id.mainInfo);
 
-		type1 = (TextView) view.findViewById(R.id.type1);
-		type2 = (TextView) view.findViewById(R.id.type2);
-		height = (TextView) view.findViewById(R.id.height);
-		weight = (TextView) view.findViewById(R.id.weight);
-		hp = (TextView) view.findViewById(R.id.hp);
-		attack = (TextView) view.findViewById(R.id.attack);
-		defence = (TextView) view.findViewById(R.id.defence);
-		special_attack = (TextView) view.findViewById(R.id.special_attack);
-		special_defence = (TextView) view.findViewById(R.id.special_defence);
-		speed = (TextView) view.findViewById(R.id.speed);
-		abilityT1 = (TextView) view.findViewById(R.id.AbilityTitle1);
-        abilityT2 = (TextView) view.findViewById(R.id.AbilityTitle2);
-        abilityT3 = (TextView) view.findViewById(R.id.AbilityTitle3);
-        abilityD1 = (TextView) view.findViewById(R.id.AbilityDesc1);
-        abilityD2 = (TextView) view.findViewById(R.id.AbilityDesc2);
-        abilityD3 = (TextView) view.findViewById(R.id.AbilityDesc3);
-        dbHelper = new DatabaseHelper(getActivity());
+		type1TextView = (TextView) mainInfo.findViewById(R.id.type1Text);
+		type2TextView = (TextView) mainInfo.findViewById(R.id.type2Text);
+        name = (TextView) mainInfo.findViewById(R.id.name);
 
-        pokemon = pokemonMainInfo.pokemon;
-        ABILITY = pokemonMainInfo.ABILITY;
+		hp = (RelativeLayout) mainInfo.findViewById(R.id.hpBar);
+		attack = (RelativeLayout) mainInfo.findViewById(R.id.attackBar);
+		defence = (RelativeLayout) mainInfo.findViewById(R.id.defenceBar);
+		special_attack = (RelativeLayout) mainInfo.findViewById(R.id.special_attackBar);
+		special_defence = (RelativeLayout) mainInfo.findViewById(R.id.special_defenceBar);
+		speed = (RelativeLayout) mainInfo.findViewById(R.id.speedBar);
 
-        Abilities temp = ABILITY.get(0);
+        RelativeLayout abilityLayout = new RelativeLayout(getContext());
+        RelativeLayout.LayoutParams relativeLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        relativeLayoutParams.setMargins(0, getDp(2), 0, getDp(20));
+        relativeLayoutParams.addRule(RelativeLayout.BELOW, R.id.abilitiesHeader);
 
-        if (ABILITY.size() == 1) {
-            abilityT1.setText(temp.getName());
-            abilityD1.setText(temp.getDescription());
-            abilityT2.setText("");
-            abilityD2.setText("");
-            abilityT3.setText("");
-            abilityD3.setText("");
+        int prevAbilityDescId = R.id.abilitiesHeader;
+        for (Abilities ability : abilities) {
+            TextView title = new TextView(getContext());
+            title.setId(View.generateViewId());
+            title.setText(ability.getName());
+            title.setTextAppearance(getContext(), android.R.style.TextAppearance_Large);
+            title.setTextColor(Color.BLACK);
+
+            TextView desc = new TextView(getContext());
+            desc.setId(View.generateViewId());
+            desc.setText(ability.getDescription());
+            desc.setTextAppearance(getContext(), android.R.style.TextAppearance_Small);
+            desc.setTextColor(Color.BLACK);
+
+            RelativeLayout.LayoutParams titleLayoutParams = new RelativeLayout.LayoutParams(
+                    RelativeLayout.LayoutParams.WRAP_CONTENT,
+                    RelativeLayout.LayoutParams.WRAP_CONTENT);
+            titleLayoutParams.setMargins(0, getDp(2), 0, getDp(2));
+            titleLayoutParams.addRule(RelativeLayout.BELOW, prevAbilityDescId);
+
+            RelativeLayout.LayoutParams descLayoutParams = new RelativeLayout.LayoutParams(
+                    RelativeLayout.LayoutParams.WRAP_CONTENT,
+                    RelativeLayout.LayoutParams.WRAP_CONTENT);
+            descLayoutParams.setMargins(0, getDp(2), 0, getDp(2));
+            descLayoutParams.addRule(RelativeLayout.BELOW, title.getId());
+
+            title.setLayoutParams(titleLayoutParams);
+            desc.setLayoutParams(descLayoutParams);
+
+            abilityLayout.addView(title);
+            abilityLayout.addView(desc);
+
+            prevAbilityDescId = desc.getId();
         }
-        else if (ABILITY.size() == 2) {
-            abilityT1.setText(temp.getName());
-            abilityD1.setText(temp.getDescription());
-            temp = ABILITY.get(1);
-            abilityT2.setText(temp.getName());
-            abilityD2.setText(temp.getDescription());
-            abilityT3.setText("");
-            abilityD3.setText("");
-        }
-        else if (ABILITY.size() == 3) {
-            abilityT1.setText(temp.getName());
-            abilityD1.setText(temp.getDescription());
-            temp = ABILITY.get(1);
-            abilityT2.setText(temp.getName());
-            abilityD2.setText(temp.getDescription());
-            temp = ABILITY.get(2);
-            abilityT3.setText(temp.getName());
-            abilityD3.setText(temp.getDescription());
-        }
+        ((RelativeLayout)(mainInfo.findViewById(R.id.abilities))).addView(abilityLayout, relativeLayoutParams);
 
-        String temp1 = pokemon.getType1();
-		String temp2 = pokemon.getType2();
+        String type1 = Utilities.formatString(pokemon.getType1());
+		String type2 = Utilities.formatString(pokemon.getType2());
 
-        temp1 = temp1.substring(0, 1).toUpperCase(Locale.US) + temp1.substring(1);
-        temp2 = temp2.substring(0, 1).toUpperCase(Locale.US) + temp2.substring(1);
+		type1TextView.setText(type1);
+        type1TextView.setTextColor(Color.WHITE);
+        setBackgroundDrawableColor(mainInfo.findViewById(R.id.type1), Utilities.getTypeColor(type1));
 
-		type1.setText(temp1);
-		
-        if (temp1.equals(temp2)) {
-        	type2.setText("");
+        if (!type1.equals(type2)) {
+            type2TextView.setText(type2);
+            type2TextView.setTextColor(Color.WHITE);
+            setBackgroundDrawableColor(mainInfo.findViewById(R.id.type2), Utilities.getTypeColor(type2));
+            mainInfo.findViewById(R.id.type2).setAlpha(1);
         } else {
-        	type2.setText(temp2);
+            mainInfo.findViewById(R.id.type2).setAlpha(0);
         }
-        
-        double num = pokemon.getHeight();
-        height.setText(String.valueOf(num/10) + " m");
-        
-        num = pokemon.getWeight();
-        weight.setText(String.valueOf(num/10) + " kg");
-		
-        int intNum;
-        intNum = pokemon.getHp();
-        hp.setText("HP:               " + Integer.toString(intNum));
-        
-        intNum = pokemon.getAttack();
-        attack.setText("Attack:        " + String.valueOf(intNum));
-        
-        intNum = pokemon.getDefence();
-        defence.setText("Defence:     " + String.valueOf(intNum));
-        
-        intNum = pokemon.getSpecial_attack();
-        special_attack.setText("Sp. Atk:       " + String.valueOf(intNum));
-        
-        intNum = pokemon.getSpecial_defence();
-        special_defence.setText("Sp. Def:       " + String.valueOf(intNum));
-        
-        intNum = pokemon.getSpeed();
-        speed.setText("Speed:         " + String.valueOf(intNum));
 
-        image = (ImageView) view.findViewById(R.id.image);
+        name.setText(pokemon.getName());
 
+        configureStatValues(hp, pokemon.getHp(), "hp");
+        configureStatValues(attack, pokemon.getAttack(), "attack");
+        configureStatValues(defence, pokemon.getDefence(), "defence");
+        configureStatValues(special_attack, pokemon.getSpecial_attack(), "special_attack");
+        configureStatValues(special_defence, pokemon.getSpecial_defence(), "special_defence");
+        configureStatValues(speed, pokemon.getSpeed(), "speed");
+
+        ImageView image = (ImageView) pokemonRL.findViewById(R.id.image);
+        image.setContentDescription("Image of " + pokemon.getName());
         image.setImageBitmap(pokemonMainInfo.bitmap);
 
-		return view;
+        return mainView;
 	}
+
+	private void configureStatValues(RelativeLayout relativeLayout, int statValue, String stat) {
+        TextView barValue = (TextView) relativeLayout.getChildAt(0);
+        barValue.setText(String.valueOf(statValue));
+
+        relativeLayout.setBackgroundColor(Utilities.getStatColor(stat));
+        relativeLayout.setMinimumWidth(getDp(calculateBarLength(statValue)));
+    }
+
+    private int calculateBarLength(int value) {
+        double fillPercent = value/255.0;
+        int maxFillAmt = 400;
+        int barLength = (int) (fillPercent*maxFillAmt);
+
+        if (barLength < 20) {
+            return 20;
+        } else {
+            return barLength;
+        }
+    }
+
+    private void setBackgroundDrawableColor(View view, int color) {
+        ((GradientDrawable)view.getBackground()).setColor(color);
+    }
+
+    private Context getContext() {
+        return getActivity().getApplicationContext();
+    }
+
+    private int getDp(int size) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, size, getResources().getDisplayMetrics());
+    }
 }
