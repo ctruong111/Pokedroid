@@ -53,14 +53,12 @@ public class pokemonMainInfo extends FragmentActivity implements ActionBar.TabLi
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.pokemon_main_info_layout);
 		
-		Intent i = getIntent();
-		pokemonName = i.getStringExtra("name");
+		pokemonName = getIntent().getStringExtra("name");
 
-        Log.e("tle99", pokemonName);
         dbHelper = new DatabaseHelper(getApplicationContext());
 
         actionBar = getActionBar();
-		actionBar.setTitle(pokemonName);
+		actionBar.setTitle("Back");
 		actionBar.setDisplayShowHomeEnabled(false);
 
         ImageTask task = new ImageTask();
@@ -142,6 +140,9 @@ public class pokemonMainInfo extends FragmentActivity implements ActionBar.TabLi
     private class locationsThread implements Runnable {
         @Override
         public void run() {
+            Log.e("ThreadResult", "Locations Thread Has Started");
+            Long timeStart = System.currentTimeMillis();
+
             locations = dbHelper.getPokemonLocations(pokemonName);
 
             if (locations == null) {
@@ -154,12 +155,18 @@ public class pokemonMainInfo extends FragmentActivity implements ActionBar.TabLi
                     pokemonLocations[i] = locations.get(i);
                 }
             }
+
+            Long timeElapsed = System.currentTimeMillis() - timeStart;
+            Log.e("ThreadResult", "Locations Thread Has Finished Took " + timeElapsed + "ms");
         }
     }
 
     private class movesThread implements Runnable {
         @Override
         public void run() {
+            Log.e("ThreadResult", "Moves Thread Has Started");
+            Long timeStart = System.currentTimeMillis();
+
             movesList = dbHelper.getPokemonMove(pokemonName);
 
             pokemonMoves = new String[movesList.size()];
@@ -168,12 +175,19 @@ public class pokemonMainInfo extends FragmentActivity implements ActionBar.TabLi
                 temp = temp.substring(0, 1).toUpperCase() + temp.substring(1);
                 pokemonMoves[i] = temp;
             }
+
+            Long timeElapsed = System.currentTimeMillis() - timeStart;
+            Log.e("ThreadResult", "Moves Thread Has Finished Took " + timeElapsed + "ms");
         }
     }
 
     private class evolutionsThread implements Runnable {
         @Override
         public void run() {
+            Log.e("ThreadResult", "Evolutions Thread Has Started");
+
+            Long timeStart = System.currentTimeMillis();
+
             evolutionChain = dbHelper.getEvolutionChain(pokemonName);
 
             if (evolutionChain != null) {
@@ -187,36 +201,63 @@ public class pokemonMainInfo extends FragmentActivity implements ActionBar.TabLi
                 pokemonEvolutions = new String[1];
                 pokemonEvolutions[0] = "No Evolutions!";
             }
+
+            Long timeElapsed = System.currentTimeMillis() - timeStart;
+            Log.e("ThreadResult", "Evolutions Thread Has Finished Took " + timeElapsed + "ms");
         }
     }
 
     private class pokemonThread implements Runnable {
         @Override
         public void run() {
+            Log.e("ThreadResult", "Pokemon Thread Has Started");
+
+            Long timeStart = System.currentTimeMillis();
             pokemon = dbHelper.getPokemon(pokemonName);
+            Long timeElapsed = System.currentTimeMillis() - timeStart;
+
+            Log.e("ThreadResult", "Pokemon Thread Has Finished Took " + timeElapsed + "ms");
         }
     }
 
     private class abilityThread implements Runnable {
         @Override
         public void run() {
+            Log.e("ThreadResult", "Ability Thread Has Started");
+
+            Long timeStart = System.currentTimeMillis();
             ABILITY = dbHelper.getAbilities(pokemonName);
+            Long timeElapsed = System.currentTimeMillis() - timeStart;
+
+            Log.e("ThreadResult", "Ability Thread Has Finished Took " + timeElapsed + "ms");
+
         }
     }
 
     private class ImageTask extends AsyncTask<byte[], Void, byte[]> {
         @Override
         protected byte[] doInBackground(byte[]... params) {
+            Log.e("ThreadResult", "ImageTask Has Begun");
+            Long timeStart = System.currentTimeMillis();
+
             bitmap = null;
             byteImage = dbHelper.getImage(pokemonName);
             byteLength = byteImage.length;
+
+            Long timeElapsed = System.currentTimeMillis() - timeStart;
+            Log.e("ThreadResult", "ImageTask Has Finished Took " + timeElapsed + "ms");
             return byteImage;
         }
 
         @Override
         protected void onPostExecute(byte[] bytes) {
             super.onPostExecute(bytes);
+
+            Long timeStart = System.currentTimeMillis();
             bitmap = BitmapFactory.decodeByteArray(byteImage, 0, byteLength);
+            Long timeElapsed = System.currentTimeMillis() - timeStart;
+
+            Log.e("Debug", "Setting Bitmap Took " + timeElapsed + "ms");
         }
     }
 
