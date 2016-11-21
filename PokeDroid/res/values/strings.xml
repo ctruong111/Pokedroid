@@ -3,12 +3,24 @@
 
     <string name="app_name">PokeDroid</string>
     <string name="action_settings">Settings</string>
+
     <string-array name="titles">
     	<item>Home</item>
     	<item>Pokemon</item>
     	<item>Moves</item>
     	<item>Type</item>
 	</string-array>
+
+	<string name="Abilities">Abilities</string>
+	<string name="HP">HP</string>
+	<string name="Attack">Attack</string>
+	<string name="Defence">Defence</string>
+	<string name="Special_Attack">Sp. Attack</string>
+	<string name="Special_Defence">Sp. Defence</string>
+	<string name="Speed">Speed</string>
+
+	<string name="stats_header">Stats</string>
+
 	<string name="drawer_open">Drawer is open</string>
     <string name="drawer_close">Drawer is closed</string>
 </resources>
