@@ -1,28 +1,21 @@
 package com.example.pokedroid;
 
-import java.io.IOException;
 import java.util.List;
 
 import android.app.ActionBar;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.webkit.WebView.FindListener;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
+
+import com.example.pokedroid.Helper.DatabaseHelper;
+import com.example.pokedroid.Pokemon.Activity.PokemonActivity;
 
 public class typeMainInfo extends FragmentActivity {
 	private DatabaseHelper dbHelper;
@@ -66,7 +59,7 @@ public class typeMainInfo extends FragmentActivity {
                 public void onItemClick(AdapterView<?> parent, View view,
                                         int position, long id) {
                     // TODO Auto-generated method stub
-                    Intent i = new Intent(view.getContext(), pokemonMainInfo.class);
+                    Intent i = new Intent(view.getContext(), PokemonActivity.class);
                     i.putExtra("name", pokemonNames.get(position)); //Passing in the pokemon's name
                     startActivity(i);
                 }

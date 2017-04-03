@@ -1,10 +1,7 @@
 package com.example.pokedroid;
 
-import java.util.List;
-
 import android.app.Activity;
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,6 +13,9 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.pokedroid.MainPage.Activity.MainActivity;
+import com.example.pokedroid.Move.Activity.MoveActivity;
 
 public class moveSearchFragment extends Fragment {
 	public static String[] names;
@@ -64,7 +64,7 @@ public class moveSearchFragment extends Fragment {
 					imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
 
 					//Change the activity
-					Intent i = new Intent(getActivity().getApplicationContext(), moveMainInfo.class);
+					Intent i = new Intent(getActivity().getApplicationContext(), MoveActivity.class);
 					i.putExtra("name", moveName); //Pass in the name of the move
 					startActivity(i);
 				} else {
